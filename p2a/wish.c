@@ -74,7 +74,7 @@ void my_exec(char ** my_argv) {
         strcat(full_path, my_argv[0]);
         if(!access(full_path, X_OK)) {
             found = 1;
-            printf("executing %s...\n", full_path);
+            //printf("executing %s...\n", full_path);
             execv(full_path, my_argv);
         }
     }
@@ -84,13 +84,14 @@ void my_exec(char ** my_argv) {
 }
 
 void run(char ** cmd_tokens, int argv_count) {
-        printf("running executable...\n");
+        //printf("running executable...\n");
         char * redirect = ">";
         char * parallel = "&";
         char ** my_argv = (char**) malloc(sizeof(char*) * PARA_NUM);
         int cur = 0;
         int base = 0;
         while(base + cur < argv_count) {
+            printf("%d, %d, %d\n", base, cur, argv_count);
             if(strcmp(cmd_tokens[base + cur], redirect) == 0) {
                 //get next token which is file name.
                 int fd = open(cmd_tokens[base + cur + 1], O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
@@ -100,9 +101,19 @@ void run(char ** cmd_tokens, int argv_count) {
             }
             else if(strcmp(cmd_tokens[base + cur], parallel) == 0) {
                 //exec the current one
-                my_exec(my_argv);
-                base += cur;
-                cur = 0;
+                pid_t pid = fork();
+                if(pid == -1) {
+                    perror("fork failed");
+                    exit(1);
+                }
+                else if(pid == 0) {
+                    my_exec(my_argv);
+                    exit(2);
+                }
+                else {
+                    base += cur + 1;
+                    cur = 0;
+                }
             }
             else{
                 //store the current argv to a particular array
@@ -111,7 +122,20 @@ void run(char ** cmd_tokens, int argv_count) {
             }
 
         }
-        my_exec(my_argv);
+        pid_t pid_last = fork();
+        if(pid_last == -1) {
+            perror("fork failed");
+            exit(1);
+        }
+        else if(pid_last == 0) {
+            my_exec(my_argv);
+            exit(2);
+        }
+        else {
+            //dup2(stdout, 1);
+            //dup2(stderr, 2);
+            return;
+        }
 }
 
 int main(int argc, char * argv[]) {
@@ -135,7 +159,6 @@ int main(int argc, char * argv[]) {
         }
 
         char ** cmd_tokens = parse_cmd(line, argv_count); 
-        printf("after parsing\n");
         if(is_builtin_cmd(cmd_tokens[0])) {
             if(!strcmp(cmd_tokens[0], "exit")) {
                 user_exit();
@@ -150,7 +173,6 @@ int main(int argc, char * argv[]) {
         else {
             run(cmd_tokens, *argv_count);
         }
-       printf("go back here in main\n"); 
     }
     return 0;
 }
