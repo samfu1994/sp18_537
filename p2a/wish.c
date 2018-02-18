@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/wait.h>
 #define PATH_NUM 128
 #define PATH_LENGTH 128
 #define PARA_NUM 64
@@ -63,8 +64,12 @@ char ** parse_cmd(char * cmd, int * count) {
     }
     return argv;
 }
-void my_exec(char ** my_argv) {
+void my_exec(char ** my_argv, int fd, int is_redirect) {
     int full_len = 256;
+    if(is_redirect) {
+        dup2(fd, 1);
+        dup2(fd, 2);
+    }
     char * full_path = (char*) malloc(sizeof(char) * full_len);
     int found = 0;
     for(int i = 0; i < path_count; i++) {
@@ -90,13 +95,17 @@ void run(char ** cmd_tokens, int argv_count) {
         char ** my_argv = (char**) malloc(sizeof(char*) * PARA_NUM);
         int cur = 0;
         int base = 0;
+        int status;
+        int is_redirect = 0;
+        int fd;
         while(base + cur < argv_count) {
-            printf("%d, %d, %d\n", base, cur, argv_count);
+            //printf("%d, %d, %d\n", base, cur, argv_count);
             if(strcmp(cmd_tokens[base + cur], redirect) == 0) {
                 //get next token which is file name.
-                int fd = open(cmd_tokens[base + cur + 1], O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-                dup2(fd, 1);   // make stdout go to file
-                dup2(fd, 2);
+                fd = open(cmd_tokens[base + cur + 1], O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+                //dup2(fd, 1);   // make stdout go to file
+                //dup2(fd, 2);
+                is_redirect = 1;
                 cur += 2;
             }
             else if(strcmp(cmd_tokens[base + cur], parallel) == 0) {
@@ -107,12 +116,14 @@ void run(char ** cmd_tokens, int argv_count) {
                     exit(1);
                 }
                 else if(pid == 0) {
-                    my_exec(my_argv);
+                    my_exec(my_argv, fd, is_redirect);
                     exit(2);
                 }
                 else {
+                    is_redirect = 0;
                     base += cur + 1;
                     cur = 0;
+                    waitpid(pid, &status, WUNTRACED);
                 }
             }
             else{
@@ -128,12 +139,12 @@ void run(char ** cmd_tokens, int argv_count) {
             exit(1);
         }
         else if(pid_last == 0) {
-            my_exec(my_argv);
+            my_exec(my_argv, fd, is_redirect);
             exit(2);
         }
         else {
-            //dup2(stdout, 1);
-            //dup2(stderr, 2);
+            is_redirect = 0;
+            waitpid(pid_last, &status, WUNTRACED);
             return;
         }
 }
