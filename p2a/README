@@ -1,0 +1,13 @@
+Overview:
+    This is a C program implementing a simple version of bash, supporting built-in commands. Also, it can execute user executables included in path variable. 
+    
+Compile:
+    gcc -o wish wish.c
+
+Command Line Arguments
+    batch mode:         ./wish [batch file]
+    interactive mode:   ./wish
+
+Design and Structure:
+    According to https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/processes-shell.
+
