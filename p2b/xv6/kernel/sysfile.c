@@ -8,6 +8,7 @@
 #include "file.h"
 #include "fcntl.h"
 #include "sysfunc.h"
+#include "pstat.h"
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
@@ -42,6 +43,35 @@ fdalloc(struct file *f)
     }
   }
   return -1;
+}
+
+int sys_settickets(void) {
+    int ticket = 0;
+    if(argint(0, &ticket) < 0) {
+        return -1;
+    }
+    proc -> ticks += proc -> tickets;
+    proc -> tickets = ticket;
+    return 0;
+}
+
+int sys_getpinfo(void) {
+    struct pstat p;
+    struct pstat * pp = &p;
+    if(argptr(0, (char**)&pp, sizeof(struct pstat) < 0)) {
+        return -1;        
+    }
+
+    for(int i = 0; i < NPROC; i++) {
+        pp -> inuse[i] = 0;
+        pp -> tickets[i] = 1;
+        pp -> pid[i] = 2;
+        pp -> ticks[i] = 3;
+    }
+    pp -> pid[0] = proc -> pid;
+    pp -> ticks[0] = proc -> ticks;
+    pp -> tickets[0] = proc -> tickets;
+    return 0;
 }
 
 int
