@@ -5,13 +5,14 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
-
-struct {
+/*struct {
   struct spinlock lock;
   struct proc proc[NPROC];
 } ptable;
+*/
 
 static struct proc *initproc;
+static unsigned long X = 1;
 
 int nextpid = 1;
 extern void forkret(void);
@@ -23,6 +24,12 @@ void
 pinit(void)
 {
   initlock(&ptable.lock, "ptable");
+}
+
+int getrandom(int M) {
+    unsigned long a = 1103515245, c = 12345;
+    X = a * X + c; 
+    return ((unsigned int)(X / 65536) % 32768) % M + 1;
 }
 
 // Look in the process table for an UNUSED proc.
@@ -256,14 +263,57 @@ void
 scheduler(void)
 {
   struct proc *p;
-
+  int pool, count;
+  int acc[NPROC], index[NPROC];
   for(;;){
     // Enable interrupts on this processor.
     sti();
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
-    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    pool = 0;
+    count = 0;
+
+    for(int i = 0; i < NPROC; i++) {
+        index[i] = 0;
+        acc[i] = 0;
+    }
+    
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+        if(p -> state == RUNNABLE){
+            //pool += p -> tickets;
+            pool += 10;
+            acc[count] = pool;
+            index[count] = p - ptable.proc; 
+            count += 1;
+        }
+    }
+    
+    if(count == 0) {
+        release(&ptable.lock);
+        continue;
+    }
+
+    int ran = getrandom(pool - 1);
+    int chosen = 0;
+    for(int i = 0; i < count; i++) {
+        if(acc[i] > ran) {
+            chosen = index[i];
+            break;
+        }
+    }
+     
+    p = &(ptable.proc[chosen]);
+    proc = p;
+    proc -> ticks += 1;
+    switchuvm(p);
+    p->state = RUNNING;
+    swtch(&cpu->scheduler, proc->context);
+    switchkvm();
+    proc = 0;                                    
+    
+    
+    /*for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
 
@@ -280,6 +330,8 @@ scheduler(void)
       // It should have changed its p->state before coming back.
       proc = 0;
     }
+    */
+    
     release(&ptable.lock);
 
   }

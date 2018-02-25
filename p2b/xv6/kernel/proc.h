@@ -10,6 +10,8 @@
 #define SEG_TSS   6  // this process's task state
 #define NSEGS     7
 
+#include "spinlock.h"
+
 // Per-CPU state
 struct cpu {
   uchar id;                    // Local APIC ID; index into cpus[] below
@@ -78,10 +80,15 @@ struct proc {
   int ticks;
 };
 
+struct {
+  struct spinlock lock;
+  struct proc proc[NPROC];
+} ptable;
+
+
 // Process memory is laid out contiguously, low addresses first:
 //   text
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
-
 #endif // _PROC_H_

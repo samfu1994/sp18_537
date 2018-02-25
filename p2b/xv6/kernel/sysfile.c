@@ -50,7 +50,6 @@ int sys_settickets(void) {
     if(argint(0, &ticket) < 0) {
         return -1;
     }
-    proc -> ticks += proc -> tickets;
     proc -> tickets = ticket;
     return 0;
 }
@@ -63,14 +62,18 @@ int sys_getpinfo(void) {
     }
 
     for(int i = 0; i < NPROC; i++) {
-        pp -> inuse[i] = 0;
-        pp -> tickets[i] = 1;
-        pp -> pid[i] = 2;
-        pp -> ticks[i] = 3;
+        /*
+        if(ptable.proc[i].state != RUNNING && 
+            ptable.proc[i].state != RUNNABLE) {
+            continue;
+        }
+        */
+        struct proc * proc_ptr = &(ptable.proc[i]);
+        pp -> inuse[i] = proc_ptr -> state == UNUSED ? 0 : 1;
+        pp -> tickets[i] = proc_ptr -> tickets;
+        pp -> pid[i] = proc_ptr -> pid;
+        pp -> ticks[i] = proc_ptr -> ticks;
     }
-    pp -> pid[0] = proc -> pid;
-    pp -> ticks[0] = proc -> ticks;
-    pp -> tickets[0] = proc -> tickets;
     return 0;
 }
 
