@@ -6,7 +6,7 @@
 #include "proc.h"
 #include "spinlock.h"
 
-struct {
+struct pt {
   struct spinlock lock;
   struct proc proc[NPROC];
 } ptable;
