@@ -232,15 +232,15 @@ ld  -m    elf_i386 -nostdlib --omagic \
 dd if=/dev/zero of=xv6.img count=10000
 10000+0 records in
 10000+0 records out
-5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.014683 s, 349 MB/s
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0139394 s, 367 MB/s
 dd if=kernel/bootblock of=xv6.img conv=notrunc
 1+0 records in
 1+0 records out
-512 bytes copied, 7.821e-05 s, 6.5 MB/s
+512 bytes copied, 5.8128e-05 s, 8.8 MB/s
 dd if=kernel/kernel of=xv6.img seek=1 conv=notrunc
-255+1 records in
-255+1 records out
-130988 bytes (131 kB, 128 KiB) copied, 0.000385322 s, 340 MB/s
+245+1 records in
+245+1 records out
+125500 bytes (126 kB, 123 KiB) copied, 0.000358952 s, 350 MB/s
 gcc -c  -iquote include -Wall -Werror -ggdb  -o tools/mkfs.o tools/mkfs.c
 gcc  tools/mkfs.o -o tools/mkfs
 mkdir -p fs
@@ -508,14 +508,14 @@ Spinning...
 **** PInfo ****
 pid: 1 tickets: 1 ticks: 16
 pid: 2 tickets: 1 ticks: 35
-pid: 3 tickets: 1 ticks: 172
-pid: 4 tickets: 1 ticks: 156
+pid: 3 tickets: 1 ticks: 171
+pid: 4 tickets: 1 ticks: 155
 pid: 5 tickets: 1 ticks: 112
-pid: 6 tickets: 1 ticks: 114
-pid: 7 tickets: 1 ticks: 128
+pid: 6 tickets: 1 ticks: 113
+pid: 7 tickets: 1 ticks: 126
 pid: 8 tickets: 1 ticks: 135
-pid: 9 tickets: 1 ticks: 125
-pid: 10 tickets: 1 ticks: 45
+pid: 9 tickets: 1 ticks: 124
+pid: 10 tickets: 1 ticks: 44
 Number of processes in use 10
 Should print 1 then 2
 
@@ -642,18 +642,18 @@ $ tester
 tester
 
  ****PInfo before**** 
-pid: 1 tickets: 1 ticks: 15
-pid: 2 tickets: 1 ticks: 34
-pid: 3 tickets: 10000 ticks: 47
-pid: 4 tickets: 5 ticks: 48
+pid: 1 tickets: 1 ticks: 16
+pid: 2 tickets: 1 ticks: 35
+pid: 3 tickets: 10000 ticks: 48
+pid: 4 tickets: 5 ticks: 49
 Spinning...
 
  ****PInfo after**** 
-pid: 1 tickets: 1 ticks: 15
-pid: 2 tickets: 1 ticks: 34
-pid: 3 tickets: 10000 ticks: 47
-pid: 4 tickets: 5 ticks: 102
-high: 47 47, low: 48 102
+pid: 1 tickets: 1 ticks: 16
+pid: 2 tickets: 1 ticks: 35
+pid: 3 tickets: 10000 ticks: 48
+pid: 4 tickets: 5 ticks: 103
+high: 48 48, low: 49 103
 Should print 1 then 2
 
 test high_sleep PASSED (20 of 20)
@@ -787,8 +787,8 @@ Spinning...
 pid: 1 tickets: 1 ticks: 16
 pid: 2 tickets: 1 ticks: 35
 pid: 3 tickets: 5 ticks: 55
-pid: 4 tickets: 100000 ticks: 581
-high: 48 581, low: 55 55
+pid: 4 tickets: 100000 ticks: 582
+high: 48 582, low: 55 55
 Should print 1 then 2
 
 test high_tickets PASSED (20 of 20)

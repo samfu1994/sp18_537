@@ -80,10 +80,10 @@ struct proc {
   int ticks;
 };
 
-struct {
+struct pt{
   struct spinlock lock;
   struct proc proc[NPROC];
-} ptable;
+} ;
 
 
 // Process memory is laid out contiguously, low addresses first:

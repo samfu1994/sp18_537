@@ -10,6 +10,8 @@
 #include "sysfunc.h"
 #include "pstat.h"
 
+extern struct pt ptable;
+
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
 static int
@@ -59,7 +61,7 @@ int sys_settickets(void) {
 
 int sys_getpinfo(void) {
     struct pstat * pp;
-     
+ 
     if(argptr(0, (char**)&pp, sizeof(struct pstat)) < 0) {
         return -1;        
     }

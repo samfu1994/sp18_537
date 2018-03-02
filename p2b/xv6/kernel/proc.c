@@ -10,6 +10,7 @@
   struct proc proc[NPROC];
 } ptable;
 */
+struct pt ptable;
 
 static struct proc *initproc;
 static unsigned long X = 1;
