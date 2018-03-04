@@ -14,7 +14,7 @@ struct pt ptable;
 
 static struct proc *initproc;
 static unsigned long X = 1;
-
+static unsigned long C = 12345;
 int nextpid = 1;
 extern void forkret(void);
 extern void trapret(void);
@@ -28,9 +28,15 @@ pinit(void)
 }
 
 int getrandom(int M) {
-    unsigned long a = 1103515245, c = 12345;
-    X = a * X + c; 
-    return ((unsigned int)(X / 65536) % 32768) % M;
+    unsigned long a = 1103515245,  exp = 5;
+
+    X = a * X + C; 
+    for(int i = 0; i < exp; i++) {
+        X = a * X + C;
+    }
+    C = X % 12345;
+    exp = X % 10;
+    return ((unsigned int)(X)) % M;
 }
 
 // Look in the process table for an UNUSED proc.
@@ -86,6 +92,11 @@ userinit(void)
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
   
+  for(int i = 0; i < NPROC; i++) {
+    ptable.proc[i].ticks = 0;
+    ptable.proc[i].tickets = 1;
+  }
+
   p = allocproc();
   acquire(&ptable.lock);
   initproc = p;
@@ -295,10 +306,11 @@ scheduler(void)
     }
     
     if(count == 0) {
+        proc = 0;
         release(&ptable.lock);
         continue;
     }
-
+    
     int ran = getrandom(pool);
     int chosen = 0;
     for(int i = 0; i < count; i++) {
@@ -307,7 +319,6 @@ scheduler(void)
             break;
         }
     }
-     
     p = &(ptable.proc[chosen]);
     proc = p;
     proc -> ticks += 1;

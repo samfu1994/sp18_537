@@ -8,6 +8,38 @@ build xv6 using make
 **********************************************************************
 Trying to clean project using make clean
 make clean
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/test1.c -MF user/test1.d -MT user/test1.d -MT user/test1.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/vm.c -MF kernel/vm.d -MT kernel/vm.d -MT kernel/vm.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/uart.c -MF kernel/uart.d -MT kernel/uart.d -MT kernel/uart.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/trap.c -MF kernel/trap.d -MT kernel/trap.d -MT kernel/trap.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/sysproc.c -MF kernel/sysproc.d -MT kernel/sysproc.d -MT kernel/sysproc.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/sysfile.c -MF kernel/sysfile.d -MT kernel/sysfile.d -MT kernel/sysfile.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/syscall.c -MF kernel/syscall.d -MT kernel/syscall.d -MT kernel/syscall.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/spinlock.c -MF kernel/spinlock.d -MT kernel/spinlock.d -MT kernel/spinlock.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/proc.c -MF kernel/proc.d -MT kernel/proc.d -MT kernel/proc.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/pipe.c -MF kernel/pipe.d -MT kernel/pipe.d -MT kernel/pipe.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/mp.c -MF kernel/mp.d -MT kernel/mp.d -MT kernel/mp.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/main.c -MF kernel/main.d -MT kernel/main.d -MT kernel/main.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/ide.c -MF kernel/ide.d -MT kernel/ide.d -MT kernel/ide.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/fs.c -MF kernel/fs.d -MT kernel/fs.d -MT kernel/fs.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/exec.c -MF kernel/exec.d -MT kernel/exec.d -MT kernel/exec.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/console.c -MF kernel/console.d -MT kernel/console.d -MT kernel/console.o
 rm -rf kernel/bio.o kernel/console.o kernel/exec.o kernel/file.o kernel/fs.o kernel/ide.o kernel/ioapic.o kernel/kalloc.o kernel/kbd.o kernel/lapic.o kernel/main.o kernel/mp.o kernel/picirq.o kernel/pipe.o kernel/proc.o kernel/spinlock.o kernel/string.o kernel/swtch.o kernel/syscall.o kernel/sysfile.o kernel/sysproc.o kernel/timer.o kernel/trapasm.o kernel/trap.o kernel/uart.o kernel/vectors.o kernel/vm.o kernel/bootmain.o kernel/bootasm.o kernel/multiboot.o kernel/data.o kernel/bootother.o kernel/initcode.o kernel/bio.d kernel/console.d kernel/exec.d kernel/file.d kernel/fs.d kernel/ide.d kernel/ioapic.d kernel/kalloc.d kernel/kbd.d kernel/lapic.d kernel/main.d kernel/mp.d kernel/picirq.d kernel/pipe.d kernel/proc.d kernel/spinlock.d kernel/string.d kernel/swtch.d kernel/syscall.d kernel/sysfile.d kernel/sysproc.d kernel/timer.d kernel/trapasm.d kernel/trap.d kernel/uart.d kernel/vectors.d kernel/vm.d kernel/bootmain.d kernel/bootasm.d kernel/multiboot.d kernel/data.d kernel/bootother.d kernel/initcode.d kernel/vectors.S kernel/bootblock kernel/bootblock.out kernel/bootother.out kernel/initcode.out kernel/kernel bootother initcode xv6.img user/bin user/cat user/echo user/forktest user/grep user/init user/kill user/ln user/ls user/mkdir user/rm user/sh user/stressfs user/tester user/usertests user/wc user/zombie user/test1 user/cat.o user/echo.o user/forktest.o user/grep.o user/init.o user/kill.o user/ln.o user/ls.o user/mkdir.o user/rm.o user/sh.o user/stressfs.o user/tester.o user/usertests.o user/wc.o user/zombie.o user/test1.o user/ulib.o user/usys.o user/printf.o user/umalloc.o user/cat.d user/echo.d user/forktest.d user/grep.d user/init.d user/kill.d user/ln.d user/ls.d user/mkdir.d user/rm.d user/sh.d user/stressfs.d user/tester.d user/usertests.d user/wc.d user/zombie.d user/test1.d user/ulib.d user/usys.d user/printf.d user/umalloc.d tools/mkfs tools/mkfs.o tools/mkfs.d fs fs.img .gdbinit .bochsrc dist
 Trying to build project using make
 make
@@ -232,15 +264,15 @@ ld  -m    elf_i386 -nostdlib --omagic \
 dd if=/dev/zero of=xv6.img count=10000
 10000+0 records in
 10000+0 records out
-5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0139394 s, 367 MB/s
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0143655 s, 356 MB/s
 dd if=kernel/bootblock of=xv6.img conv=notrunc
 1+0 records in
 1+0 records out
-512 bytes copied, 5.8128e-05 s, 8.8 MB/s
+512 bytes copied, 7.8491e-05 s, 6.5 MB/s
 dd if=kernel/kernel of=xv6.img seek=1 conv=notrunc
 245+1 records in
 245+1 records out
-125500 bytes (126 kB, 123 KiB) copied, 0.000358952 s, 350 MB/s
+125632 bytes (126 kB, 123 KiB) copied, 0.000353749 s, 355 MB/s
 gcc -c  -iquote include -Wall -Werror -ggdb  -o tools/mkfs.o tools/mkfs.c
 gcc  tools/mkfs.o -o tools/mkfs
 mkdir -p fs
@@ -303,24 +335,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/test1 fs/test1
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 426 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/ls user/bin/stressfs user/bin/grep user/bin/tester user/bin/kill user/bin/cat user/bin/mkdir user/bin/test1 user/bin/init user/bin/rm user/bin/echo user/bin/ln user/bin/usertests user/bin/sh user/bin/wc user/bin/zombie
@@ -348,24 +380,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 427 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -408,24 +440,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 427 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -468,24 +500,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 429 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -506,16 +538,16 @@ tester
 Spinning...
 
 **** PInfo ****
-pid: 1 tickets: 1 ticks: 16
-pid: 2 tickets: 1 ticks: 35
-pid: 3 tickets: 1 ticks: 171
-pid: 4 tickets: 1 ticks: 155
-pid: 5 tickets: 1 ticks: 112
-pid: 6 tickets: 1 ticks: 113
-pid: 7 tickets: 1 ticks: 126
-pid: 8 tickets: 1 ticks: 135
-pid: 9 tickets: 1 ticks: 124
-pid: 10 tickets: 1 ticks: 44
+pid: 1 tickets: 1 ticks: 17
+pid: 2 tickets: 1 ticks: 36
+pid: 3 tickets: 1 ticks: 163
+pid: 4 tickets: 1 ticks: 78
+pid: 5 tickets: 1 ticks: 187
+pid: 6 tickets: 1 ticks: 64
+pid: 7 tickets: 1 ticks: 205
+pid: 8 tickets: 1 ticks: 62
+pid: 9 tickets: 1 ticks: 190
+pid: 10 tickets: 1 ticks: 47
 Number of processes in use 10
 Should print 1 then 2
 
@@ -542,24 +574,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 428 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -579,10 +611,10 @@ $ tester
 tester
 
  **** PInfo **** 
-pid: 3 tickets: 1 ticks: 44
+pid: 3 tickets: 1 ticks: 46
 Should print 1 then 2
 
-test default_tickets PASSED (20 of 20)
+test default_tickets PASSED (10 of 10)
  (Check the default tickets set for processes 
  The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/default_tickets.c)
 
@@ -605,24 +637,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 433 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -642,18 +674,18 @@ $ tester
 tester
 
  ****PInfo before**** 
-pid: 1 tickets: 1 ticks: 16
-pid: 2 tickets: 1 ticks: 35
+pid: 1 tickets: 1 ticks: 17
+pid: 2 tickets: 1 ticks: 36
 pid: 3 tickets: 10000 ticks: 48
 pid: 4 tickets: 5 ticks: 49
 Spinning...
 
  ****PInfo after**** 
-pid: 1 tickets: 1 ticks: 16
-pid: 2 tickets: 1 ticks: 35
+pid: 1 tickets: 1 ticks: 17
+pid: 2 tickets: 1 ticks: 36
 pid: 3 tickets: 10000 ticks: 48
-pid: 4 tickets: 5 ticks: 103
-high: 48 48, low: 49 103
+pid: 4 tickets: 5 ticks: 104
+high: 48 48, low: 49 104
 Should print 1 then 2
 
 test high_sleep PASSED (20 of 20)
@@ -679,24 +711,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 429 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -740,24 +772,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-wc
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
 zombie
 usertests
-echo
-cat
+wc
 tester
-mkdir
-grep
-init
 test1
-ln
-ls
-kill
-sh
-README
-stressfs
-rm
 forktest
+init
+echo
+mkdir
+ln
 balloc: first 433 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -778,22 +810,700 @@ tester
 
  ****PInfo before**** 
 pid: 1 tickets: 1 ticks: 16
-pid: 2 tickets: 1 ticks: 35
-pid: 3 tickets: 5 ticks: 55
-pid: 4 tickets: 100000 ticks: 48
+pid: 2 tickets: 1 ticks: 36
+pid: 3 tickets: 5 ticks: 50
+pid: 4 tickets: 100000 ticks: 50
 Spinning...
 
  ****PInfo after**** 
 pid: 1 tickets: 1 ticks: 16
-pid: 2 tickets: 1 ticks: 35
-pid: 3 tickets: 5 ticks: 55
-pid: 4 tickets: 100000 ticks: 582
-high: 48 582, low: 55 55
+pid: 2 tickets: 1 ticks: 36
+pid: 3 tickets: 5 ticks: 50
+pid: 4 tickets: 100000 ticks: 592
+high: 50 592, low: 50 50
 Should print 1 then 2
 
-test high_tickets PASSED (20 of 20)
+test high_tickets PASSED (10 of 10)
  (Check that a process with an extremely high number of tickets is more likely to be scheduled 
  The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/high_tickets.c)
+
+starting switch_tickets
+
+**********************************************************************
+
+Test switch_tickets
+A high ticket process will switch with a low ticket process midway through 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/switch_tickets.c
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b-new/ctests/switch_tickets.c
+Trying to build project using make
+make
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
+zombie
+usertests
+wc
+tester
+test1
+forktest
+init
+echo
+mkdir
+ln
+balloc: first 434 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Ctrl+a h for help
+/u/c/s/cs537-1/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+set low tickets for process A with pid: 4
+set high tickets for process B with pid: 5
+B completed first round of spinning...
+***********getpinfo results************
+pid: 1 tickets: 1 ticks: 17 i: 0
+pid: 2 tickets: 1 ticks: 36 i: 1
+pid: 3 tickets: 100000000 ticks: 51 i: 2
+pid: 4 tickets: 1 ticks: 52 i: 3
+pid: 5 tickets: 1000 ticks: 106 i: 4
+set low tickets for process B
+A completed first round of spinning..
+set high tickets for process A
+Passed 1/2 tests. Switching tickets...
+A completed spinning
+Checking for correct values...
+***********getpinfo results************
+pid: 1 tickets: 1 ticks: 17 i: 0
+pid: 2 tickets: 1 ticks: 36 i: 1
+pid: 3 tickets: 100000000 ticks: 54 i: 2
+pid: 4 tickets: 1000 ticks: 163 i: 3
+pid: 5 tickets: 1 ticks: 107 i: 4
+B completed spinning 
+Should print 1 then 2
+
+
+test switch_tickets PASSED (20 of 20)
+ (A high ticket process will switch with a low ticket process midway through 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/switch_tickets.c)
+
+starting feedback_converge
+
+**********************************************************************
+
+Test feedback_converge
+Processes will attempt to adjust their tickets to achieve equal runtime 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/feedback_converge.c
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b-new/ctests/feedback_converge.c
+Trying to build project using make
+make
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
+zombie
+usertests
+wc
+tester
+test1
+forktest
+init
+echo
+mkdir
+ln
+balloc: first 436 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Ctrl+a h for help
+/u/c/s/cs537-1/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+Goal ticks variance: <15
+
+Child ticket variance: 77
+Child ticket variance: 36
+Child ticket variance: 20
+Child ticket variance: 8
+Should print 1 then 2
+
+test feedback_converge PASSED (20 of 20)
+ (Processes will attempt to adjust their tickets to achieve equal runtime 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/feedback_converge.c)
+
+starting feedback_diverge
+
+**********************************************************************
+
+Test feedback_diverge
+Processes will attempt to adjust their tickets to achieve unequal runtime 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/feedback_diverge.c
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b-new/ctests/feedback_diverge.c
+Trying to build project using make
+make
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
+zombie
+usertests
+wc
+tester
+test1
+forktest
+init
+echo
+mkdir
+ln
+balloc: first 435 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Ctrl+a h for help
+/u/c/s/cs537-1/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+Goal: Achieve <5% runtime for a child process
+
+Spinning...
+Child running percentages: pid 4 (52%), pid 5 (47%)
+Child running percentages: pid 4 (50%), pid 5 (50%)
+Child running percentages: pid 4 (53%), pid 5 (46%)
+Child running percentages: pid 4 (47%), pid 5 (52%)
+Child running percentages: pid 4 (48%), pid 5 (51%)
+Child running percentages: pid 4 (58%), pid 5 (41%)
+Child running percentages: pid 4 (54%), pid 5 (45%)
+Child running percentages: pid 4 (65%), pid 5 (34%)
+Child running percentages: pid 4 (81%), pid 5 (18%)
+Child running percentages: pid 4 (88%), pid 5 (11%)
+Child running percentages: pid 4 (100%), pid 5 (0%)
+Should print 1 then 2
+
+test feedback_diverge PASSED (20 of 20)
+ (Processes will attempt to adjust their tickets to achieve unequal runtime 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/feedback_diverge.c)
+
+starting stress_equal
+
+**********************************************************************
+
+Test stress_equal
+Check that several processes with the same number of tickets are equally scheduled 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/stress_equal.c
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b-new/ctests/stress_equal.c
+Trying to build project using make
+make
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
+zombie
+usertests
+wc
+tester
+test1
+forktest
+init
+echo
+mkdir
+ln
+balloc: first 433 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Ctrl+a h for help
+/u/c/s/cs537-1/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+Goal: Achieve low variance in ticks for many processes with the same number of tickets
+
+ ****PInfo before**** 
+pid: 1 tickets: 1 ticks: 16
+pid: 2 tickets: 1 ticks: 35
+pid: 3 tickets: 16114 ticks: 55
+pid: 4 tickets: 5371 ticks: 54
+pid: 5 tickets: 5371 ticks: 55
+pid: 6 tickets: 5371 ticks: 53
+pid: 7 tickets: 5371 ticks: 56
+pid: 8 tickets: 5371 ticks: 56
+pid: 9 tickets: 5371 ticks: 53
+pid: 10 tickets: 5371 ticks: 55
+pid: 11 tickets: 5371 ticks: 50
+pid: 12 tickets: 5371 ticks: 57
+pid: 13 tickets: 5371 ticks: 55
+pid: 14 tickets: 5371 ticks: 54
+pid: 15 tickets: 5371 ticks: 53
+pid: 16 tickets: 5371 ticks: 55
+pid: 17 tickets: 5371 ticks: 56
+pid: 18 tickets: 5371 ticks: 53
+pid: 19 tickets: 5371 ticks: 55
+pid: 20 tickets: 5371 ticks: 55
+pid: 21 tickets: 5371 ticks: 55
+pid: 22 tickets: 5371 ticks: 53
+pid: 23 tickets: 5371 ticks: 53
+pid: 24 tickets: 5371 ticks: 54
+pid: 25 tickets: 5371 ticks: 55
+pid: 26 tickets: 5371 ticks: 54
+pid: 27 tickets: 5371 ticks: 56
+pid: 28 tickets: 5371 ticks: 55
+pid: 29 tickets: 5371 ticks: 60
+pid: 30 tickets: 5371 ticks: 59
+pid: 31 tickets: 5371 ticks: 57
+pid: 32 tickets: 5371 ticks: 55
+pid: 33 tickets: 5371 ticks: 60
+pid: 34 tickets: 5371 ticks: 54
+pid: 35 tickets: 5371 ticks: 58
+pid: 36 tickets: 5371 ticks: 60
+pid: 37 tickets: 5371 ticks: 53
+pid: 38 tickets: 5371 ticks: 54
+pid: 39 tickets: 5371 ticks: 53
+pid: 40 tickets: 5371 ticks: 58
+pid: 41 tickets: 5371 ticks: 60
+pid: 42 tickets: 5371 ticks: 60
+pid: 43 tickets: 5371 ticks: 60
+pid: 44 tickets: 5371 ticks: 55
+pid: 45 tickets: 5371 ticks: 55
+pid: 46 tickets: 5371 ticks: 54
+pid: 47 tickets: 5371 ticks: 58
+pid: 48 tickets: 5371 ticks: 56
+pid: 49 tickets: 5371 ticks: 57
+pid: 50 tickets: 5371 ticks: 57
+pid: 51 tickets: 5371 ticks: 60
+pid: 52 tickets: 5371 ticks: 58
+pid: 53 tickets: 5371 ticks: 55
+pid: 54 tickets: 5371 ticks: 55
+pid: 55 tickets: 5371 ticks: 54
+pid: 56 tickets: 5371 ticks: 56
+pid: 57 tickets: 5371 ticks: 54
+pid: 58 tickets: 5371 ticks: 55
+pid: 59 tickets: 5371 ticks: 54
+pid: 60 tickets: 5371 ticks: 56
+pid: 61 tickets: 5371 ticks: 57
+pid: 62 tickets: 5371 ticks: 55
+pid: 63 tickets: 5371 ticks: 55
+pid: 64 tickets: 5371 ticks: 55
+Spinning...
+ ****PInfo after**** 
+pid: 1 tickets: 1 ticks: 16
+pid: 2 tickets: 1 ticks: 35
+pid: 3 tickets: 16114 ticks: 83
+pid: 4 tickets: 5371 ticks: 63
+pid: 5 tickets: 5371 ticks: 67
+pid: 6 tickets: 5371 ticks: 56
+pid: 7 tickets: 5371 ticks: 65
+pid: 8 tickets: 5371 ticks: 63
+pid: 9 tickets: 5371 ticks: 65
+pid: 10 tickets: 5371 ticks: 65
+pid: 11 tickets: 5371 ticks: 54
+pid: 12 tickets: 5371 ticks: 63
+pid: 13 tickets: 5371 ticks: 72
+pid: 14 tickets: 5371 ticks: 61
+pid: 15 tickets: 5371 ticks: 65
+pid: 16 tickets: 5371 ticks: 59
+pid: 17 tickets: 5371 ticks: 66
+pid: 18 tickets: 5371 ticks: 63
+pid: 19 tickets: 5371 ticks: 64
+pid: 20 tickets: 5371 ticks: 69
+pid: 21 tickets: 5371 ticks: 67
+pid: 22 tickets: 5371 ticks: 71
+pid: 23 tickets: 5371 ticks: 61
+pid: 24 tickets: 5371 ticks: 65
+pid: 25 tickets: 5371 ticks: 63
+pid: 26 tickets: 5371 ticks: 65
+pid: 27 tickets: 5371 ticks: 63
+pid: 28 tickets: 5371 ticks: 61
+pid: 29 tickets: 5371 ticks: 66
+pid: 30 tickets: 5371 ticks: 72
+pid: 31 tickets: 5371 ticks: 66
+pid: 32 tickets: 5371 ticks: 68
+pid: 33 tickets: 5371 ticks: 68
+pid: 34 tickets: 5371 ticks: 65
+pid: 35 tickets: 5371 ticks: 67
+pid: 36 tickets: 5371 ticks: 65
+pid: 37 tickets: 5371 ticks: 59
+pid: 38 tickets: 5371 ticks: 66
+pid: 39 tickets: 5371 ticks: 66
+pid: 40 tickets: 5371 ticks: 72
+pid: 41 tickets: 5371 ticks: 75
+pid: 42 tickets: 5371 ticks: 70
+pid: 43 tickets: 5371 ticks: 71
+pid: 44 tickets: 5371 ticks: 65
+pid: 45 tickets: 5371 ticks: 61
+pid: 46 tickets: 5371 ticks: 67
+pid: 47 tickets: 5371 ticks: 70
+pid: 48 tickets: 5371 ticks: 66
+pid: 49 tickets: 5371 ticks: 63
+pid: 50 tickets: 5371 ticks: 68
+pid: 51 tickets: 5371 ticks: 69
+pid: 52 tickets: 5371 ticks: 70
+pid: 53 tickets: 5371 ticks: 64
+pid: 54 tickets: 5371 ticks: 67
+pid: 55 tickets: 5371 ticks: 67
+pid: 56 tickets: 5371 ticks: 67
+pid: 57 tickets: 5371 ticks: 60
+pid: 58 tickets: 5371 ticks: 65
+pid: 59 tickets: 5371 ticks: 62
+pid: 60 tickets: 5371 ticks: 68
+pid: 61 tickets: 5371 ticks: 65
+pid: 62 tickets: 5371 ticks: 65
+pid: 63 tickets: 5371 ticks: 61
+pid: 64 tickets: 5371 ticks: 69
+Variance: ~14
+Should print 1 then 2
+
+test stress_equal PASSED (20 of 20)
+ (Check that several processes with the same number of tickets are equally scheduled 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/stress_equal.c)
+
+starting stress_manylow
+
+**********************************************************************
+
+Test stress_manylow
+A process with a high number of tickets should run as often as the total of many processes whose tickets sum to that number 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/stress_manylow.c
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b-new/ctests/stress_manylow.c
+Trying to build project using make
+make
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
+zombie
+usertests
+wc
+tester
+test1
+forktest
+init
+echo
+mkdir
+ln
+balloc: first 434 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Ctrl+a h for help
+/u/c/s/cs537-1/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+Goal: Achieve <5% error in tick difference between a single high ticket process and many low ticket processes
+
+ ****PInfo before**** 
+pid: 1 tickets: 1 ticks: 17
+pid: 2 tickets: 1 ticks: 36
+pid: 3 tickets: 16114 ticks: 61
+pid: 4 tickets: 5371 ticks: 52
+pid: 5 tickets: 5371 ticks: 52
+pid: 6 tickets: 5371 ticks: 52
+pid: 7 tickets: 5371 ticks: 52
+pid: 8 tickets: 5371 ticks: 53
+pid: 9 tickets: 5371 ticks: 53
+pid: 10 tickets: 5371 ticks: 53
+pid: 11 tickets: 5371 ticks: 53
+pid: 12 tickets: 5371 ticks: 53
+pid: 13 tickets: 5371 ticks: 53
+pid: 14 tickets: 5371 ticks: 53
+pid: 15 tickets: 5371 ticks: 53
+pid: 16 tickets: 5371 ticks: 53
+pid: 17 tickets: 322260 ticks: 55
+pid: 18 tickets: 5371 ticks: 54
+pid: 19 tickets: 5371 ticks: 54
+pid: 20 tickets: 5371 ticks: 54
+pid: 21 tickets: 5371 ticks: 54
+pid: 22 tickets: 5371 ticks: 54
+pid: 23 tickets: 5371 ticks: 54
+pid: 24 tickets: 5371 ticks: 54
+pid: 25 tickets: 5371 ticks: 55
+pid: 26 tickets: 5371 ticks: 55
+pid: 27 tickets: 5371 ticks: 55
+pid: 28 tickets: 5371 ticks: 55
+pid: 29 tickets: 5371 ticks: 55
+pid: 30 tickets: 5371 ticks: 55
+pid: 31 tickets: 5371 ticks: 55
+pid: 32 tickets: 5371 ticks: 55
+pid: 33 tickets: 5371 ticks: 55
+pid: 34 tickets: 5371 ticks: 55
+pid: 35 tickets: 5371 ticks: 56
+pid: 36 tickets: 5371 ticks: 56
+pid: 37 tickets: 5371 ticks: 56
+pid: 38 tickets: 5371 ticks: 56
+pid: 39 tickets: 5371 ticks: 56
+pid: 40 tickets: 5371 ticks: 56
+pid: 41 tickets: 5371 ticks: 56
+pid: 42 tickets: 5371 ticks: 56
+pid: 43 tickets: 5371 ticks: 56
+pid: 44 tickets: 5371 ticks: 57
+pid: 45 tickets: 5371 ticks: 57
+pid: 46 tickets: 5371 ticks: 57
+pid: 47 tickets: 5371 ticks: 57
+pid: 48 tickets: 5371 ticks: 57
+pid: 49 tickets: 5371 ticks: 57
+pid: 50 tickets: 5371 ticks: 57
+pid: 51 tickets: 5371 ticks: 57
+pid: 52 tickets: 5371 ticks: 57
+pid: 53 tickets: 5371 ticks: 58
+pid: 54 tickets: 5371 ticks: 58
+pid: 55 tickets: 5371 ticks: 58
+pid: 56 tickets: 5371 ticks: 58
+pid: 57 tickets: 5371 ticks: 58
+pid: 58 tickets: 5371 ticks: 58
+pid: 59 tickets: 5371 ticks: 58
+pid: 60 tickets: 5371 ticks: 58
+pid: 61 tickets: 5371 ticks: 58
+pid: 62 tickets: 5371 ticks: 59
+pid: 63 tickets: 5371 ticks: 59
+pid: 64 tickets: 5371 ticks: 59
+Spinning...
+
+ ****PInfo after**** 
+pid: 1 tickets: 1 ticks: 17
+pid: 2 tickets: 1 ticks: 36
+pid: 3 tickets: 10000000 ticks: 88
+pid: 4 tickets: 5371 ticks: 61
+pid: 5 tickets: 5371 ticks: 58
+pid: 6 tickets: 5371 ticks: 64
+pid: 7 tickets: 5371 ticks: 58
+pid: 8 tickets: 5371 ticks: 61
+pid: 9 tickets: 5371 ticks: 62
+pid: 10 tickets: 5371 ticks: 59
+pid: 11 tickets: 5371 ticks: 60
+pid: 12 tickets: 5371 ticks: 62
+pid: 13 tickets: 5371 ticks: 60
+pid: 14 tickets: 5371 ticks: 56
+pid: 15 tickets: 5371 ticks: 61
+pid: 16 tickets: 5371 ticks: 61
+pid: 17 tickets: 322260 ticks: 483
+pid: 18 tickets: 5371 ticks: 61
+pid: 19 tickets: 5371 ticks: 61
+pid: 20 tickets: 5371 ticks: 61
+pid: 21 tickets: 5371 ticks: 61
+pid: 22 tickets: 5371 ticks: 68
+pid: 23 tickets: 5371 ticks: 61
+pid: 24 tickets: 5371 ticks: 65
+pid: 25 tickets: 5371 ticks: 64
+pid: 26 tickets: 5371 ticks: 65
+pid: 27 tickets: 5371 ticks: 63
+pid: 28 tickets: 5371 ticks: 62
+pid: 29 tickets: 5371 ticks: 64
+pid: 30 tickets: 5371 ticks: 64
+pid: 31 tickets: 5371 ticks: 66
+pid: 32 tickets: 5371 ticks: 58
+pid: 33 tickets: 5371 ticks: 62
+pid: 34 tickets: 5371 ticks: 64
+pid: 35 tickets: 5371 ticks: 66
+pid: 36 tickets: 5371 ticks: 61
+pid: 37 tickets: 5371 ticks: 67
+pid: 38 tickets: 5371 ticks: 59
+pid: 39 tickets: 5371 ticks: 66
+pid: 40 tickets: 5371 ticks: 69
+pid: 41 tickets: 5371 ticks: 61
+pid: 42 tickets: 5371 ticks: 61
+pid: 43 tickets: 5371 ticks: 59
+pid: 44 tickets: 5371 ticks: 60
+pid: 45 tickets: 5371 ticks: 68
+pid: 46 tickets: 5371 ticks: 65
+pid: 47 tickets: 5371 ticks: 62
+pid: 48 tickets: 5371 ticks: 63
+pid: 49 tickets: 5371 ticks: 64
+pid: 50 tickets: 5371 ticks: 66
+pid: 51 tickets: 5371 ticks: 63
+pid: 52 tickets: 5371 ticks: 62
+pid: 53 tickets: 5371 ticks: 62
+pid: 54 tickets: 5371 ticks: 71
+pid: 55 tickets: 5371 ticks: 67
+pid: 56 tickets: 5371 ticks: 63
+pid: 57 tickets: 5371 ticks: 71
+pid: 58 tickets: 5371 ticks: 63
+pid: 59 tickets: 5371 ticks: 64
+pid: 60 tickets: 5371 ticks: 69
+pid: 61 tickets: 5371 ticks: 64
+pid: 62 tickets: 5371 ticks: 66
+pid: 63 tickets: 5371 ticks: 65
+pid: 64 tickets: 5371 ticks: 63
+Percent error: 2%
+Should print 1 then 2
+
+test stress_manylow PASSED (20 of 20)
+ (A process with a high number of tickets should run as often as the total of many processes whose tickets sum to that number 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/stress_manylow.c)
+
+starting random
+
+**********************************************************************
+
+Test random
+Check that the scheduling is random, not just uniform 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/random.c
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b-new/ctests/random.c
+Trying to build project using make
+make
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+rm
+README
+ls
+cat
+stressfs
+sh
+kill
+grep
+zombie
+usertests
+wc
+tester
+test1
+forktest
+init
+echo
+mkdir
+ln
+balloc: first 431 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Ctrl+a h for help
+/u/c/s/cs537-1/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+Goal: To have a random, not simply uniform, scheduler
+(Pid difference variance > 150, Direction change > 15%)
+
+Spinning...
+Variance: 330
+Direction change percentage: 65%
+Should print 1 then 2
+
+test random PASSED (30 of 30)
+ (Check that the scheduling is random, not just uniform 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/random.c)
 
 **********************************************************************
 Summary:
@@ -812,7 +1522,7 @@ test processesinuse PASSED (20 of 20)
  (Check the number of processes in use by calling getpinfo() 
  The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/processesinuse.c)
 
-test default_tickets PASSED (20 of 20)
+test default_tickets PASSED (10 of 10)
  (Check the default tickets set for processes 
  The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/default_tickets.c)
 
@@ -824,10 +1534,34 @@ test forktickets PASSED (20 of 20)
  (Check that a child process has the same number of tickets as its parent 
  The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/forktickets.c)
 
-test high_tickets PASSED (20 of 20)
+test high_tickets PASSED (10 of 10)
  (Check that a process with an extremely high number of tickets is more likely to be scheduled 
  The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/high_tickets.c)
 
-Passed 8 of 8 tests.
-Overall 8 of 8
-Points 120 of 120
+test switch_tickets PASSED (20 of 20)
+ (A high ticket process will switch with a low ticket process midway through 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/switch_tickets.c)
+
+test feedback_converge PASSED (20 of 20)
+ (Processes will attempt to adjust their tickets to achieve equal runtime 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/feedback_converge.c)
+
+test feedback_diverge PASSED (20 of 20)
+ (Processes will attempt to adjust their tickets to achieve unequal runtime 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/feedback_diverge.c)
+
+test stress_equal PASSED (20 of 20)
+ (Check that several processes with the same number of tickets are equally scheduled 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/stress_equal.c)
+
+test stress_manylow PASSED (20 of 20)
+ (A process with a high number of tickets should run as often as the total of many processes whose tickets sum to that number 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/stress_manylow.c)
+
+test random PASSED (30 of 30)
+ (Check that the scheduling is random, not just uniform 
+ The corresponding test file is at ~cs537-1/ta/tests/2b-new/ctests/random.c)
+
+Passed 14 of 14 tests.
+Overall 14 of 14
+Points 230 of 230
