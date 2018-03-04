@@ -1,0 +1,17 @@
+Files and Folders:
+    1 xv6 folder
+    2 graph.pdf
+
+Overview:
+    This is a modified xv6 implementation with weird scheduling policy.
+
+Compile:
+    "make" under xv6 folder.
+
+Design and Structure:
+    According to https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/scheduling-xv6-lottery.
+    The higher number tickers a process owns, the higher probability it will be scheduled. As a result, the number of times and the execution time is proportional to the number of tickets a process holds in its lifetime.
+
+
+Notes:
+    graph.pdf shows the result of processes who has the tickets ratio of 3:2:1.
