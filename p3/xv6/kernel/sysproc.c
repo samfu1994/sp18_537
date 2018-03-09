@@ -13,6 +13,18 @@ sys_fork(void)
 }
 
 int
+sys_mprotect(void)
+{
+    return 1;
+}
+
+int
+sys_munprotect(void)
+{
+    return 2;
+}
+
+int
 sys_exit(void)
 {
   exit();
