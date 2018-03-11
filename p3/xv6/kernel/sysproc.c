@@ -11,19 +11,71 @@ sys_fork(void)
 {
   return fork();
 }
-
+/* 
 int
 sys_mprotect(void)
 {
-    return 1;
+    int len = 1;
+    char * pp;
+    const int pg_size = PGSIZE;
+    if(argint(1, &len) < 0) {
+        return -1;
+    }
+    if(len <= 0) {
+        return -2;
+    }
+    if(len * pg_size >= proc -> sz) {
+        return -3;
+    }
+
+    if(argptr(0, &pp, len * pg_size) < 0) {
+        return -4;
+    }
+
+    pde_t * pgdir = proc -> pgdir;
+    pte_t * pte;
+    for(long i = (long)pp; i < (long)pp + pg_size * len; i += pg_size) {
+        if((pte = walkpgdir(pgdir, (void*)i, 0)) == 0) {
+            panic("sys_mprotect: pte should exist");
+        }
+        *pte = (*pte) & ~PTE_W;
+    }
+    lcr3((uint)proc -> pgdir);
+    return 0;
 }
 
 int
 sys_munprotect(void)
 {
-    return 2;
-}
+    int len = 1;
+    char * pp;
+    const int pg_size = PGSIZE;
+    if(argint(1, &len) < 0) {
+        return -1;
+    }
+    if(len <= 0) {
+        return -2;
+    }
+    if(len * pg_size >= proc -> sz) {
+        return -3;
+    }
 
+    if(argptr(0, &pp, len * pg_size) < 0) {
+        return -4;
+    }
+
+    pde_t * pgdir = proc -> pgdir;
+    pte_t * pte;
+    for(long i = (long)pp; i < (long)pp + pg_size * len; i += pg_size) {
+        if((pte = walkpgdir(pgdir, (void*) i, 0)) == 0) {
+            panic("sys_mprotect: pte should exist");
+        }
+        *pte = *pte | PTE_W;
+    }
+    lcr3((uint)proc -> pgdir);
+    return len;
+}
+*/
 int
 sys_exit(void)
 {

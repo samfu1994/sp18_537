@@ -9,7 +9,7 @@
 extern char data[];  // defined in data.S
 
 static pde_t *kpgdir;  // for use in scheduler()
-
+ 
 // Allocate one page table for the machine for the kernel address
 // space for scheduler processes.
 void
@@ -61,16 +61,75 @@ walkpgdir(pde_t *pgdir, const void *va, int create)
   } else {
     if(!create || (pgtab = (pte_t*)kalloc()) == 0)
       return 0;
-    // Make sure all those PTE_P bits are zero.
     memset(pgtab, 0, PGSIZE);
-    // The permissions here are overly generous, but they can
-    // be further restricted by the permissions in the page table 
-    // entries, if necessary.
     *pde = PADDR(pgtab) | PTE_P | PTE_W | PTE_U;
   }
   return &pgtab[PTX(va)];
 }
+int
+sys_munprotect(void)
+{
+    int len = 1;
+    char * pp;
+    const int pg_size = PGSIZE;
+    if(argint(1, &len) < 0) {
+        return -1;
+    }
+    if(len <= 0) {
+        return -2;
+    }
+    if(len * pg_size >= proc -> sz) {
+        return -3;
+    }
+                                        
+    if(argptr(0, &pp, len * pg_size) < 0) {
+        return -4;
+    }
+                                             
+    pde_t * pgdir = proc -> pgdir;
+    pte_t * pte;
+    for(long i = (long)pp; i < (long)pp + pg_size * len; i += pg_size) {
+        if((pte = walkpgdir(pgdir, (void*) i, 0)) == 0){
+            panic("sys_mprotect: pte should exist");    
+        }
+        *pte = *pte | PTE_W;
+    }
+    lcr3((uint)proc -> pgdir);
+    return 0;
+}
 
+int
+sys_mprotect(void)
+{
+    int len = 1;
+    char * pp;
+    const int pg_size = PGSIZE;
+    if(argint(1, &len) < 0) {
+        return -1;
+    }
+    if(len <= 0) {
+        return -2;
+    }
+    if(len * pg_size >= proc -> sz) {
+        return -3;
+    }
+                                        
+    if(argptr(0, &pp, len * pg_size) < 0) {
+        return -4;
+    }
+    pde_t * pgdir = proc -> pgdir;
+    pte_t * pte;
+    for(long i = (long)pp; i < (long)pp + pg_size * len; i += pg_size) {
+        if((pte = walkpgdir(pgdir, (void*) i, 0)) == 0){
+            panic("sys_mprotect: pte should exist");    
+        }
+        *pte = (*pte) & ~PTE_W;
+    }
+    lcr3((uint)proc -> pgdir);
+    return 0;
+}                          
+                                             
+                
 // Create PTEs for linear addresses starting at la that refer to
 // physical addresses starting at pa. la and size might not
 // be page-aligned.
