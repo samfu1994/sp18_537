@@ -76,16 +76,20 @@ sys_munprotect(void)
         return -1;
     }
     if(len <= 0) {
-        return -2;
+        return -1;
     }
     if(len * pg_size >= proc -> sz) {
-        return -3;
+        return -1;
     }
                                         
     if(argptr(0, &pp, len * pg_size) < 0) {
-        return -4;
+        return -1;
     }
-                                             
+    
+    if((unsigned int) pp % 4096 != 0) {
+        return -1;
+    }
+                                         
     pde_t * pgdir = proc -> pgdir;
     pte_t * pte;
     for(long i = (long)pp; i < (long)pp + pg_size * len; i += pg_size) {
@@ -108,15 +112,20 @@ sys_mprotect(void)
         return -1;
     }
     if(len <= 0) {
-        return -2;
+        return -1;
     }
     if(len * pg_size >= proc -> sz) {
-        return -3;
+        return -1;
     }
                                         
     if(argptr(0, &pp, len * pg_size) < 0) {
-        return -4;
+        return -1;
     }
+    
+    if((unsigned int) pp % 4096 != 0) {
+        return -1;
+    }
+
     pde_t * pgdir = proc -> pgdir;
     pte_t * pte;
     for(long i = (long)pp; i < (long)pp + pg_size * len; i += pg_size) {
@@ -359,7 +368,7 @@ pde_t*
 copyuvm(pde_t *pgdir, uint sz)
 {
   pde_t *d;
-  pte_t *pte;
+  pte_t *pte, * tmp;
   uint pa, i;
   char *mem;
 
@@ -376,6 +385,10 @@ copyuvm(pde_t *pgdir, uint sz)
     memmove(mem, (char*)pa, PGSIZE);
     if(mappages(d, (void*)i, PGSIZE, PADDR(mem), PTE_W|PTE_U) < 0)
       goto bad;
+    if( ((*pte) & PTE_W) == 0) {
+        tmp = walkpgdir(d, (void*)i, 0);
+        (*tmp) = (*tmp) & ~PTE_W;
+    }
   }
   return d;
 

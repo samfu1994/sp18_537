@@ -7,6 +7,7 @@
 #include <sys/sysinfo.h>
 #include <sys/mman.h>
 #include <pthread.h>
+#include <unistd.h>
 
 #define NAME_MAX_LENGTH 1024
 #define PATCH_SIZE 4
@@ -26,6 +27,7 @@ void print_res(struct arg_struct * args, int round) {
             fprintf(stdout, "%d%c", args[i].res_count[j], args[i].res_char[j]);
         }
     }
+    fflush(stdout);
     return;
 }
 
@@ -84,7 +86,7 @@ void zip_file(int fd, int cur_size) {
         fprintf(stderr, "error when mmap file\n");
         exit(1);
     }
-    
+    //fprintf(stdout, "%d\n", cur_size); 
     int start;
     char * start_addr;
     int cur_patch_size;
@@ -154,25 +156,23 @@ int main(int argc, char * argv []) {
 	}
 	int num_file = argc - 1;
     int num_thread = get_nprocs();
-	int * fds = malloc(sizeof(int) * num_file);
-    int * sizes = malloc(sizeof(int) * num_file);
+	int fd;
+    int size;
     //pthread_t ** threads = malloc(sizeof(pthread_t * ) * num_thread);
 
-    for(int i = 0; i < num_thread; i++) {
-        //pthread_create(threads[i], NULL,);
-    }
-    
     for(int i = 0; i < num_file; i++) {
         struct stat st;
-        fds[i] = open(argv[i + 1], O_RDWR);
-        fstat(fds[i], &st);
-        sizes[i] = st.st_size;    
+        fd = open(argv[i + 1], O_RDONLY);
+        fstat(fd, &st);
+        size = st.st_size;    
+        zip_file(fd, size);
+        if(fd < 0)
+            fprintf(stdout, "error when open %d\n", fd);
+        close(fd);
     }
 
-    for(int i = 0; i < num_file; i++) {
-        zip_file(fds[i], sizes[i]);
+    for(int i = 0; i < num_thread; i++) {
+    
     }
-    free(fds);
-    free(sizes);
 	return 0;
 }
