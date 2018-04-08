@@ -96,6 +96,7 @@ int             pipewrite(struct pipe*, char*, int);
 
 // proc.c
 struct proc*    copyproc(struct proc*);
+int             clone(void(*)(void *, void*), void *, void*, void*);
 void            exit(void);
 int             fork(void);
 int             growproc(int);

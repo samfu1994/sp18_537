@@ -6,6 +6,22 @@
 #include "proc.h"
 #include "sysfunc.h"
 
+int sys_clone(void)
+{
+    void (*func)(void*, void*);
+    void *stack, * arg1, * arg2;
+    argptr(0, (char**)&func, sizeof(void (*)(void*, void*)));
+    argptr(1, (char**)&arg1, sizeof(void*));
+    argptr(2, (char**)&arg2, sizeof(void*));
+    argptr(3, (char**)&stack, sizeof(void*));
+    return clone(func, arg1, arg2, stack);
+}
+ 
+int sys_join(void)
+{
+    return 1;
+}
+
 int
 sys_fork(void)
 {

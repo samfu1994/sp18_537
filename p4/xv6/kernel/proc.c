@@ -444,3 +444,42 @@ procdump(void)
 }
 
 
+int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
+{
+    if((uint)stack % PGSIZE != 0 || (uint)stack + PGSIZE > (proc -> sz)) {
+        return -2;
+    }
+
+    int i, pid;
+    struct proc * np;
+    if((np = allocproc()) == 0)
+        return -1;
+    
+    np -> pgdir = proc -> pgdir;
+    np -> sz = proc -> sz;
+    np -> parent = proc;
+    *np -> tf = *proc -> tf;
+    
+    np -> tf -> eax = 0;
+    np -> ustack = stack;
+    np -> rf_count = proc -> rf_count;
+    *(np -> rf_count) += 1;
+
+    *((uint*)(stack + PGSIZE - sizeof(uint))) = (uint) arg1;
+    *((uint*)(stack + PGSIZE - 2 * sizeof(uint))) = (uint) arg2;
+    *((uint*)(stack + PGSIZE - 3 * sizeof(uint))) = 0xffffffff;
+    
+    np -> tf -> esp = (uint)stack + PGSIZE - 3 * sizeof(uint);
+    np -> tf -> eip = (uint)fcn;
+
+    for(i = 0; i < NOFILE; i++)
+        if(proc->ofile[i])
+            np->ofile[i] = filedup(proc->ofile[i]);
+    np->cwd = idup(proc->cwd);
+    
+    pid = np -> pid;
+    np -> state = RUNNABLE;
+    safestrcpy(np -> name, proc -> name, sizeof(proc -> name));
+    return pid;
+}
+
