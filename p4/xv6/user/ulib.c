@@ -104,7 +104,7 @@ memmove(void *vdst, void *vsrc, int n)
   return vdst;
 }
 
-/*int
+int
 thread_create(void (*start_routine)(void *, void*), void * arg1, void * arg2)
 {
     uint big_enough_size = PGSIZE * 2;
@@ -127,5 +127,4 @@ int thread_join(void * stack)
     free(stack);
     return 0;
 }
-dd*/
 
