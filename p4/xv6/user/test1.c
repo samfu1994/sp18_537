@@ -17,6 +17,9 @@ main(int argc, char *argv[])
 {
   int a = 222, b = 333;
   printf(1, "clone is %d\n", thread_create(&func, (void*)&a, (void*) &b)); 
+  printf(1, "after create\n");
+  int pid = thread_join();
+  printf(1, "after join pid : %d\n", pid);
   //printf(1, " clone is %d", clone(&func, (void*) & fd, (void*) &i, (void*) & stack));
   /*
    * if(argc <= 1){

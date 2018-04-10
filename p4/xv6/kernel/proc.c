@@ -53,7 +53,11 @@ found:
     return 0;
   }
   sp = p->kstack + KSTACKSIZE;
-  
+  if((p -> rf_count = (int*)kalloc()) == 0){
+    p -> state = UNUSED;
+    return 0;
+  }
+  *(p -> rf_count) = 1;
   // Leave room for trap frame.
   sp -= sizeof *p->tf;
   p->tf = (struct trapframe*)sp;
@@ -217,8 +221,11 @@ wait(void)
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->parent != proc)
         continue;
+      if(proc -> pgdir == p -> pgdir)
+          continue;
       havekids = 1;
-      if(p->state == ZOMBIE){
+      //if(p->state == ZOMBIE){
+      if(p->state == ZOMBIE && * (p -> rf_count) == 1){
         // Found one.
         pid = p->pid;
         kfree(p->kstack);
@@ -450,6 +457,7 @@ int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
         return -2;
     }
 
+    //int i;
     int i, pid;
     struct proc * np;
     if((np = allocproc()) == 0)
@@ -462,11 +470,9 @@ int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
     
     np -> tf -> eax = 0;
     np -> ustack = stack;
-    np -> rf_count = proc -> rf_count;
-    *(np -> rf_count) += 1;
 
-    *((uint*)(stack + PGSIZE - sizeof(uint))) = (uint) arg1;
-    *((uint*)(stack + PGSIZE - 2 * sizeof(uint))) = (uint) arg2;
+    *((uint*)(stack + PGSIZE - sizeof(uint))) = (uint) arg2;
+    *((uint*)(stack + PGSIZE - 2 * sizeof(uint))) = (uint) arg1;
     *((uint*)(stack + PGSIZE - 3 * sizeof(uint))) = 0xffffffff;
     
     np -> tf -> esp = (uint)stack + PGSIZE - 3 * sizeof(uint);
@@ -480,6 +486,59 @@ int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
     pid = np -> pid;
     np -> state = RUNNABLE;
     safestrcpy(np -> name, proc -> name, sizeof(proc -> name));
+    
+    np -> rf_count = proc -> rf_count;
+    *(np -> rf_count) += 1;
+    
     return pid;
+}
+
+int join(void ** stack) {
+    //if((uint) stack + sizeof(uint) > proc -> sz) {
+    //    return -1;
+    //}
+    
+    struct proc *p;
+    //int havekids;
+    int havekids, pid;
+
+    acquire(&ptable.lock);
+    for(;;){
+        // Scan through table looking for zombie children.
+        havekids = 0;
+        for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+            if(p->parent != proc)
+                continue;
+            if(proc -> pgdir != p -> pgdir)
+                continue;
+            havekids = 1;
+            if(p->state == ZOMBIE){
+                // Found one.
+                *stack = p -> ustack;
+                pid = p->pid;
+                kfree(p->kstack);
+                p->kstack = 0;
+                //freevm(p->pgdir);
+                p->state = UNUSED;
+                p->pid = 0;
+                p->parent = 0;
+                p->name[0] = 0;
+                p->killed = 0;
+                release(&ptable.lock);
+                *(p -> rf_count) -= 1;
+
+                return pid;
+            }
+        }
+
+        // No point waiting if we don't have any children.
+        if(!havekids || proc->killed){
+            release(&ptable.lock);
+            return -1;
+        }
+
+        // Wait for children to exit.  (See wakeup1 call in proc_exit.)
+        sleep(proc, &ptable.lock);  //DOC: wait-sleep
+  }
 }
 

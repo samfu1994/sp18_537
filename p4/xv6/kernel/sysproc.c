@@ -19,7 +19,9 @@ int sys_clone(void)
  
 int sys_join(void)
 {
-    return 1;
+    void * stack;
+    argptr(0, (char**) &stack, sizeof(void*));
+    return join(&stack);
 }
 
 int

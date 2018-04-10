@@ -122,9 +122,13 @@ thread_create(void (*start_routine)(void *, void*), void * arg1, void * arg2)
 }
 
 
-int thread_join(void * stack) 
+int thread_join() 
 {
-    free(stack);
-    return 0;
+    void * ustack;
+    int id = join(&ustack);
+    if(id == -1) {
+        free(ustack);
+    }
+    return id;
 }
 
