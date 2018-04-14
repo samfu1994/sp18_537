@@ -4,6 +4,8 @@
 #include "user.h"
 #include "x86.h"
 
+#define PGSIZE 4096
+
 char*
 strcpy(char *s, char *t)
 {

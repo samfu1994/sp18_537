@@ -456,6 +456,7 @@ int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
     if((uint)stack % PGSIZE != 0 || (uint)stack + PGSIZE > (proc -> sz)) {
         return -2;
     }
+    cprintf("clone::stack now is %d\n", (uint)(stack));
 
     //int i;
     int i, pid;
@@ -494,9 +495,6 @@ int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
 }
 
 int join(void ** stack) {
-    //if((uint) stack + sizeof(uint) > proc -> sz) {
-    //    return -1;
-    //}
     
     struct proc *p;
     //int havekids;
@@ -515,6 +513,7 @@ int join(void ** stack) {
             if(p->state == ZOMBIE){
                 // Found one.
                 *stack = p -> ustack;
+                cprintf("join::stack now is %d\n", (uint)(*stack));
                 pid = p->pid;
                 kfree(p->kstack);
                 p->kstack = 0;

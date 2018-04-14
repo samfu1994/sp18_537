@@ -1,7 +1,6 @@
 #ifndef _USER_H_
 #define _USER_H_
 
-#define PGSIZE 4096
 struct stat;
 
 // system calls
