@@ -111,9 +111,10 @@ thread_create(void (*start_routine)(void *, void*), void * arg1, void * arg2)
 {
     uint big_enough_size = PGSIZE * 2;
     void * stack = malloc(big_enough_size);
+    printf(1, "stack allocated : %d\n", (uint) stack);
     if(!stack) {
         printf(1, "malloc failed\n");
-        exit();
+        return -1;
     }
     
     if((uint)stack % PGSIZE) {
@@ -123,14 +124,43 @@ thread_create(void (*start_routine)(void *, void*), void * arg1, void * arg2)
     return clone(start_routine, arg1, arg2, stack);
 }
 
+static inline int fetch_and_add(volatile int* variable, int value)
+{
+      __asm__ volatile("lock; xaddl %0, %1"
+        : "+r" (value), "+m" (*variable) // input+output
+        : // No input-only
+        : "memory"
+      );
+      return value;
+}
 
 int thread_join() 
 {
     void * ustack;
     int id = join(&ustack);
-    if(id == -1) {
+    if(id != -1) {
+        printf(1, "stack freeing: %d\n", (uint)ustack);
         free(ustack);
     }
+    else {
+        printf(1, "id is -1\n");
+    }
     return id;
+}
+
+void lock_init(volatile lock_t *lock) {
+  lock -> ticket = 0;
+  lock -> turn = 0;
+}
+
+void lock_acquire(volatile lock_t *lock) {
+  int my_turn = fetch_and_add(&(lock -> ticket), 1);
+  while(lock -> turn != my_turn)
+    ; // spin
+
+}
+
+void lock_release(volatile lock_t *lock) {
+  lock -> turn = lock -> turn + 1;
 }
 

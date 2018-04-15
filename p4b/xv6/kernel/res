@@ -1,0 +1,54 @@
+test build PASSED
+ (build xv6 using make)
+
+test clone_basic PASSED (10 of 10)
+ (test for basic functionailty of clone(), with no cleanup)
+
+test clone_parent_sleep FAILED (0 of 10)
+ (test for clone() and join() where the thread terminates before join() is called)
+ tester failed
+
+test clone_child_sleep FAILED (0 of 10)
+ (basic test for clone() and join())
+ tester failed
+
+test clone_arguments FAILED (0 of 10)
+ (test for arguments to clone() and join())
+ tester failed
+
+test clone_bad FAILED (0 of 10)
+ (error tests for clone() and join())
+ tester failed
+
+test clone_return FAILED (0 of 10)
+ (test for clone() where the thread function returns, requires manual inspection)
+ tester failed
+
+test clone_wait FAILED (0 of 10)
+ (after clone(), wait() should not succeed)
+ tester failed
+
+test fork_join PASSED (10 of 10)
+ (after fork(), join() should not succeed)
+
+test threads_basic PASSED (10 of 10)
+ (basic tests for thread_create() and thread_join())
+
+test threads_many FAILED (0 of 10)
+ (create and join many threads)
+ xv6 kernel panic
+
+test threads_zombies PASSED (10 of 10)
+ (create many threads, and make them all zombies)
+
+test threads_sbrk FAILED (0 of 10)
+ (test to make sure threads handle sbrk() correctly)
+ tester failed
+
+test lock_basic FAILED (0 of 10)
+ (basic test for lock correctness)
+ make failed (error 2)
+
+test lock_setup FAILED (0 of 10)
+ (test that locks are set up correctly and do not interfere with each other)
+ make failed (error 2)

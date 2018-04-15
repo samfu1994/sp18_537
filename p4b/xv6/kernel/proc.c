@@ -57,6 +57,7 @@ found:
     p -> state = UNUSED;
     return 0;
   }
+  initlock(&(p->sz_lock), "sz_lock"); 
   *(p -> rf_count) = 1;
   // Leave room for trap frame.
   sp -= sizeof *p->tf;
@@ -111,16 +112,22 @@ int
 growproc(int n)
 {
   uint sz;
-  
+  acquire(&(proc->sz_lock));
+
   sz = proc->sz;
   if(n > 0){
-    if((sz = allocuvm(proc->pgdir, sz, sz + n)) == 0)
+    if((sz = allocuvm(proc->pgdir, sz, sz + n)) == 0){
+      release(&(proc->sz_lock));
       return -1;
+    }
   } else if(n < 0){
-    if((sz = deallocuvm(proc->pgdir, sz, sz + n)) == 0)
+    if((sz = deallocuvm(proc->pgdir, sz, sz + n)) == 0){
+      release(&(proc->sz_lock));
       return -1;
+    }
   }
   proc->sz = sz;
+  release(&(proc->sz_lock));
   switchuvm(proc);
   return 0;
 }
@@ -454,10 +461,10 @@ procdump(void)
 int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
 {
     if((uint)stack % PGSIZE != 0 || (uint)stack + PGSIZE > (proc -> sz)) {
-        return -2;
+        return -1;
     }
-    cprintf("clone::stack now is %d\n", (uint)(stack));
 
+    // cprintf("clone::stack now is %d\n", (uint)(stack));
     //int i;
     int i, pid;
     struct proc * np;
@@ -495,7 +502,6 @@ int clone(void(*fcn)(void *, void *), void *arg1, void *arg2, void *stack)
 }
 
 int join(void ** stack) {
-    
     struct proc *p;
     //int havekids;
     int havekids, pid;
@@ -513,7 +519,9 @@ int join(void ** stack) {
             if(p->state == ZOMBIE){
                 // Found one.
                 *stack = p -> ustack;
+                //cprintf("join::p -> ustack now is %d\n", (uint)(p -> ustack));
                 cprintf("join::stack now is %d\n", (uint)(*stack));
+                cprintf("join::get param %p\n", (void*)(stack));
                 pid = p->pid;
                 kfree(p->kstack);
                 p->kstack = 0;

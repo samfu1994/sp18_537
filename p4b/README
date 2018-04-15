@@ -1,0 +1,11 @@
+Overview: 
+    This project made the following changes to xv6:
+        1 add clone() system call which create a thread shares same address space with parent process.
+        2 add join() system call which waits for child threads share the same address space.
+        3 changed wait() system call to wait only for processes not share same address space.
+        4 add reference count to make sure free the process at the right time.
+        5 add spinlock lock_t with fetchAndAdd atomic instruction.
+
+
+
+
