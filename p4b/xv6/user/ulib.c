@@ -111,7 +111,6 @@ thread_create(void (*start_routine)(void *, void*), void * arg1, void * arg2)
 {
     uint big_enough_size = PGSIZE * 2;
     void * stack = malloc(big_enough_size);
-    printf(1, "stack allocated : %d\n", (uint) stack);
     if(!stack) {
         printf(1, "malloc failed\n");
         return -1;
@@ -139,11 +138,7 @@ int thread_join()
     void * ustack;
     int id = join(&ustack);
     if(id != -1) {
-        printf(1, "stack freeing: %d\n", (uint)ustack);
         free(ustack);
-    }
-    else {
-        printf(1, "id is -1\n");
     }
     return id;
 }

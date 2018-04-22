@@ -72,9 +72,11 @@ parallel_sbrk(void)
 
   // Expand address space for stack
   stack1 = sbrk(PGSIZE);
+  printf(1, "stack1 is %p\n", stack1);
   check(stack1 != (char *)-1, "sbrk() failed");
   check((uint)stack1 % PGSIZE == 0, "sbrk() return value is not page aligned");
   limit = (char *)stack1 + PGSIZE;
+  printf(1, "limit is %p\n", limit);
 
   printf(1, "Creating 1 thread to call sbrk() once...\n");
   pid1 = clone(&func1, NULL, NULL, stack1);
@@ -87,9 +89,11 @@ parallel_sbrk(void)
   check(stack1 == stack2, "join() returned the wrong stack");
   check(global == 1, "global is incorrect");
   check(limit == (char *)stack1 + 2*PGSIZE, "limit is incorrect");
-
+  printf(1, "later: limit is %p\n", limit);
   // Go back to original limit
   addr = sbrk(0);
+  printf(1, "addr is %p\n", addr);
+  printf(1, "RHS is %p\n", (char*)stack1 + 2 * PGSIZE);
   check(addr == (char *)stack1 + 2*PGSIZE, "sbrk() failed");
   addr = sbrk(-2*PGSIZE);
   check(addr == (char *)stack1 + 2*PGSIZE, "sbrk() failed");

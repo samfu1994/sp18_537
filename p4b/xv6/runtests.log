@@ -32,33 +32,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 718 blocks have been allocated
+zombie
+forktest
+balloc: first 607 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -78,6 +74,7 @@ init: starting sh
 $ tester
 tester
 PASSED TEST!
+
 
 test clone_basic PASSED (10 of 10)
  (test for basic functionailty of clone(), with no cleanup)
@@ -100,33 +97,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 718 blocks have been allocated
+zombie
+forktest
+balloc: first 607 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -145,9 +138,6 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-sys_join stack now is fe3f4c
-join::stack now is 12288
-join::get param 2fbc
 PASSED TEST!
 
 
@@ -172,33 +162,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 719 blocks have been allocated
+zombie
+forktest
+balloc: first 608 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -217,9 +203,6 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-sys_join stack now is fe3f4c
-join::stack now is 12288
-join::get param 2fbc
 PASSED TEST!
 
 
@@ -244,33 +227,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 721 blocks have been allocated
+zombie
+forktest
+balloc: first 609 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -289,9 +268,6 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-sys_join stack now is fe3f4c
-join::stack now is 12288
-join::get param 2fbc
 PASSED TEST!
 
 
@@ -316,33 +292,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 721 blocks have been allocated
+zombie
+forktest
+balloc: first 610 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -387,33 +359,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 719 blocks have been allocated
+zombie
+forktest
+balloc: first 608 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -432,11 +400,8 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-sys_join stack now is fe3f4c
 PID 4 should trap to 0xffffffff...
 pid 4 tester: trap 14 err 5 on cpu 1 eip 0xffffffff addr 0xffffffff--kill proc
-join::stack now is 12288
-join::get param 2fb8
 PID 4 joined. Check manually if the trap succeeded.
 PASSED TEST!
 
@@ -462,33 +427,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 719 blocks have been allocated
+zombie
+forktest
+balloc: first 608 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -507,9 +468,6 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-sys_join stack now is fe3f4c
-join::stack now is 12288
-join::get param 2fbc
 PASSED TEST!
 
 
@@ -534,33 +492,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 716 blocks have been allocated
+zombie
+forktest
+balloc: first 605 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -579,9 +533,7 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-sys_join stack now is fe3f4c
 PASSED TEST!
-
 
 test fork_join PASSED (10 of 10)
  (after fork(), join() should not succeed)
@@ -604,33 +556,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 720 blocks have been allocated
+zombie
+forktest
+balloc: first 609 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -649,11 +597,6 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-stack allocated : 34288
-sys_join stack now is fe3f4c
-join::stack now is 36864
-join::get param 2f98
-stack freeing: 36864
 PASSED TEST!
 
 
@@ -678,33 +621,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 724 blocks have been allocated
+zombie
+forktest
+balloc: first 613 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -724,316 +663,11 @@ init: starting sh
 $ tester
 tester
 Creating child threads...
-stack allocated : 33904
-stack allocated : 25704
-stack allocated : 17504
-stack allocated : 69632
-stack allocated : 61432
-stack allocated : 53232
-stack allocated : 102400
-stack allocated : 94200
-stack allocated : 86000
-stack allocated : 135168
-stack allocated : 126968
-stack allocated : 118768
-stack allocated : 167936
-stack allocated : 159736
-stack allocated : 151536
-stack allocated : 200704
-stack allocated : 192504
-stack allocated : 184304
-stack allocated : 233472
-stack allocated : 225272
-stack allocated : 217072
-stack allocated : 266240
-stack allocated : 258040
-stack allocated : 249840
-stack allocated : 299008
-stack allocated : 290808
-stack allocated : 282608
-stack allocated : 331776
-stack allocated : 323576
-stack allocated : 315376
-stack allocated : 364544
-stack allocated : 356344
-stack allocated : 348144
-stack allocated : 397312
-stack allocated : 389112
-stack allocated : 380912
-stack allocated : 430080
-stack allocated : 421880
-stack allocated : 413680
-stack allocated : 462848
-stack allocated : 454648
-stack allocated : 446448
-stack allocated : 495616
-stack allocated : 487416
-stack allocated : 479216
-stack allocated : 528384
-stack allocated : 520184
-stack allocated : 511984
-stack allocated : 561152
-stack allocated : 552952
-stack allocated : 544752
-stack allocated : 593920
-stack allocated : 585720
-stack allocated : 577520
-stack allocated : 626688
-stack allocated : 618488
-stack allocated : 610288
-stack allocated : 0
 malloc failed
 Created 57 child threads
 Joining all 57 child threads...
-sys_join stack now is fe3f4c
-join::stack now is 36864
-join::get param 2f88
-stack freeing: 36864
-sys_join stack now is fe3f4c
-join::stack now is 28672
-join::get param 2f88
-stack freeing: 28672
-sys_join stack now is fe3f4c
-join::stack now is 20480
-join::get param 2f88
-stack freeing: 20480
-sys_join stack now is fe3f4c
-join::stack now is 69632
-join::get param 2f88
-stack freeing: 69632
-sys_join stack now is fe3f4c
-join::stack now is 61440
-join::get param 2f88
-stack freeing: 61440
-sys_join stack now is fe3f4c
-join::stack now is 53248
-join::get param 2f88
-stack freeing: 53248
-sys_join stack now is fe3f4c
-join::stack now is 102400
-join::get param 2f88
-stack freeing: 102400
-sys_join stack now is fe3f4c
-join::stack now is 94208
-join::get param 2f88
-stack freeing: 94208
-sys_join stack now is fe3f4c
-join::stack now is 86016
-join::get param 2f88
-stack freeing: 86016
-sys_join stack now is fe3f4c
-join::stack now is 135168
-join::get param 2f88
-stack freeing: 135168
-sys_join stack now is fe3f4c
-join::stack now is 126976
-join::get param 2f88
-stack freeing: 126976
-sys_join stack now is fe3f4c
-join::stack now is 118784
-join::get param 2f88
-stack freeing: 118784
-sys_join stack now is fe3f4c
-join::stack now is 167936
-join::get param 2f88
-stack freeing: 167936
-sys_join stack now is fe3f4c
-join::stack now is 159744
-join::get param 2f88
-stack freeing: 159744
-sys_join stack now is fe3f4c
-join::stack now is 151552
-join::get param 2f88
-stack freeing: 151552
-sys_join stack now is fe3f4c
-join::stack now is 200704
-join::get param 2f88
-stack freeing: 200704
-sys_join stack now is fe3f4c
-join::stack now is 192512
-join::get param 2f88
-stack freeing: 192512
-sys_join stack now is fe3f4c
-join::stack now is 184320
-join::get param 2f88
-stack freeing: 184320
-sys_join stack now is fe3f4c
-join::stack now is 225280
-join::get param 2f88
-stack freeing: 225280
-sys_join stack now is fe3f4c
-join::stack now is 233472
-join::get param 2f88
-stack freeing: 233472
-sys_join stack now is fe3f4c
-join::stack now is 217088
-join::get param 2f88
-stack freeing: 217088
-sys_join stack now is fe3f4c
-join::stack now is 266240
-join::get param 2f88
-stack freeing: 266240
-sys_join stack now is fe3f4c
-join::stack now is 258048
-join::get param 2f88
-stack freeing: 258048
-sys_join stack now is fe3f4c
-join::stack now is 249856
-join::get param 2f88
-stack freeing: 249856
-sys_join stack now is fe3f4c
-join::stack now is 299008
-join::get param 2f88
-stack freeing: 299008
-sys_join stack now is fe3f4c
-join::stack now is 290816
-join::get param 2f88
-stack freeing: 290816
-sys_join stack now is fe3f4c
-join::stack now is 282624
-join::get param 2f88
-stack freeing: 282624
-sys_join stack now is fe3f4c
-join::stack now is 331776
-join::get param 2f88
-stack freeing: 331776
-sys_join stack now is fe3f4c
-join::stack now is 323584
-join::get param 2f88
-stack freeing: 323584
-sys_join stack now is fe3f4c
-join::stack now is 315392
-join::get param 2f88
-stack freeing: 315392
-sys_join stack now is fe3f4c
-join::stack now is 364544
-join::get param 2f88
-stack freeing: 364544
-sys_join stack now is fe3f4c
-join::stack now is 356352
-join::get param 2f88
-stack freeing: 356352
-sys_join stack now is fe3f4c
-join::stack now is 348160
-join::get param 2f88
-stack freeing: 348160
-sys_join stack now is fe3f4c
-join::stack now is 397312
-join::get param 2f88
-stack freeing: 397312
-sys_join stack now is fe3f4c
-join::stack now is 389120
-join::get param 2f88
-stack freeing: 389120
-sys_join stack now is fe3f4c
-join::stack now is 380928
-join::get param 2f88
-stack freeing: 380928
-sys_join stack now is fe3f4c
-join::stack now is 430080
-join::get param 2f88
-stack freeing: 430080
-sys_join stack now is fe3f4c
-join::stack now is 421888
-join::get param 2f88
-stack freeing: 421888
-sys_join stack now is fe3f4c
-join::stack now is 413696
-join::get param 2f88
-stack freeing: 413696
-sys_join stack now is fe3f4c
-join::stack now is 462848
-join::get param 2f88
-stack freeing: 462848
-sys_join stack now is fe3f4c
-join::stack now is 454656
-join::get param 2f88
-stack freeing: 454656
-sys_join stack now is fe3f4c
-join::stack now is 446464
-join::get param 2f88
-stack freeing: 446464
-sys_join stack now is fe3f4c
-join::stack now is 495616
-join::get param 2f88
-stack freeing: 495616
-sys_join stack now is fe3f4c
-join::stack now is 487424
-join::get param 2f88
-stack freeing: 487424
-sys_join stack now is fe3f4c
-join::stack now is 479232
-join::get param 2f88
-stack freeing: 479232
-sys_join stack now is fe3f4c
-join::stack now is 528384
-join::get param 2f88
-stack freeing: 528384
-sys_join stack now is fe3f4c
-join::stack now is 520192
-join::get param 2f88
-stack freeing: 520192
-sys_join stack now is fe3f4c
-join::stack now is 512000
-join::get param 2f88
-stack freeing: 512000
-sys_join stack now is fe3f4c
-join::stack now is 561152
-join::get param 2f88
-stack freeing: 561152
-sys_join stack now is fe3f4c
-join::stack now is 552960
-join::get param 2f88
-stack freeing: 552960
-sys_join stack now is fe3f4c
-join::stack now is 544768
-join::get param 2f88
-stack freeing: 544768
-sys_join stack now is fe3f4c
-join::stack now is 593920
-join::get param 2f88
-stack freeing: 593920
-sys_join stack now is fe3f4c
-join::stack now is 585728
-join::get param 2f88
-stack freeing: 585728
-sys_join stack now is fe3f4c
-join::stack now is 577536
-join::get param 2f88
-stack freeing: 577536
-sys_join stack now is fe3f4c
-join::stack now is 626688
-join::get param 2f88
-stack freeing: 626688
-sys_join stack now is fe3f4c
-join::stack now is 618496
-join::get param 2f88
-stack freeing: 618496
-sys_join stack now is fe3f4c
-join::stack now is 610304
-join::get param 2f88
-stack freeing: 610304
 All 57 child threads joined
 Creating child threads...
-stack allocated : 626688
-stack allocated : 77800
-stack allocated : 110568
-stack allocated : 143336
-stack allocated : 176104
-stack allocated : 208872
-stack allocated : 241640
-stack allocated : 274408
-stack allocated : 307176
-stack allocated : 339944
-stack allocated : 372712
-stack allocated : 405480
-stack allocated : 438248
-stack allocated : 471016
-stack allocated : 503784
-stack allocated : 536552
-stack allocated : 569320
-stack allocated : 602088
-stack allocated : 0
 malloc failed
 Created 18 child threads
 user/tester.c:75 check (i >= MIN_THREADS) failed: Not enough threads created
@@ -1062,33 +696,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 718 blocks have been allocated
+zombie
+forktest
+balloc: first 607 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -1132,33 +762,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 727 blocks have been allocated
+zombie
+forktest
+balloc: first 615 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -1178,9 +804,6 @@ init: starting sh
 $ tester
 tester
 Creating 1 thread to call sbrk() once...
-sys_join stack now is fe3f4c
-join::stack now is 16384
-join::get param 3fa8
 user/tester.c:93 check (addr == (char *)stack1 + 2*PGSIZE) failed: sbrk() failed
 TEST FAILED
 
@@ -1207,33 +830,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 719 blocks have been allocated
+zombie
+forktest
+balloc: first 608 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -1253,156 +872,6 @@ init: starting sh
 $ tester
 tester
 Unblocking all 50 threads...
-sys_join stack now is fe3f4c
-join::stack now is 12288
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 16384
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 20480
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 24576
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 28672
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 32768
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 36864
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 40960
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 45056
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 49152
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 53248
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 57344
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 61440
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 65536
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 69632
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 73728
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 77824
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 81920
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 86016
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 90112
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 94208
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 98304
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 102400
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 106496
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 110592
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 114688
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 118784
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 122880
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 126976
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 131072
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 135168
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 139264
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 143360
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 147456
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 151552
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 155648
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 159744
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 163840
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 167936
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 172032
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 176128
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 180224
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 184320
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 188416
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 192512
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 196608
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 200704
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 204800
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 208896
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 212992
-join::get param 2fbc
 PASSED TEST!
 
 
@@ -1427,33 +896,29 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --o
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
+rm
 mkdir
 ls
-threads_many
 threads_sbrk
-rm
-clone_bad
-clone_return
-clone_parent_sleep
+wc
 usertests
-stressfs
-ln
-cat
-clone_wait
-sh
-clone_child_sleep
-init
 test2
 README
-wc
-echo
-kill
-forktest
-zombie
-test1
+ln
 grep
+clone_bad
+kill
+stressfs
+threads_many
+sh
+init
+test1
+echo
+cat
 tester
-balloc: first 720 blocks have been allocated
+zombie
+forktest
+balloc: first 609 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
 make qemu-nox 
@@ -1473,156 +938,6 @@ init: starting sh
 $ tester
 tester
 Unblocking all 50 threads...
-sys_join stack now is fe3f4c
-join::stack now is 12288
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 16384
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 20480
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 24576
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 28672
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 32768
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 36864
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 40960
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 45056
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 49152
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 53248
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 57344
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 61440
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 65536
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 69632
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 73728
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 77824
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 81920
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 86016
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 90112
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 94208
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 98304
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 102400
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 106496
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 110592
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 114688
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 118784
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 122880
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 126976
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 131072
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 135168
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 139264
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 143360
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 147456
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 151552
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 155648
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 159744
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 163840
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 167936
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 172032
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 176128
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 180224
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 184320
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 188416
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 192512
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 196608
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 200704
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 204800
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 208896
-join::get param 2fbc
-sys_join stack now is fe3f4c
-join::stack now is 212992
-join::get param 2fbc
 Acquiring and releasing multiple locks...
 PASSED TEST!
 

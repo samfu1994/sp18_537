@@ -21,7 +21,6 @@ int sys_join(void)
 {
     void ** stack;
     argptr(0, (char**) &stack, sizeof(void*));
-    cprintf("sys_join stack now is %p\n", (void*) &stack);
     return join(stack);
 }
 

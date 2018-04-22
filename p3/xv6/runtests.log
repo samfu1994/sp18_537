@@ -8,6 +8,8 @@ build xv6 using make
 **********************************************************************
 Trying to build project using make
 make
+gcc  -iquote include -Wall -Werror -ggdb  \
+  -M -MG tools/mkfs.c -MF tools/mkfs.d -MT tools/mkfs.d -MT tools/mkfs.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/test1.c -MF user/test1.d -MT user/test1.d -MT user/test1.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
@@ -23,38 +25,40 @@ ld  -m    elf_i386 -nostdlib --omagic \
 dd if=/dev/zero of=xv6.img count=10000
 10000+0 records in
 10000+0 records out
-5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0155748 s, 329 MB/s
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.015354 s, 333 MB/s
 dd if=kernel/bootblock of=xv6.img conv=notrunc
 1+0 records in
 1+0 records out
-512 bytes copied, 0.000101364 s, 5.1 MB/s
+512 bytes copied, 5.9981e-05 s, 8.5 MB/s
 dd if=kernel/kernel of=xv6.img seek=1 conv=notrunc
 239+1 records in
 239+1 records out
-122840 bytes (123 kB, 120 KiB) copied, 0.000372052 s, 330 MB/s
+122840 bytes (123 kB, 120 KiB) copied, 0.000369149 s, 333 MB/s
+gcc -c  -iquote include -Wall -Werror -ggdb  -o tools/mkfs.o tools/mkfs.c
+gcc  tools/mkfs.o -o tools/mkfs
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/test1.o user/test1.c
 ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 --output=user/bin/test1 user/test1.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
 cp user/bin/test1 fs/test1
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 430 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/test1
@@ -81,24 +85,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 431 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -119,7 +123,7 @@ init: starting sh
 $ tester
 tester
 null dereference: pid 4 tester: trap 14 err 4 on cpu 1 eip 0x103e addr 0x0--kill proc
-TEST PASSED
+PASSED TEST!
 
 
 test null PASSED (10 of 10)
@@ -143,24 +147,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 431 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -181,7 +185,7 @@ init: starting sh
 $ tester
 tester
 bad dereference (0x801): pid 4 tester: trap 14 err 4 on cpu 1 eip 0x103e addr 0x801--kill proc
-TEST PASSED
+PASSED TEST!
 
 
 test null2 PASSED (10 of 10)
@@ -205,24 +209,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 433 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -242,7 +246,7 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-TEST PASSED
+PASSED TEST!
 
 
 test bounds PASSED (10 of 10)
@@ -266,24 +270,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 434 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -303,7 +307,7 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-TEST PASSED
+PASSED TEST!
 
 
 test protect_args PASSED (10 of 10)
@@ -327,24 +331,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 431 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -365,7 +369,8 @@ init: starting sh
 $ tester
 tester
 pid 4 tester: trap 14 err 4 on cpu 1 eip 0x10cc addr 0x3000--kill proc
-TEST PASSED
+PASSED TEST!
+
 
 test protect_fail PASSED (20 of 20)
  (mprotect/munprotect failure should not affect the system)
@@ -388,24 +393,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 434 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -430,7 +435,7 @@ pid 5 tester: trap 14 err 7 on cpu 1 eip 0x10e7 addr 0xaff8--kill proc
 reached here
 pid 7 tester: trap 14 err 7 on cpu 1 eip 0x120f addr 0x8000--kill proc
 reached here
-TEST PASSED
+PASSED TEST!
 
 test protect_basic PASSED (20 of 20)
  (basic mprotect/munprotect functionalities)
@@ -453,24 +458,24 @@ ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x1000 
 cp user/bin/tester fs/tester
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-kill
-tester
+rm
+mkdir
+ls
+wc
+usertests
 README
-echo
-zombie
-test1
+ln
+grep
+kill
+stressfs
 sh
 init
-ln
-wc
-mkdir
-rm
+test1
+echo
 cat
+tester
+zombie
 forktest
-grep
-ls
-usertests
-stressfs
 balloc: first 432 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/tester
@@ -493,7 +498,7 @@ tester
 pid 5 tester: trap 14 err 7 on cpu 1 eip 0x1072 addr 0x8000--kill proc
 reached here
 pid 6 tester: trap 14 err 7 on cpu 1 eip 0x117b addr 0x10000--kill proc
-TEST PASSED
+PASSED TEST!
 
 
 test protect_advanced PASSED (20 of 20)

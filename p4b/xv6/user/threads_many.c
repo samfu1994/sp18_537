@@ -68,7 +68,6 @@ fill_ptable(void)
   for (i = 0; i < MAX_THREADS; ++i) {
     pid = thread_create(&func1, NULL, NULL);
     if (pid != -1) {
-        printf(1, "i is %d, pid is %d\n", i, pid);
         check(pid > lastpid, "thread_create() returned the wrong pid");
       lastpid = pid;
     } else {

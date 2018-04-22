@@ -519,9 +519,6 @@ int join(void ** stack) {
             if(p->state == ZOMBIE){
                 // Found one.
                 *stack = p -> ustack;
-                //cprintf("join::p -> ustack now is %d\n", (uint)(p -> ustack));
-                cprintf("join::stack now is %d\n", (uint)(*stack));
-                cprintf("join::get param %p\n", (void*)(stack));
                 pid = p->pid;
                 kfree(p->kstack);
                 p->kstack = 0;
