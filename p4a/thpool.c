@@ -6,8 +6,8 @@ queue * init_queue(int cap) {
     queue * q = malloc(sizeof(queue));
     q -> cap = cap;
     // q -> funcs = malloc(sizeof(function_ptr) *  cap);
-    q -> rfuncs = malloc(sizeof(reducer_ptr) *  cap);
-    q -> mfuncs = malloc(sizeof(mapper_ptr) *  cap);
+    q -> rfuncs = malloc(sizeof(Reducer) *  cap);
+    q -> mfuncs = malloc(sizeof(Mapper) *  cap);
     q -> argc_list = malloc(sizeof(int) * cap);
     q -> argv_list = malloc(sizeof(char*) * cap); 
     q -> res_list = malloc(sizeof(char*) * cap); 
@@ -27,7 +27,7 @@ queue * init_queue(int cap) {
     return q;
 }
 
-int enqueue_reduce(queue * q, reducer_ptr fp, char * key, Getter g, int par) {
+int enqueue_reduce(queue * q, Reducer fp, char * key, Getter g, int par) {
     sem_wait(&(q -> empty));
     sem_wait(&(q -> mutex));
     q -> size += 1;
@@ -41,23 +41,26 @@ int enqueue_reduce(queue * q, reducer_ptr fp, char * key, Getter g, int par) {
     return 0;
 }
 
-int enqueue_map(queue * q, mapper_ptr fp, char * file) {
+int enqueue_map(queue * q, Mapper fp, char * file) {
     sem_wait(&(q -> empty));
     sem_wait(&(q -> mutex));
-    int tmp_empty = -2, tmp_full = -2;
-    sem_getvalue(&(q -> empty), &tmp_empty);
-    sem_getvalue(&(q -> full), &tmp_full);
-    printf("EEEEN : empty is %d, full is %d\n", tmp_empty, tmp_full);
+    // int tmp_empty = -2, tmp_full = -2;
+    // sem_getvalue(&(q -> empty), &tmp_empty);
+    // sem_getvalue(&(q -> full), &tmp_full);
+    // printf("EEEEN : empty is %d, full is %d\n", tmp_empty, tmp_full);
+    printf("cur is %d, enqueue_map : %s\n", q -> rear, file);
     q -> size += 1;
     q -> mfuncs[q -> rear] = fp;
     q -> argv_list[q -> rear] = file;
+    for(int i = 0; i < REP_NUM; i++)
+        printf("after enqueue_map, argv_list[%d] is %s\n", i, q -> argv_list[i]);
     q -> rear = (q -> rear + 1) % (q -> cap);
     sem_post(&(q -> mutex));
     sem_post(&(q -> full));
     return 0;
 }
 
-reducer_ptr dequeue_reduce(queue * q, char** key, Getter* g, int* par){
+Reducer dequeue_reduce(queue * q, char** key, Getter* g, int* par){
     int cur;
     sem_wait(&(q -> full));
     sem_wait(&(q -> mutex));
@@ -74,23 +77,25 @@ reducer_ptr dequeue_reduce(queue * q, char** key, Getter* g, int* par){
     return q -> rfuncs[cur];
 }
 
-mapper_ptr dequeue_map(queue * q, char * file){
+Mapper dequeue_map(queue * q, char ** file){
     int cur;
-    printf("try to dequeue\n");
+    // printf("try to dequeue\n");
     sem_wait(&(q -> full));
     sem_wait(&(q -> mutex));
-    int tmp_empty = -2, tmp_full = -2;
-    sem_getvalue(&(q -> empty), &tmp_empty);
-    sem_getvalue(&(q -> full), &tmp_full);
-    printf("DE: : empty is %d, full is %d\n", tmp_empty, tmp_full);
+    // int tmp_empty = -2, tmp_full = -2;
+    // sem_getvalue(&(q -> empty), &tmp_empty);
+    // sem_getvalue(&(q -> full), &tmp_full);
+    // printf("DE: : empty is %d, full is %d\n", tmp_empty, tmp_full);
     q -> size -= 1;
     cur = q -> front;
     //* file = q -> argv_list[cur];
-    strcpy(file, q -> argv_list[cur]);
+    // strcpy(file, q -> argv_list[cur]);
+    *file = q -> argv_list[cur];
+    printf("cur is %d, dequeue_map %s, argvlist : %s\n", cur, *file, q -> argv_list[cur]);
     q -> front = (q -> front + 1) % (q -> cap);
     sem_post(&(q -> mutex));
     sem_post(&(q -> empty));
-    printf("finish DE\n");
+    // printf("finish DE\n");
     return q -> mfuncs[cur];
 }
 
@@ -121,13 +126,13 @@ void * cleaner(void * void_tp) {
             printf("someone has finished\n");
             for(int i = 0; i < tp -> num_thread; i++) {
                 if(pthread_cancel(tp -> threads[i]) != 0){
-                    printf("killing thread error");
+                    printf("killing thread %d error\n", i);
                 }
-                //printf("killing thread %d\n", i);
             }
             break;
         }
     }
+    return NULL;
 }
 
 thpool * init_thpool(int thread_num, int queue_cap, int isMap, int jobNum) {
@@ -155,25 +160,25 @@ thpool * init_thpool(int thread_num, int queue_cap, int isMap, int jobNum) {
 
 void * routine_map(void * void_tp) {
     thpool * tp = (thpool *) void_tp;
-    int argc;
-    char * res = malloc(sizeof(char) * MAX_SIZE_RES);
-    char ** argv = malloc(sizeof(char*) * MAX_NUM_ARGC);
-    for(int i = 0; i < MAX_NUM_ARGC; i++) {
-        argv[i] = malloc(sizeof(char*) * MAX_LENGTH_ARGV);
-    }
-    char * filename = (char*) malloc(sizeof(char) * 128);
+    // int argc;
+    // char * res = malloc(sizeof(char) * MAX_SIZE_RES);
+    // char ** argv = malloc(sizeof(char*) * MAX_NUM_ARGC);
+    // for(int i = 0; i < MAX_NUM_ARGC; i++) {
+    //     argv[i] = malloc(sizeof(char*) * MAX_LENGTH_ARGV);
+    // }
+    char * filename;
     while(1) {
-        mapper_ptr fp = dequeue_map(tp -> q, filename);
-        // function_ptr fp = dequeue(tp -> q, &argc, &argv, &res);
-        // (*fp)(argc, argv, res);
+        Mapper fp = dequeue_map(tp -> q, &filename);
         (*fp)(filename);
+        sem_wait(&(tp -> q -> mutex));
         tp -> jobNum -= 1;
-        printf("job num is %d\n", tp -> jobNum);
         if(tp -> jobNum == 0) {
+            sem_post(&(tp -> q -> mutex));
             break;
         }
+        sem_post(&(tp -> q -> mutex));
     }
-    printf("quit\n");
+    printf("quit map routine\n");
     return NULL;
 }
 
@@ -181,33 +186,34 @@ void * routine_map(void * void_tp) {
 void * routine_reduce(void * void_tp) {
     thpool * tp = (thpool *) void_tp;
     int argc;
-    char * res = malloc(sizeof(char) * MAX_SIZE_RES);
+    // char * res = malloc(sizeof(char) * MAX_SIZE_RES);
     char ** argv = malloc(sizeof(char*) * MAX_NUM_ARGC);
     for(int i = 0; i < MAX_NUM_ARGC; i++) {
         argv[i] = malloc(sizeof(char*) * MAX_LENGTH_ARGV);
     }
     while(1) {
-        reducer_ptr fp = dequeue_reduce(tp -> q, &argv[0], NULL, &argc);
-        // function_ptr fp = dequeue(tp -> q, &argc, &argv, &res);
-        // (*fp)(argc, argv, res);
+        Reducer fp = dequeue_reduce(tp -> q, &argv[0], NULL, &argc);
         (*fp)(argv[0], NULL, argc);
+        sem_wait(&(tp -> q -> mutex));
         tp -> jobNum -= 1;
-        printf("job num is %d\n", tp -> jobNum);
         if(tp -> jobNum == 0) {
+            sem_post(&(tp -> q -> mutex));
             break;
         }
+        sem_post(&(tp -> q -> mutex));
     }
+    printf("quit reduce routine\n");
     return NULL;
 }
 
-int thpool_add_job_reduce(thpool * tp, reducer_ptr fp, int argc, char ** argv, char * res) {
+int thpool_add_job_reduce(thpool * tp, Reducer fp, int argc, char * argv, char * res) {
     // return enqueue(tp -> q, fp, argc, argv, res);
-    return enqueue_reduce(tp -> q, fp, argv[0], NULL, argc); 
+    return enqueue_reduce(tp -> q, fp, argv, NULL, argc); 
 }
 
-int thpool_add_job_map(thpool * tp, mapper_ptr fp, char * filename) {
+int thpool_add_job_map(thpool * tp, Mapper fp, char * filename) {
     // return enqueue(tp -> q, fp, argc, argv, res);
-    //printf("thread_add_job_map: %s\n", filename);
+    printf("thread_add_job_map: %s\n", filename);
     return enqueue_map(tp -> q, fp, filename); 
 }
 
@@ -233,34 +239,37 @@ void f_reduce(char * key, Getter get_func, int partition_number) {
             break;
         }
     }
-    printf("mid is %d\n", mid);
     start = mid;
     end = mid;
+    printf("key is %s\n", key);
+    printf("start is %d, end is %d\n", start, end);
     while(start >= 0 && strcmp(p -> content[start].key, key) == 0) {
         start -= 1;
     }
     start += 1;
-    while(end < p -> len && strcmp(p -> content[end].key, key) == 0) {
+    while(end <= p -> len && strcmp(p -> content[end].key, key) == 0) {
         end += 1;
     }
     end -= 1;
     int sum = 0;
+    printf("start is %d, end is %d\n", start, end);
     for(int i = start; i <= end; i++) {
+        printf("reduce :: %s,  %s\n", p -> content[i].key, p -> content[i].value);
         sum += atoi(p -> content[i].value);
     }
-    printf("reduce %s, %d\n", key, sum);
+    printf("sum of %s is %d\n", key, sum);
 }
 
 void f_map(char* file) {
-    char * tmp = (char*)malloc(sizeof(char) * 100);
-    for(int i = 0; i < 10; i++) {
-        // strcpy(tmp, file);
-        // int ll = strlen(tmp);
-        // sprintf(&tmp[ll], "%3d", i);
-        // tmp[ll + 3] = 0;
-        // printf("   map: %s\n", tmp);
-        sprintf(tmp, "1");
-        MR_Emit(file, tmp);
+    char * value;
+    char * key;
+    for(int i = 0; i < REP_NUM; i++) {
+        key = (char*)malloc(sizeof(char) * KEY_LENGTH);
+        value = (char*)malloc(sizeof(char) * VALUE_LENGTH);
+        sprintf(value, "2");
+        sprintf(key, "0");
+        // MR_Emit(file, value);
+        MR_Emit(key, value);
     }
     printf("map : %s\n", file);
 }
@@ -275,48 +284,23 @@ unsigned long MR_DefaultHashPartition(char *key, int num_partitions) {
 
 void MR_Emit(char *key, char *value){
     unsigned long partition_index = MR_DefaultHashPartition(key, PARTITION_NUM);
-    printf("parition index is %d\n", partition_index);
+    printf("key is %d, partition index is %lu\n", atoi(key), partition_index);
     partition * p = &partitions[partition_index];
-    int l = p -> len;
-    printf("l now is %d\n", p -> len);
-    //strlen can be used here
-    p -> content[l].key = (char*)malloc(sizeof(char) * KEY_LENGTH);
-    p -> content[l].value = (char*)malloc(sizeof(char) * VALUE_LENGTH);
 
-    strcpy(p -> content[l].key, key);
-    strcpy(p -> content[l].value, value);
+    // printf("l now is %d\n", p -> len);
+    // printf("key length is %lu, val length is %lu\n", strlen(key), strlen(value));
+    sem_wait(&(sems[partition_index]));
+    int l = p -> len;
+    for(int i = 0; i < PARTITION_NUM; i++) {
+        // printf("partition : %d, length is %lu\n", i, partitions[i].len);
+    }
+    p -> content[l].key = key;
+    p -> content[l].value = value;
+    // strcpy(p -> content[l].key, key);
+    // strcpy(p -> content[l].value, value);
     p -> len += 1;
+    printf("ptr is %p\n", p -> content[l].key);
+    printf("inserting value : %s, len %lu, p -> len is %d\n", p -> content[l].key, strlen(p -> content[l].key), p -> len);
+    sem_post(&(sems[partition_index]));
     return;
 }
-
-// int main(){
-//     int thread_num = 4;
-//     int queue_size = 10;
-
-//     thpool * tp = init_thpool(thread_num, queue_size);
-//     reducer_ptr fp = &f;
-//     int argc = 1;
-//     char ** argv;
-//     char ** res;
-//     res = malloc(sizeof(char* ) * 2048);
-//     for(int i = 0; i < 2048; i++) {
-//         res[i] = malloc(sizeof(char) * MAX_SIZE_RES);
-//     }
-
-//     for(int j = 0; j < 2048; j++){
-//         argv = malloc(sizeof(char*) * argc);
-//         for(int i = 0; i < argc; i++) {
-//             argv[i] = malloc(sizeof(char) * MAX_LENGTH_ARGV);
-//             sprintf(argv[i], "%d", i + j);
-//         }
-//         thpool_add_job_reduce(tp, fp, argc, argv, res[j]);
-//     }
-//     sleep(1);
-//     for(int i = 0; i < 2048; i++) {
-//         printf("now res[%d] is %s\n", i, res[i]);
-//     }
-//     for(int i = 0; i < thread_num; i++) {
-//         pthread_join(tp -> threads[i], NULL);
-//     }
-//     return 0;
-// }
