@@ -113,6 +113,7 @@ int queue_is_full(queue * q) {
 void * cleaner(void * void_tp) {
     thpool * tp = (thpool*) void_tp;
     while(1){
+        printf("origin is %d, now is %d\n", tp -> originJobNum, tp -> jobNum);
         if(tp -> originJobNum == tp -> jobNum) {
             sleep(1);
         }
@@ -122,7 +123,7 @@ void * cleaner(void * void_tp) {
                 if(pthread_cancel(tp -> threads[i]) != 0){
                     printf("killing thread error");
                 }
-                printf("killing thread %d\n", i);
+                //printf("killing thread %d\n", i);
             }
             break;
         }
@@ -190,6 +191,11 @@ void * routine_reduce(void * void_tp) {
         // function_ptr fp = dequeue(tp -> q, &argc, &argv, &res);
         // (*fp)(argc, argv, res);
         (*fp)(argv[0], NULL, argc);
+        tp -> jobNum -= 1;
+        printf("job num is %d\n", tp -> jobNum);
+        if(tp -> jobNum == 0) {
+            break;
+        }
     }
     return NULL;
 }
@@ -201,7 +207,7 @@ int thpool_add_job_reduce(thpool * tp, reducer_ptr fp, int argc, char ** argv, c
 
 int thpool_add_job_map(thpool * tp, mapper_ptr fp, char * filename) {
     // return enqueue(tp -> q, fp, argc, argv, res);
-    printf("thread_add_job_map: %s\n", filename);
+    //printf("thread_add_job_map: %s\n", filename);
     return enqueue_map(tp -> q, fp, filename); 
 }
 
@@ -210,11 +216,77 @@ int thpool_is_empty(thpool * tp) {
 }
 
 void f_reduce(char * key, Getter get_func, int partition_number) {
-    printf("reduce %s, %d\n", key, partition_number);
+    unsigned long partition_index = MR_DefaultHashPartition(key, PARTITION_NUM);
+    partition * p = &partitions[partition_index];
+    int start = 0, end = p -> len;
+    int mid = 0;
+    while(start < end) {
+        mid = (start + end) / 2;
+        int cur = strcmp(p -> content[mid].key, key);
+        if(cur < 0) {
+            start = mid + 1;
+        }
+        else if(cur > 0) {
+            end = mid - 1;
+        }
+        else{
+            break;
+        }
+    }
+    printf("mid is %d\n", mid);
+    start = mid;
+    end = mid;
+    while(start >= 0 && strcmp(p -> content[start].key, key) == 0) {
+        start -= 1;
+    }
+    start += 1;
+    while(end < p -> len && strcmp(p -> content[end].key, key) == 0) {
+        end += 1;
+    }
+    end -= 1;
+    int sum = 0;
+    for(int i = start; i <= end; i++) {
+        sum += atoi(p -> content[i].value);
+    }
+    printf("reduce %s, %d\n", key, sum);
 }
 
 void f_map(char* file) {
+    char * tmp = (char*)malloc(sizeof(char) * 100);
+    for(int i = 0; i < 10; i++) {
+        // strcpy(tmp, file);
+        // int ll = strlen(tmp);
+        // sprintf(&tmp[ll], "%3d", i);
+        // tmp[ll + 3] = 0;
+        // printf("   map: %s\n", tmp);
+        sprintf(tmp, "1");
+        MR_Emit(file, tmp);
+    }
     printf("map : %s\n", file);
+}
+
+unsigned long MR_DefaultHashPartition(char *key, int num_partitions) {
+    unsigned long hash = 5381;
+    int c;
+    while ((c = *key++) != '\0')
+        hash = hash * 33 + c;
+    return hash % num_partitions;
+}
+
+void MR_Emit(char *key, char *value){
+    unsigned long partition_index = MR_DefaultHashPartition(key, PARTITION_NUM);
+    printf("parition index is %d\n", partition_index);
+    partition * p = &partitions[partition_index];
+    int l = p -> len;
+    printf("l now is %d\n", p -> len);
+    //strlen can be used here
+    p -> content[l].key = (char*)malloc(sizeof(char) * KEY_LENGTH);
+    p -> content[l].value = (char*)malloc(sizeof(char) * VALUE_LENGTH);
+
+    strcpy(p -> content[l].key, key);
+    strcpy(p -> content[l].value, value);
+    p -> len += 1;
+    return;
 }
 
 // int main(){

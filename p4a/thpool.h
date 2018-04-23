@@ -9,6 +9,20 @@
 #define MAX_NUM_ARGC 1024
 #define MAX_LENGTH_ARGV 64
 #define MAX_SIZE_RES 1024
+#define PARTITION_NUM 10
+#define NODE_NUM 1024
+#define KEY_LENGTH 16
+#define VALUE_LENGTH 16
+
+typedef struct{
+    char * key;
+    char * value;
+} node;
+
+typedef struct{
+    node * content;
+    int len;
+} partition;
 
 typedef void (*mapper_ptr)(char*);
 typedef void (*reducer_ptr)(char *key, Getter get_func, int partition_number);
@@ -52,4 +66,8 @@ int thpool_add_job_reduce(thpool *, reducer_ptr, int, char **, char * );
 int thpool_add_job_map(thpool *, mapper_ptr, char*);
 int thpool_is_empty(thpool *);
 
+
+partition * partitions;
+unsigned long MR_DefaultHashPartition(char *key, int num_partitions);
+void MR_Emit(char *key, char *value);
 #endif

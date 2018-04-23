@@ -1,24 +1,17 @@
 #include "thpool.h"
 
 #define TEST_NUM 16
-unsigned long MR_DefaultHashPartition(char *key, int num_partitions) {
-    unsigned long hash = 5381;
-    int c;
-    while ((c = *key++) != '\0')
-        hash = hash * 33 + c;
-    return hash % num_partitions;
-}
-
-void MR_Emit(char *key, char *value){
-    
-}
-
 
 void MR_Run(int argc, char *argv[], 
         Mapper map, int num_mappers, 
         Reducer reduce, int num_reducers, 
         Partitioner partition){
 
+    partitions = malloc(sizeof(partition) * PARTITION_NUM);
+    for(int i = 0; i < PARTITION_NUM; i++) {
+        partitions[i].content = (node*) malloc(sizeof(node) * NODE_NUM);
+        partitions[i].len = 0;
+    }
     int queue_size = 10;
     int num_files = 10;
     reducer_ptr rfp = &f_reduce;
@@ -28,29 +21,34 @@ void MR_Run(int argc, char *argv[],
     thpool * tp = init_thpool(num_mappers, queue_size, 1, num_files);
     char * filename = (char*)malloc(sizeof(char) * 200);
     for(int j = 0; j < num_files; j++) {
-        printf("adding map job%d\n", j);
+        filename = malloc(sizeof(char*) * 200);
         sprintf(filename, "filename%d", j);
         thpool_add_job_map(tp, mfp, filename);
     }
+    for(int i = 0; i < num_mappers;  i++) {
+        pthread_join(tp -> threads[i], NULL);
+    }
+    printf("mapping phase finished\n");
     //soring phase
-    /*
+    
     //reduce phase
     thpool * tp2 = init_thpool(num_reducers, queue_size, 0, num_reducers);
-    for(int j = 0; j < TEST_NUM; j++){
+    for(int j = 0; j < num_reducers; j++){
         printf("add reducing job %d\n", j);
         argv = malloc(sizeof(char*) * argc);
         for(int i = 0; i < argc; i++) {
             argv[i] = malloc(sizeof(char) * MAX_LENGTH_ARGV);
-            sprintf(argv[i], "%d", i + j);
+            // sprintf(argv[i], "come here and reduce %d", i + j);
+            strcpy(argv[i], partitions[0].content[0].key);
         }
         thpool_add_job_reduce(tp2, rfp, argc, argv, NULL);
-    }*/
+    }
     
     sleep(3);
     printf("main:: after sleep\n");
-    for(int i = 0; i < num_mappers;  i++) {
-        pthread_join(tp -> threads[i], NULL);
-    }
+    for(int i = 0; i < num_reducers;  i++) {
+        pthread_join(tp2 -> threads[i], NULL);
+    }   
     
     return;    
 }
