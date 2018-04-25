@@ -12,6 +12,32 @@ test_select=0
 test_cnt=0
 test_passed=0
 
+timeouts=(1
+1
+1
+1
+1
+1
+1
+30
+1
+1
+3
+10
+10
+10
+10
+40
+1
+1
+5
+100
+40
+100
+80
+20
+40)
+
 function check_mr_files {
 	if [ ! -f mapreduce.c ]; then
 	    echo "mapreduce.c file not found!"
@@ -36,18 +62,18 @@ function sort_run {
     	echo "  Failed to build sort_m${1}r${2}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
 
-	if ! ./sort_m${1}r${2} ${4}; then
+	if ! timeout ${timeouts[${test_cnt}-1]} ./sort_m${1}r${2} ${4}; then
 		echo "[Test${test_cnt} failed]"
 		echo "  Error occured while running ./sort_m${1}r${2} ${4}"
     	echo
     	#delete executable on failure
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
@@ -61,7 +87,7 @@ function sort_run {
 				echo "    - actual output path: sort_f${3}m${1}r${2}_t${test_cnt}\($i\).out"
     			echo
 		    	if [ ${continue_flag} -eq 1 ]; then
-		    		return 1	
+		    		return 1
 		    	fi
 		    	exit 1
 			fi
@@ -98,17 +124,17 @@ function wordcount_run {
     	echo "  Failed to build wordcount_m${1}r${2}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
 
-	if ! ./wordcount_m${1}r${2} ${4}; then
+	if ! timeout ${timeouts[${test_cnt}-1]} ./wordcount_m${1}r${2} ${4}; then
 		echo "[Test${test_cnt} failed]"
 		echo "  Error occured while running ./wordcount_m${1}r${2} ${4}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
@@ -123,7 +149,7 @@ function wordcount_run {
     			echo
 
 		    	if [ ${continue_flag} -eq 1 ]; then
-		    		return 1	
+		    		return 1
 		    	fi
 		    	exit 1
 			fi
@@ -159,17 +185,17 @@ function wordcount_cp_run {
     	echo "  Failed to build wordcount_cp_m${1}r${2}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
 
-	if ! ./wordcount_cp_m${1}r${2} ${4}; then
+	if ! timeout ${timeouts[${test_cnt}-1]} ./wordcount_cp_m${1}r${2} ${4}; then
 		echo "[Test${test_cnt} failed]"
 		echo "  Error occured while running ./wordcount_cp_m${1}r${2} ${4}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
@@ -184,7 +210,7 @@ function wordcount_cp_run {
     			echo
 
 		    	if [ ${continue_flag} -eq 1 ]; then
-		    		return 1	
+		    		return 1
 		    	fi
 		    	exit 1
 			fi
@@ -220,17 +246,17 @@ function wordcount_multi_run {
     	echo "  Failed to build wordcount_multi_m${1}r${2}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
 
-	if ! ./wordcount_multi_m${1}r${2} ${4}; then
+	if ! timeout ${timeouts[${test_cnt}-1]} ./wordcount_multi_m${1}r${2} ${4}; then
 		echo "[Test${test_cnt} failed]"
 		echo "  Error occured while running ./wordcount_multi_m${1}r${2} ${4}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
@@ -247,7 +273,7 @@ function wordcount_multi_run {
 		    			echo
 
 				    	if [ ${continue_flag} -eq 1 ]; then
-				    		return 1	
+				    		return 1
 				    	fi
 				    	exit 1
 					fi
@@ -288,17 +314,17 @@ function wordcount_weight_run {
     	echo "  Failed to build wordcount_m${1}r${2}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
 
-	if ! ./wordcount_weight_m${1}r${2} ${4}; then
+	if ! timeout ${timeouts[${test_cnt}-1]} ./wordcount_weight_m${1}r${2} ${4}; then
 		echo "[Test${test_cnt} failed]"
 		echo "  Error occured while running ./wordcount_m${1}r${2} ${4}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
@@ -313,7 +339,7 @@ function wordcount_weight_run {
     			echo
 
 		    	if [ ${continue_flag} -eq 1 ]; then
-		    		return 1	
+		    		return 1
 		    	fi
 		    	exit 1
 			fi
@@ -343,24 +369,24 @@ function valgrind_run {
 		return 0
 	    fi
 	fi
-	echo "valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind_test${test_cnt}.log ./wordcount_m${1}r${2} ${4}"  
+	echo "valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind_test${test_cnt}.log ./wordcount_m${1}r${2} ${4}"
 
 	if ! gcc -o wordcount_m${1}r${2} wordcount.c mapreduce.c -g -Wall -Werror -pthread -O -lm -DNUM_MAPPERS=${1} -DNUM_REDUCERS=${2} -DFILE_OUTPUT_SUFFIX="\"f${3}m${1}r${2}_t${test_cnt}\""; then
 		echo "[Test${test_cnt} failed]"
     	echo "  Failed to build wordcount_m${1}r${2}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi
 
-	if ! valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind_test${test_cnt}.log ./wordcount_m${1}r${2} ${4}; then
+        if ! timeout ${timeouts[${test_cnt}-1]} valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind_test${test_cnt}.log ./wordcount_m${1}r${2} ${4}; then
 		echo "[Test${test_cnt} failed]"
 		echo "  Error occured while running ./wordcount_m${1}r${2} ${4}"
     	echo
     	if [ ${continue_flag} -eq 1 ]; then
-    		return 1	
+    		return 1
     	fi
     	exit 1
 	fi

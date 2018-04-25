@@ -7,5 +7,11 @@
 #include <unistd.h>
 #include <semaphore.h>
 #include <string.h>
+#include <assert.h>
 
+#include <fcntl.h>
+#include <errno.h>
+#include <time.h>
+
+#include <semaphore.h>
 #endif

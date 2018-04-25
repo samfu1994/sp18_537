@@ -1,16 +1,14 @@
-# all: mapreduce.o thpool.o
-# 	gcc mapreduce.o thpool.o -o test
+all :
+	gcc mapreduce.c -pthread -o test
 
-thpool.o:	thpool.c
-		gcc -Wall -Werror -c -pthread thpool.c
+debug :
+	gcc mapreduce.c -g -pthread -o test
 
-test: thpool.o mapreduce.c 
-		gcc mapreduce.c thpool.o -Wall -Werror -pthread -o test
+wc:
+	gcc -o test_wc wordcount.c mapreduce.c -Wall -Werror -pthread -O -DNUM_MAPPERS=1 -DNUM_REDUCERS=10
 
-debug: thpool.o mapreduce.c 
-		gcc mapreduce.c thpool.o -O0 -Wall -Werror -pthread -o test
+sort:
+	gcc -o test_sort sort.c mapreduce.c -Wall -Werror -pthread -O -DNUM_MAPPERS=1 -DNUM_REDUCERS=1
 
-
-clean:
-	rm *.o
+clean:	
 	rm test
