@@ -1,0 +1,2064 @@
+starting build
+
+**********************************************************************
+
+Test build
+build project using make
+
+**********************************************************************
+rm -f xcheck
+gcc xcheck.c -o xcheck -Wall -Werror -O
+
+
+test build PASSED
+ (build project using make)
+
+starting noimage
+
+**********************************************************************
+
+Test noimage
+Run without a file system
+
+**********************************************************************
+
+
+test noimage 
+ (Run without a file system)
+
+starting good
+
+**********************************************************************
+
+Test good
+Run on a good file system
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/good
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+
+
+test good PASSED (5 of 5)
+ (Run on a good file system)
+
+starting goodlarge
+
+**********************************************************************
+
+Test goodlarge
+Run on large good file system
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/goodlarge
+size : 2048, nblocks : 1969, ninodes : 600
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 512, type: 1
+inode : 3, link :1, size 0, type: 2
+inode : 4, link :1, size 512, type: 1
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 6145, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 8192, type: 1
+finish first round
+
+
+test goodlarge PASSED (5 of 5)
+ (Run on large good file system)
+
+starting goodrefcnt
+
+**********************************************************************
+
+Test goodrefcnt
+Run on a file system with only good file reference counts
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/goodrefcnt
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 1793, type: 2
+inode : 3, link :1, size 9975, type: 2
+inode : 4, link :1, size 9460, type: 2
+inode : 5, link :1, size 6137, type: 2
+inode : 6, link :1, size 11147, type: 2
+inode : 7, link :1, size 9853, type: 2
+inode : 8, link :1, size 9468, type: 2
+inode : 9, link :1, size 9478, type: 2
+inode : 10, link :1, size 11069, type: 2
+inode : 11, link :1, size 9541, type: 2
+inode : 12, link :1, size 9526, type: 2
+inode : 13, link :1, size 17105, type: 2
+inode : 14, link :1, size 9696, type: 2
+inode : 15, link :1, size 9422, type: 2
+inode : 16, link :1, size 35159, type: 2
+inode : 17, link :1, size 10297, type: 2
+inode : 18, link :1, size 9270, type: 2
+inode : 19, link :1, size 512, type: 1
+inode : 20, link :1, size 6144, type: 2
+inode : 21, link :1, size 71680, type: 2
+inode : 22, link :1, size 6145, type: 2
+inode : 23, link :1, size 512, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 512, type: 1
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :2, size 71680, type: 2
+inode : 28, link :1, size 512, type: 1
+inode : 29, link :1, size 6144, type: 2
+inode : 30, link :1, size 512, type: 2
+inode : 31, link :1, size 6145, type: 2
+inode : 32, link :1, size 1024, type: 1
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+inode : 65, link :1, size 0, type: 2
+inode : 66, link :1, size 0, type: 2
+inode : 67, link :1, size 0, type: 2
+inode : 68, link :1, size 0, type: 2
+inode : 69, link :1, size 0, type: 2
+inode : 70, link :1, size 0, type: 2
+inode : 71, link :1, size 0, type: 2
+inode : 72, link :1, size 0, type: 2
+inode : 73, link :1, size 0, type: 2
+inode : 74, link :1, size 0, type: 2
+inode : 75, link :1, size 0, type: 2
+inode : 76, link :1, size 0, type: 2
+inode : 77, link :1, size 0, type: 2
+inode : 78, link :1, size 0, type: 2
+inode : 79, link :1, size 0, type: 2
+inode : 80, link :1, size 0, type: 2
+inode : 81, link :1, size 0, type: 2
+inode : 82, link :1, size 0, type: 2
+inode : 83, link :1, size 0, type: 3
+finish first round
+
+
+test goodrefcnt PASSED (5 of 5)
+ (Run on a file system with only good file reference counts)
+
+starting goodlink
+
+**********************************************************************
+
+Test goodlink
+Run on a file system with only good directory link counts
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/goodlink
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :2, size 512, type: 1
+inode : 2, link :1, size 1793, type: 2
+inode : 3, link :1, size 9596, type: 2
+inode : 4, link :1, size 9128, type: 2
+inode : 5, link :1, size 5904, type: 2
+inode : 6, link :1, size 10716, type: 2
+inode : 7, link :1, size 9432, type: 2
+inode : 8, link :1, size 9144, type: 2
+inode : 9, link :1, size 9108, type: 2
+inode : 10, link :1, size 10684, type: 2
+inode : 11, link :1, size 9200, type: 2
+inode : 12, link :1, size 9184, type: 2
+inode : 13, link :1, size 16312, type: 2
+inode : 14, link :1, size 9348, type: 2
+inode : 15, link :2, size 9060, type: 2
+inode : 16, link :1, size 34908, type: 2
+inode : 17, link :1, size 9916, type: 2
+inode : 18, link :1, size 8916, type: 2
+inode : 19, link :1, size 0, type: 3
+inode : 20, link :1, size 64, type: 1
+finish first round
+
+
+test goodlink PASSED (5 of 5)
+ (Run on a file system with only good directory link counts)
+
+starting goodrm
+
+**********************************************************************
+
+Test goodrm
+Run on a good file system having some files removed
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/goodrm
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :2, size 512, type: 1
+inode : 2, link :1, size 1793, type: 2
+inode : 3, link :1, size 9596, type: 2
+inode : 4, link :2, size 9128, type: 2
+inode : 5, link :1, size 5904, type: 2
+inode : 6, link :1, size 48, type: 1
+inode : 7, link :1, size 9432, type: 2
+inode : 8, link :1, size 9144, type: 2
+inode : 9, link :1, size 9108, type: 2
+inode : 10, link :1, size 10684, type: 2
+inode : 11, link :1, size 9200, type: 2
+inode : 12, link :1, size 9184, type: 2
+inode : 13, link :1, size 16312, type: 2
+inode : 14, link :1, size 9348, type: 2
+inode : 15, link :1, size 9060, type: 2
+finish first round
+
+
+test goodrm PASSED (5 of 5)
+ (Run on a good file system having some files removed)
+
+starting nonexistant
+
+**********************************************************************
+
+Test nonexistant
+Run on a nonexistant file system
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/nonexistant
+
+
+test nonexistant PASSED (5 of 5)
+ (Run on a nonexistant file system)
+
+starting badroot
+
+**********************************************************************
+
+Test badroot
+Run on a file system with a root directory in bad location
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badroot
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 0, type: 2
+
+
+test badroot PASSED (5 of 5)
+ (Run on a file system with a root directory in bad location)
+
+starting badinode
+
+**********************************************************************
+
+Test badinode
+Run on a file system with a bad type in an inode
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badinode
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 4
+
+
+test badinode PASSED (5 of 5)
+ (Run on a file system with a bad type in an inode)
+
+starting badaddr
+
+**********************************************************************
+
+Test badaddr
+Run on a file system with a bad direct address in an inode
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badaddr
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+
+
+test badaddr PASSED (5 of 5)
+ (Run on a file system with a bad direct address in an inode)
+
+starting badindir1
+
+**********************************************************************
+
+Test badindir1
+Run on a file system with a bad indirect address in an inode
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badindir1
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+
+
+test badindir1 PASSED (5 of 5)
+ (Run on a file system with a bad indirect address in an inode)
+
+starting badroot2
+
+**********************************************************************
+
+Test badroot2
+Run on a file system with a bad root directory in good location
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badroot2
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test badroot2 FAILED (0 of 5)
+ (Run on a file system with a bad root directory in good location)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badroot2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badroot2
+ to compare your error output with reference outputs. 
+
+starting badfmt
+
+**********************************************************************
+
+Test badfmt
+Run on a file system without . or .. directories
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badfmt
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+
+
+test badfmt PASSED (5 of 5)
+ (Run on a file system without . or .. directories)
+
+starting mrkfree
+
+**********************************************************************
+
+Test mrkfree
+Run on a file system with an inuse direct block marked free
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/mrkfree
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+
+
+test mrkfree PASSED (5 of 5)
+ (Run on a file system with an inuse direct block marked free)
+
+starting indirfree
+
+**********************************************************************
+
+Test indirfree
+Run on a file system with an inuse indirect block marked free
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/indirfree
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+
+
+test indirfree PASSED (5 of 5)
+ (Run on a file system with an inuse indirect block marked free)
+
+starting mrkused
+
+**********************************************************************
+
+Test mrkused
+Run on a file system with a free block marked used
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/mrkused
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test mrkused FAILED (0 of 5)
+ (Run on a file system with a free block marked used)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/mrkused
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/mrkused
+ to compare your error output with reference outputs. 
+
+starting addronce
+
+**********************************************************************
+
+Test addronce
+Run on a file system with a direct address used more than once
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/addronce
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 512, type: 2
+
+
+test addronce PASSED (5 of 5)
+ (Run on a file system with a direct address used more than once)
+
+starting addronce2
+
+**********************************************************************
+
+Test addronce2
+Run on a file system with an indirect address used more than once
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/addronce2
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :2, size 512, type: 1
+inode : 2, link :1, size 1793, type: 2
+inode : 3, link :1, size 9596, type: 2
+inode : 4, link :1, size 9128, type: 2
+inode : 5, link :1, size 5904, type: 2
+inode : 6, link :1, size 10716, type: 2
+inode : 7, link :1, size 9432, type: 2
+inode : 8, link :1, size 9144, type: 2
+inode : 9, link :1, size 9108, type: 2
+inode : 10, link :1, size 10684, type: 2
+inode : 11, link :1, size 9200, type: 2
+inode : 12, link :1, size 9184, type: 2
+inode : 13, link :1, size 16312, type: 2
+inode : 14, link :1, size 9348, type: 2
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test addronce2 FAILED (0 of 5)
+ (Run on a file system with an indirect address used more than once)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/addronce2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/addronce2
+ to compare your error output with reference outputs. 
+
+starting imrkused
+
+**********************************************************************
+
+Test imrkused
+Run on a file system with inode marked used, but not referenced in a directory
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/imrkused
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test imrkused FAILED (0 of 5)
+ (Run on a file system with inode marked used, but not referenced in a directory)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/imrkused
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/imrkused
+ to compare your error output with reference outputs. 
+
+starting imrkfree
+
+**********************************************************************
+
+Test imrkfree
+Run on a file system with inode marked free, but referenced in a directory
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/imrkfree
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 0
+Failure: ./xcheck gave incorrect standard error.
+Expected: "ERROR: inode referred to in directory but marked free.\n"
+Got:      "ERROR: bad inode.\n"
+
+
+test imrkfree FAILED (0 of 5)
+ (Run on a file system with inode marked free, but referenced in a directory)
+ ./xcheck gave incorrect standard error.
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/imrkfree
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/imrkfree
+ to compare your error output with reference outputs. 
+
+starting badrefcnt
+
+**********************************************************************
+
+Test badrefcnt
+Run on a file system which has an inode that is referenced less than its reference count
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badrefcnt
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :2, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test badrefcnt FAILED (0 of 5)
+ (Run on a file system which has an inode that is referenced less than its reference count)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badrefcnt
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badrefcnt
+ to compare your error output with reference outputs. 
+
+starting badrefcnt2
+
+**********************************************************************
+
+Test badrefcnt2
+Run on a file system which has an inode that is referenced more than its reference count
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badrefcnt2
+size : 2048, nblocks : 1969, ninodes : 600
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 512, type: 1
+inode : 3, link :1, size 0, type: 2
+inode : 4, link :1, size 512, type: 1
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 6145, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 8192, type: 1
+inode : 9, link :1, size 0, type: 2
+inode : 10, link :1, size 0, type: 2
+inode : 11, link :1, size 0, type: 2
+inode : 12, link :1, size 0, type: 2
+inode : 13, link :1, size 0, type: 2
+inode : 14, link :1, size 0, type: 2
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+inode : 65, link :1, size 0, type: 2
+inode : 66, link :1, size 0, type: 2
+inode : 67, link :1, size 0, type: 2
+inode : 68, link :1, size 0, type: 2
+inode : 69, link :1, size 0, type: 2
+inode : 70, link :1, size 0, type: 2
+inode : 71, link :1, size 0, type: 2
+inode : 72, link :1, size 0, type: 2
+inode : 73, link :1, size 0, type: 2
+inode : 74, link :1, size 0, type: 2
+inode : 75, link :1, size 0, type: 2
+inode : 76, link :1, size 0, type: 2
+inode : 77, link :1, size 0, type: 2
+inode : 78, link :1, size 0, type: 2
+inode : 79, link :1, size 0, type: 2
+inode : 80, link :1, size 0, type: 2
+inode : 81, link :1, size 0, type: 2
+inode : 82, link :1, size 0, type: 2
+inode : 83, link :1, size 0, type: 2
+inode : 84, link :1, size 0, type: 2
+inode : 85, link :1, size 0, type: 2
+inode : 86, link :1, size 0, type: 2
+inode : 87, link :1, size 0, type: 2
+inode : 88, link :1, size 0, type: 2
+inode : 89, link :1, size 0, type: 2
+inode : 90, link :1, size 0, type: 2
+inode : 91, link :1, size 0, type: 2
+inode : 92, link :1, size 0, type: 2
+inode : 93, link :1, size 0, type: 2
+inode : 94, link :1, size 0, type: 2
+inode : 95, link :1, size 0, type: 2
+inode : 96, link :1, size 0, type: 2
+inode : 97, link :1, size 0, type: 2
+inode : 98, link :1, size 0, type: 2
+inode : 99, link :1, size 0, type: 2
+inode : 100, link :1, size 0, type: 2
+inode : 101, link :1, size 0, type: 2
+inode : 102, link :1, size 0, type: 2
+inode : 103, link :1, size 0, type: 2
+inode : 104, link :1, size 0, type: 2
+inode : 105, link :1, size 0, type: 2
+inode : 106, link :1, size 0, type: 2
+inode : 107, link :2, size 0, type: 2
+inode : 108, link :1, size 0, type: 2
+inode : 109, link :1, size 0, type: 2
+inode : 110, link :1, size 0, type: 2
+inode : 111, link :1, size 0, type: 2
+inode : 112, link :1, size 0, type: 2
+inode : 113, link :1, size 0, type: 2
+inode : 114, link :1, size 0, type: 2
+inode : 115, link :1, size 0, type: 2
+inode : 116, link :1, size 0, type: 2
+inode : 117, link :1, size 0, type: 2
+inode : 118, link :1, size 0, type: 2
+inode : 119, link :1, size 0, type: 2
+inode : 120, link :1, size 0, type: 2
+inode : 121, link :1, size 0, type: 2
+inode : 122, link :1, size 0, type: 2
+inode : 123, link :1, size 0, type: 2
+inode : 124, link :1, size 0, type: 2
+inode : 125, link :1, size 0, type: 2
+inode : 126, link :1, size 0, type: 2
+inode : 127, link :1, size 0, type: 2
+inode : 128, link :1, size 0, type: 2
+inode : 129, link :1, size 0, type: 2
+inode : 130, link :1, size 0, type: 2
+inode : 131, link :1, size 0, type: 2
+inode : 132, link :1, size 0, type: 2
+inode : 133, link :1, size 0, type: 2
+inode : 134, link :1, size 0, type: 2
+inode : 135, link :1, size 0, type: 2
+inode : 136, link :1, size 0, type: 2
+inode : 137, link :1, size 0, type: 2
+inode : 138, link :1, size 0, type: 2
+inode : 139, link :1, size 0, type: 2
+inode : 140, link :1, size 0, type: 2
+inode : 141, link :1, size 0, type: 2
+inode : 142, link :1, size 0, type: 2
+inode : 143, link :1, size 0, type: 2
+inode : 144, link :1, size 0, type: 2
+inode : 145, link :1, size 0, type: 2
+inode : 146, link :1, size 0, type: 2
+inode : 147, link :1, size 0, type: 2
+inode : 148, link :1, size 0, type: 2
+inode : 149, link :1, size 0, type: 2
+inode : 150, link :1, size 0, type: 2
+inode : 151, link :1, size 0, type: 2
+inode : 152, link :1, size 0, type: 2
+inode : 153, link :1, size 0, type: 2
+inode : 154, link :1, size 0, type: 2
+inode : 155, link :1, size 0, type: 2
+inode : 156, link :1, size 0, type: 2
+inode : 157, link :1, size 0, type: 2
+inode : 158, link :1, size 0, type: 2
+inode : 159, link :1, size 0, type: 2
+inode : 160, link :1, size 0, type: 2
+inode : 161, link :1, size 0, type: 2
+inode : 162, link :1, size 0, type: 2
+inode : 163, link :1, size 0, type: 2
+inode : 164, link :1, size 0, type: 2
+inode : 165, link :1, size 0, type: 2
+inode : 166, link :1, size 0, type: 2
+inode : 167, link :1, size 0, type: 2
+inode : 168, link :1, size 0, type: 2
+inode : 169, link :1, size 0, type: 2
+inode : 170, link :1, size 0, type: 2
+inode : 171, link :1, size 0, type: 2
+inode : 172, link :1, size 0, type: 2
+inode : 173, link :1, size 0, type: 2
+inode : 174, link :1, size 0, type: 2
+inode : 175, link :1, size 0, type: 2
+inode : 176, link :1, size 0, type: 2
+inode : 177, link :1, size 0, type: 2
+inode : 178, link :1, size 0, type: 2
+inode : 179, link :1, size 0, type: 2
+inode : 180, link :1, size 0, type: 2
+inode : 181, link :1, size 0, type: 2
+inode : 182, link :1, size 0, type: 2
+inode : 183, link :1, size 0, type: 2
+inode : 184, link :1, size 0, type: 2
+inode : 185, link :1, size 0, type: 2
+inode : 186, link :1, size 0, type: 2
+inode : 187, link :1, size 0, type: 2
+inode : 188, link :1, size 0, type: 2
+inode : 189, link :1, size 0, type: 2
+inode : 190, link :1, size 0, type: 2
+inode : 191, link :1, size 0, type: 2
+inode : 192, link :1, size 0, type: 2
+inode : 193, link :1, size 0, type: 2
+inode : 194, link :1, size 0, type: 2
+inode : 195, link :1, size 0, type: 2
+inode : 196, link :1, size 0, type: 2
+inode : 197, link :1, size 0, type: 2
+inode : 198, link :1, size 0, type: 2
+inode : 199, link :1, size 0, type: 2
+inode : 200, link :1, size 0, type: 2
+inode : 201, link :1, size 0, type: 2
+inode : 202, link :1, size 0, type: 2
+inode : 203, link :1, size 0, type: 2
+inode : 204, link :1, size 0, type: 2
+inode : 205, link :1, size 0, type: 2
+inode : 206, link :1, size 0, type: 2
+inode : 207, link :1, size 0, type: 2
+inode : 208, link :1, size 0, type: 2
+inode : 209, link :1, size 0, type: 2
+inode : 210, link :1, size 0, type: 2
+inode : 211, link :1, size 0, type: 2
+inode : 212, link :1, size 0, type: 2
+inode : 213, link :1, size 0, type: 2
+inode : 214, link :1, size 0, type: 2
+inode : 215, link :1, size 0, type: 2
+inode : 216, link :1, size 0, type: 2
+inode : 217, link :1, size 0, type: 2
+inode : 218, link :1, size 0, type: 2
+inode : 219, link :1, size 0, type: 2
+inode : 220, link :1, size 0, type: 2
+inode : 221, link :1, size 0, type: 2
+inode : 222, link :1, size 0, type: 2
+inode : 223, link :1, size 0, type: 2
+inode : 224, link :1, size 0, type: 2
+inode : 225, link :1, size 0, type: 2
+inode : 226, link :1, size 0, type: 2
+inode : 227, link :1, size 0, type: 2
+inode : 228, link :1, size 0, type: 2
+inode : 229, link :1, size 0, type: 2
+inode : 230, link :1, size 0, type: 2
+inode : 231, link :1, size 0, type: 2
+inode : 232, link :1, size 0, type: 2
+inode : 233, link :1, size 0, type: 2
+inode : 234, link :1, size 0, type: 2
+inode : 235, link :1, size 0, type: 2
+inode : 236, link :1, size 0, type: 2
+inode : 237, link :1, size 0, type: 2
+inode : 238, link :1, size 0, type: 2
+inode : 239, link :1, size 0, type: 2
+inode : 240, link :1, size 0, type: 2
+inode : 241, link :1, size 0, type: 2
+inode : 242, link :1, size 0, type: 2
+inode : 243, link :1, size 0, type: 2
+inode : 244, link :1, size 0, type: 2
+inode : 245, link :1, size 0, type: 2
+inode : 246, link :1, size 0, type: 2
+inode : 247, link :1, size 0, type: 2
+inode : 248, link :1, size 0, type: 2
+inode : 249, link :1, size 0, type: 2
+inode : 250, link :1, size 0, type: 2
+inode : 251, link :1, size 0, type: 2
+inode : 252, link :1, size 0, type: 2
+inode : 253, link :1, size 0, type: 2
+inode : 254, link :1, size 0, type: 2
+inode : 255, link :1, size 0, type: 2
+inode : 256, link :1, size 0, type: 2
+inode : 257, link :1, size 0, type: 2
+inode : 258, link :1, size 0, type: 2
+inode : 259, link :1, size 0, type: 2
+inode : 260, link :1, size 0, type: 2
+inode : 261, link :1, size 0, type: 2
+inode : 262, link :1, size 0, type: 2
+inode : 263, link :1, size 0, type: 2
+inode : 264, link :1, size 0, type: 2
+inode : 265, link :1, size 0, type: 2
+inode : 266, link :1, size 0, type: 2
+inode : 267, link :1, size 0, type: 2
+inode : 268, link :1, size 0, type: 2
+inode : 269, link :1, size 0, type: 2
+inode : 270, link :1, size 0, type: 2
+inode : 271, link :1, size 0, type: 2
+inode : 272, link :1, size 0, type: 2
+inode : 273, link :1, size 0, type: 2
+inode : 274, link :1, size 0, type: 2
+inode : 275, link :1, size 0, type: 2
+inode : 276, link :1, size 0, type: 2
+inode : 277, link :1, size 0, type: 2
+inode : 278, link :1, size 0, type: 2
+inode : 279, link :1, size 0, type: 2
+inode : 280, link :1, size 0, type: 2
+inode : 281, link :1, size 0, type: 2
+inode : 282, link :1, size 0, type: 2
+inode : 283, link :1, size 0, type: 2
+inode : 284, link :1, size 0, type: 2
+inode : 285, link :1, size 0, type: 2
+inode : 286, link :1, size 0, type: 2
+inode : 287, link :1, size 0, type: 2
+inode : 288, link :1, size 0, type: 2
+inode : 289, link :1, size 0, type: 2
+inode : 290, link :1, size 0, type: 2
+inode : 291, link :1, size 0, type: 2
+inode : 292, link :1, size 0, type: 2
+inode : 293, link :1, size 0, type: 2
+inode : 294, link :1, size 0, type: 2
+inode : 295, link :1, size 0, type: 2
+inode : 296, link :1, size 0, type: 2
+inode : 297, link :1, size 0, type: 2
+inode : 298, link :1, size 0, type: 2
+inode : 299, link :1, size 0, type: 2
+inode : 300, link :1, size 0, type: 2
+inode : 301, link :1, size 0, type: 2
+inode : 302, link :1, size 0, type: 2
+inode : 303, link :1, size 0, type: 2
+inode : 304, link :1, size 0, type: 2
+inode : 305, link :1, size 0, type: 2
+inode : 306, link :1, size 0, type: 2
+inode : 307, link :1, size 0, type: 2
+inode : 308, link :1, size 0, type: 2
+inode : 309, link :1, size 0, type: 2
+inode : 310, link :1, size 0, type: 2
+inode : 311, link :1, size 0, type: 2
+inode : 312, link :1, size 0, type: 2
+inode : 313, link :1, size 0, type: 2
+inode : 314, link :1, size 0, type: 2
+inode : 315, link :1, size 0, type: 2
+inode : 316, link :1, size 0, type: 2
+inode : 317, link :1, size 0, type: 2
+inode : 318, link :1, size 0, type: 2
+inode : 319, link :1, size 0, type: 2
+inode : 320, link :1, size 0, type: 2
+inode : 321, link :1, size 0, type: 2
+inode : 322, link :1, size 0, type: 2
+inode : 323, link :1, size 0, type: 2
+inode : 324, link :1, size 0, type: 2
+inode : 325, link :1, size 0, type: 2
+inode : 326, link :1, size 0, type: 2
+inode : 327, link :1, size 0, type: 2
+inode : 328, link :1, size 0, type: 2
+inode : 329, link :1, size 0, type: 2
+inode : 330, link :1, size 0, type: 2
+inode : 331, link :1, size 0, type: 2
+inode : 332, link :1, size 0, type: 2
+inode : 333, link :1, size 0, type: 2
+inode : 334, link :1, size 0, type: 2
+inode : 335, link :1, size 0, type: 2
+inode : 336, link :1, size 0, type: 2
+inode : 337, link :1, size 0, type: 2
+inode : 338, link :1, size 0, type: 2
+inode : 339, link :1, size 0, type: 2
+inode : 340, link :1, size 0, type: 2
+inode : 341, link :1, size 0, type: 2
+inode : 342, link :1, size 0, type: 2
+inode : 343, link :1, size 0, type: 2
+inode : 344, link :1, size 0, type: 2
+inode : 345, link :1, size 0, type: 2
+inode : 346, link :1, size 0, type: 2
+inode : 347, link :1, size 0, type: 2
+inode : 348, link :1, size 0, type: 2
+inode : 349, link :1, size 0, type: 2
+inode : 350, link :1, size 0, type: 2
+inode : 351, link :1, size 0, type: 2
+inode : 352, link :1, size 0, type: 2
+inode : 353, link :1, size 0, type: 2
+inode : 354, link :1, size 0, type: 2
+inode : 355, link :1, size 0, type: 2
+inode : 356, link :1, size 0, type: 2
+inode : 357, link :1, size 0, type: 2
+inode : 358, link :1, size 0, type: 2
+inode : 359, link :1, size 0, type: 2
+inode : 360, link :1, size 0, type: 2
+inode : 361, link :1, size 0, type: 2
+inode : 362, link :1, size 0, type: 2
+inode : 363, link :1, size 0, type: 2
+inode : 364, link :1, size 0, type: 2
+inode : 365, link :1, size 0, type: 2
+inode : 366, link :1, size 0, type: 2
+inode : 367, link :1, size 0, type: 2
+inode : 368, link :1, size 0, type: 2
+inode : 369, link :1, size 0, type: 2
+inode : 370, link :1, size 0, type: 2
+inode : 371, link :1, size 0, type: 2
+inode : 372, link :1, size 0, type: 2
+inode : 373, link :1, size 0, type: 2
+inode : 374, link :1, size 0, type: 2
+inode : 375, link :1, size 0, type: 2
+inode : 376, link :1, size 0, type: 2
+inode : 377, link :1, size 0, type: 2
+inode : 378, link :1, size 0, type: 2
+inode : 379, link :1, size 0, type: 2
+inode : 380, link :1, size 0, type: 2
+inode : 381, link :1, size 0, type: 2
+inode : 382, link :1, size 0, type: 2
+inode : 383, link :1, size 0, type: 2
+inode : 384, link :1, size 0, type: 2
+inode : 385, link :1, size 0, type: 2
+inode : 386, link :1, size 0, type: 2
+inode : 387, link :1, size 0, type: 2
+inode : 388, link :1, size 0, type: 2
+inode : 389, link :1, size 0, type: 2
+inode : 390, link :1, size 0, type: 2
+inode : 391, link :1, size 0, type: 2
+inode : 392, link :1, size 0, type: 2
+inode : 393, link :1, size 0, type: 2
+inode : 394, link :1, size 0, type: 2
+inode : 395, link :1, size 0, type: 2
+inode : 396, link :1, size 0, type: 2
+inode : 397, link :1, size 0, type: 2
+inode : 398, link :1, size 0, type: 2
+inode : 399, link :1, size 0, type: 2
+inode : 400, link :1, size 0, type: 2
+inode : 401, link :1, size 0, type: 2
+inode : 402, link :1, size 0, type: 2
+inode : 403, link :1, size 0, type: 2
+inode : 404, link :1, size 0, type: 2
+inode : 405, link :1, size 0, type: 2
+inode : 406, link :1, size 0, type: 2
+inode : 407, link :1, size 0, type: 2
+inode : 408, link :1, size 0, type: 2
+inode : 409, link :1, size 0, type: 2
+inode : 410, link :1, size 0, type: 2
+inode : 411, link :1, size 0, type: 2
+inode : 412, link :1, size 0, type: 2
+inode : 413, link :1, size 0, type: 2
+inode : 414, link :1, size 0, type: 2
+inode : 415, link :1, size 0, type: 2
+inode : 416, link :1, size 0, type: 2
+inode : 417, link :1, size 0, type: 2
+inode : 418, link :1, size 0, type: 2
+inode : 419, link :1, size 0, type: 2
+inode : 420, link :1, size 0, type: 2
+inode : 421, link :1, size 0, type: 2
+inode : 422, link :1, size 0, type: 2
+inode : 423, link :1, size 0, type: 2
+inode : 424, link :1, size 0, type: 2
+inode : 425, link :1, size 0, type: 2
+inode : 426, link :1, size 0, type: 2
+inode : 427, link :1, size 0, type: 2
+inode : 428, link :1, size 0, type: 2
+inode : 429, link :1, size 0, type: 2
+inode : 430, link :1, size 0, type: 2
+inode : 431, link :1, size 0, type: 2
+inode : 432, link :1, size 0, type: 2
+inode : 433, link :1, size 0, type: 2
+inode : 434, link :1, size 0, type: 2
+inode : 435, link :1, size 0, type: 2
+inode : 436, link :1, size 0, type: 2
+inode : 437, link :1, size 0, type: 2
+inode : 438, link :1, size 0, type: 2
+inode : 439, link :1, size 0, type: 2
+inode : 440, link :1, size 0, type: 2
+inode : 441, link :1, size 0, type: 2
+inode : 442, link :1, size 0, type: 2
+inode : 443, link :1, size 0, type: 2
+inode : 444, link :1, size 0, type: 2
+inode : 445, link :1, size 0, type: 2
+inode : 446, link :1, size 0, type: 2
+inode : 447, link :1, size 0, type: 2
+inode : 448, link :1, size 0, type: 2
+inode : 449, link :1, size 0, type: 2
+inode : 450, link :1, size 0, type: 2
+inode : 451, link :1, size 0, type: 2
+inode : 452, link :1, size 0, type: 2
+inode : 453, link :1, size 0, type: 2
+inode : 454, link :1, size 0, type: 2
+inode : 455, link :1, size 0, type: 2
+inode : 456, link :1, size 0, type: 2
+inode : 457, link :1, size 0, type: 2
+inode : 458, link :1, size 0, type: 2
+inode : 459, link :1, size 0, type: 2
+inode : 460, link :1, size 0, type: 2
+inode : 461, link :1, size 0, type: 2
+inode : 462, link :1, size 0, type: 2
+inode : 463, link :1, size 0, type: 2
+inode : 464, link :1, size 0, type: 2
+inode : 465, link :1, size 0, type: 2
+inode : 466, link :1, size 0, type: 2
+inode : 467, link :1, size 0, type: 2
+inode : 468, link :1, size 0, type: 2
+inode : 469, link :1, size 0, type: 2
+inode : 470, link :1, size 0, type: 2
+inode : 471, link :1, size 0, type: 2
+inode : 472, link :1, size 0, type: 2
+inode : 473, link :1, size 0, type: 2
+inode : 474, link :1, size 0, type: 2
+inode : 475, link :1, size 0, type: 2
+inode : 476, link :1, size 0, type: 2
+inode : 477, link :1, size 0, type: 2
+inode : 478, link :1, size 0, type: 2
+inode : 479, link :1, size 0, type: 2
+inode : 480, link :1, size 0, type: 2
+inode : 481, link :1, size 0, type: 2
+inode : 482, link :1, size 0, type: 2
+inode : 483, link :1, size 0, type: 2
+inode : 484, link :1, size 0, type: 2
+inode : 485, link :1, size 0, type: 2
+inode : 486, link :1, size 0, type: 2
+inode : 487, link :1, size 0, type: 2
+inode : 488, link :1, size 0, type: 2
+inode : 489, link :1, size 0, type: 2
+inode : 490, link :1, size 0, type: 2
+inode : 491, link :1, size 0, type: 2
+inode : 492, link :1, size 6144, type: 2
+inode : 493, link :1, size 71680, type: 2
+inode : 494, link :1, size 6145, type: 2
+inode : 495, link :1, size 512, type: 2
+inode : 496, link :1, size 0, type: 2
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test badrefcnt2 FAILED (0 of 5)
+ (Run on a file system which has an inode that is referenced more than its reference count)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badrefcnt2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badrefcnt2
+ to compare your error output with reference outputs. 
+
+starting badindir2
+
+**********************************************************************
+
+Test badindir2
+Run on a file system with a bad indirect address in an inode
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badindir2
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+Failure: ./xcheck returned incorrect status code. Expected 1 got -6
+
+
+test badindir2 FAILED (0 of 5)
+ (Run on a file system with a bad indirect address in an inode)
+ ./xcheck returned incorrect status code. Expected 1 got -6
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badindir2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badindir2
+ to compare your error output with reference outputs. 
+
+starting dironce
+
+**********************************************************************
+
+Test dironce
+Run on a file system with a directory appearing more than once
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/dironce
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test dironce FAILED (0 of 5)
+ (Run on a file system with a directory appearing more than once)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/dironce
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/dironce
+ to compare your error output with reference outputs. 
+
+starting badlarge
+
+**********************************************************************
+
+Test badlarge
+Run on a large file system with an indirect directory appearing more than once
+
+**********************************************************************
+/tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badlarge
+size : 2048, nblocks : 1969, ninodes : 600
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 512, type: 1
+inode : 3, link :1, size 0, type: 2
+inode : 4, link :1, size 512, type: 1
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 6145, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 8192, type: 1
+finish first round
+Failure: ./xcheck returned incorrect status code. Expected 1 got 0
+
+
+test badlarge FAILED (0 of 5)
+ (Run on a large file system with an indirect directory appearing more than once)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badlarge
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badlarge
+ to compare your error output with reference outputs. 
+
+starting valgrind
+
+**********************************************************************
+
+Test valgrind
+Run valgrind on xcheck
+
+**********************************************************************
+/usr/bin/valgrind --show-reachable=yes --xml=yes --child-silent-after-fork=yes --undef-value-errors=no --xml-file=/tmp/tmp0SBQPZ/p/vg_summary.xml /tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/mrkused
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+Failure: /usr/bin/valgrind gave incorrect standard error.
+Expected: "ERROR: bitmap marks block in use but it is not in use.\n"
+Got:      ""
+
+
+test valgrind FAILED (0 of 5)
+ (Run valgrind on xcheck)
+ /usr/bin/valgrind gave incorrect standard error.
+
+starting valgrind2
+
+**********************************************************************
+
+Test valgrind2
+Run valgrind on xcheck
+
+**********************************************************************
+/usr/bin/valgrind --show-reachable=yes --xml=yes --child-silent-after-fork=yes --undef-value-errors=no --xml-file=/tmp/tmp0SBQPZ/p/vg_summary.xml /tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/imrkused
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 6144, type: 2
+inode : 3, link :1, size 71680, type: 2
+inode : 4, link :1, size 6145, type: 2
+inode : 5, link :1, size 512, type: 2
+inode : 6, link :1, size 0, type: 2
+inode : 7, link :1, size 512, type: 1
+inode : 8, link :1, size 0, type: 2
+inode : 9, link :1, size 71680, type: 2
+inode : 10, link :1, size 512, type: 1
+inode : 11, link :1, size 6144, type: 2
+inode : 12, link :1, size 512, type: 2
+inode : 13, link :1, size 6145, type: 2
+inode : 14, link :1, size 1024, type: 1
+inode : 15, link :1, size 0, type: 2
+inode : 16, link :1, size 0, type: 2
+inode : 17, link :1, size 0, type: 2
+inode : 18, link :1, size 0, type: 2
+inode : 19, link :1, size 0, type: 2
+inode : 20, link :1, size 0, type: 2
+inode : 21, link :1, size 0, type: 2
+inode : 22, link :1, size 0, type: 2
+inode : 23, link :1, size 0, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 0, type: 2
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :1, size 0, type: 2
+inode : 28, link :1, size 0, type: 2
+inode : 29, link :1, size 0, type: 2
+inode : 30, link :1, size 0, type: 2
+inode : 31, link :1, size 0, type: 2
+inode : 32, link :1, size 0, type: 2
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+finish first round
+Failure: /usr/bin/valgrind gave incorrect standard error.
+Expected: "ERROR: inode marked use but not found in a directory.\n"
+Got:      ""
+
+
+test valgrind2 FAILED (0 of 5)
+ (Run valgrind on xcheck)
+ /usr/bin/valgrind gave incorrect standard error.
+
+starting valgrind3
+
+**********************************************************************
+
+Test valgrind3
+Run valgrind on xcheck
+
+**********************************************************************
+/usr/bin/valgrind --show-reachable=yes --xml=yes --child-silent-after-fork=yes --undef-value-errors=no --xml-file=/tmp/tmp0SBQPZ/p/vg_summary.xml /tmp/tmp0SBQPZ/p/./xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/goodrefcnt
+size : 1024, nblocks : 995, ninodes : 200
+inode : 1, link :1, size 512, type: 1
+inode : 2, link :1, size 1793, type: 2
+inode : 3, link :1, size 9975, type: 2
+inode : 4, link :1, size 9460, type: 2
+inode : 5, link :1, size 6137, type: 2
+inode : 6, link :1, size 11147, type: 2
+inode : 7, link :1, size 9853, type: 2
+inode : 8, link :1, size 9468, type: 2
+inode : 9, link :1, size 9478, type: 2
+inode : 10, link :1, size 11069, type: 2
+inode : 11, link :1, size 9541, type: 2
+inode : 12, link :1, size 9526, type: 2
+inode : 13, link :1, size 17105, type: 2
+inode : 14, link :1, size 9696, type: 2
+inode : 15, link :1, size 9422, type: 2
+inode : 16, link :1, size 35159, type: 2
+inode : 17, link :1, size 10297, type: 2
+inode : 18, link :1, size 9270, type: 2
+inode : 19, link :1, size 512, type: 1
+inode : 20, link :1, size 6144, type: 2
+inode : 21, link :1, size 71680, type: 2
+inode : 22, link :1, size 6145, type: 2
+inode : 23, link :1, size 512, type: 2
+inode : 24, link :1, size 0, type: 2
+inode : 25, link :1, size 512, type: 1
+inode : 26, link :1, size 0, type: 2
+inode : 27, link :2, size 71680, type: 2
+inode : 28, link :1, size 512, type: 1
+inode : 29, link :1, size 6144, type: 2
+inode : 30, link :1, size 512, type: 2
+inode : 31, link :1, size 6145, type: 2
+inode : 32, link :1, size 1024, type: 1
+inode : 33, link :1, size 0, type: 2
+inode : 34, link :1, size 0, type: 2
+inode : 35, link :1, size 0, type: 2
+inode : 36, link :1, size 0, type: 2
+inode : 37, link :1, size 0, type: 2
+inode : 38, link :1, size 0, type: 2
+inode : 39, link :1, size 0, type: 2
+inode : 40, link :1, size 0, type: 2
+inode : 41, link :1, size 0, type: 2
+inode : 42, link :1, size 0, type: 2
+inode : 43, link :1, size 0, type: 2
+inode : 44, link :1, size 0, type: 2
+inode : 45, link :1, size 0, type: 2
+inode : 46, link :1, size 0, type: 2
+inode : 47, link :1, size 0, type: 2
+inode : 48, link :1, size 0, type: 2
+inode : 49, link :1, size 0, type: 2
+inode : 50, link :1, size 0, type: 2
+inode : 51, link :1, size 0, type: 2
+inode : 52, link :1, size 0, type: 2
+inode : 53, link :1, size 0, type: 2
+inode : 54, link :1, size 0, type: 2
+inode : 55, link :1, size 0, type: 2
+inode : 56, link :1, size 0, type: 2
+inode : 57, link :1, size 0, type: 2
+inode : 58, link :1, size 0, type: 2
+inode : 59, link :1, size 0, type: 2
+inode : 60, link :1, size 0, type: 2
+inode : 61, link :1, size 0, type: 2
+inode : 62, link :1, size 0, type: 2
+inode : 63, link :1, size 0, type: 2
+inode : 64, link :1, size 0, type: 2
+inode : 65, link :1, size 0, type: 2
+inode : 66, link :1, size 0, type: 2
+inode : 67, link :1, size 0, type: 2
+inode : 68, link :1, size 0, type: 2
+inode : 69, link :1, size 0, type: 2
+inode : 70, link :1, size 0, type: 2
+inode : 71, link :1, size 0, type: 2
+inode : 72, link :1, size 0, type: 2
+inode : 73, link :1, size 0, type: 2
+inode : 74, link :1, size 0, type: 2
+inode : 75, link :1, size 0, type: 2
+inode : 76, link :1, size 0, type: 2
+inode : 77, link :1, size 0, type: 2
+inode : 78, link :1, size 0, type: 2
+inode : 79, link :1, size 0, type: 2
+inode : 80, link :1, size 0, type: 2
+inode : 81, link :1, size 0, type: 2
+inode : 82, link :1, size 0, type: 2
+inode : 83, link :1, size 0, type: 3
+finish first round
+
+
+test valgrind3 PASSED (5 of 5)
+ (Run valgrind on xcheck)
+
+**********************************************************************
+Summary:
+test build PASSED
+ (build project using make)
+
+test noimage 
+ (Run without a file system)
+
+test good PASSED (5 of 5)
+ (Run on a good file system)
+
+test goodlarge PASSED (5 of 5)
+ (Run on large good file system)
+
+test goodrefcnt PASSED (5 of 5)
+ (Run on a file system with only good file reference counts)
+
+test goodlink PASSED (5 of 5)
+ (Run on a file system with only good directory link counts)
+
+test goodrm PASSED (5 of 5)
+ (Run on a good file system having some files removed)
+
+test nonexistant PASSED (5 of 5)
+ (Run on a nonexistant file system)
+
+test badroot PASSED (5 of 5)
+ (Run on a file system with a root directory in bad location)
+
+test badinode PASSED (5 of 5)
+ (Run on a file system with a bad type in an inode)
+
+test badaddr PASSED (5 of 5)
+ (Run on a file system with a bad direct address in an inode)
+
+test badindir1 PASSED (5 of 5)
+ (Run on a file system with a bad indirect address in an inode)
+
+test badroot2 FAILED (0 of 5)
+ (Run on a file system with a bad root directory in good location)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badroot2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badroot2
+ to compare your error output with reference outputs. 
+
+test badfmt PASSED (5 of 5)
+ (Run on a file system without . or .. directories)
+
+test mrkfree PASSED (5 of 5)
+ (Run on a file system with an inuse direct block marked free)
+
+test indirfree PASSED (5 of 5)
+ (Run on a file system with an inuse indirect block marked free)
+
+test mrkused FAILED (0 of 5)
+ (Run on a file system with a free block marked used)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/mrkused
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/mrkused
+ to compare your error output with reference outputs. 
+
+test addronce PASSED (5 of 5)
+ (Run on a file system with a direct address used more than once)
+
+test addronce2 FAILED (0 of 5)
+ (Run on a file system with an indirect address used more than once)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/addronce2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/addronce2
+ to compare your error output with reference outputs. 
+
+test imrkused FAILED (0 of 5)
+ (Run on a file system with inode marked used, but not referenced in a directory)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/imrkused
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/imrkused
+ to compare your error output with reference outputs. 
+
+test imrkfree FAILED (0 of 5)
+ (Run on a file system with inode marked free, but referenced in a directory)
+ ./xcheck gave incorrect standard error.
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/imrkfree
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/imrkfree
+ to compare your error output with reference outputs. 
+
+test badrefcnt FAILED (0 of 5)
+ (Run on a file system which has an inode that is referenced less than its reference count)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badrefcnt
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badrefcnt
+ to compare your error output with reference outputs. 
+
+test badrefcnt2 FAILED (0 of 5)
+ (Run on a file system which has an inode that is referenced more than its reference count)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badrefcnt2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badrefcnt2
+ to compare your error output with reference outputs. 
+
+test badindir2 FAILED (0 of 5)
+ (Run on a file system with a bad indirect address in an inode)
+ ./xcheck returned incorrect status code. Expected 1 got -6
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badindir2
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badindir2
+ to compare your error output with reference outputs. 
+
+test dironce FAILED (0 of 5)
+ (Run on a file system with a directory appearing more than once)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/dironce
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/dironce
+ to compare your error output with reference outputs. 
+
+test badlarge FAILED (0 of 5)
+ (Run on a large file system with an indirect directory appearing more than once)
+ ./xcheck returned incorrect status code. Expected 1 got 0
+
+ Test it yourself by running
+ xcheck /u/c/s/cs537-1/ta/tests/5a-new/images/badlarge
+ and check out the test folder
+ /u/c/s/cs537-1/ta/tests/5a-new/err/badlarge
+ to compare your error output with reference outputs. 
+
+test valgrind FAILED (0 of 5)
+ (Run valgrind on xcheck)
+ /usr/bin/valgrind gave incorrect standard error.
+
+test valgrind2 FAILED (0 of 5)
+ (Run valgrind on xcheck)
+ /usr/bin/valgrind gave incorrect standard error.
+
+test valgrind3 PASSED (5 of 5)
+ (Run valgrind on xcheck)
+
+Passed 17 of 29 tests.
+Overall 17 of 29
+Points 80 of 140
