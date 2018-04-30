@@ -19,10 +19,13 @@ int fsfd;
 struct superblock * sb;
 int nblocks, ninodes;
 int * block_refs;
+int * used;
+int * inode_refs;
 char mask;
+int inused_inode_bound;
 
 void rsect(uint, void *);
-void add_ref(struct dinode * cur_inode);
+void add_ref(struct dinode * cur_inode, int );
 
 uint
 i2b(uint inum)
@@ -67,7 +70,6 @@ rsect(uint sec, void *buf)
 
 char uget_c(uint * arr, int i, char * bitmap) {
 	int addr = xint(arr[i]);
-	// block_refs[addr] += 1;
 	int index = addr / 8;
 	int bit = addr % 8;
 	char c = bitmap[index] >> bit;
@@ -76,7 +78,6 @@ char uget_c(uint * arr, int i, char * bitmap) {
 
 char get_c(int * arr, int i, char * bitmap) {
 	int addr = xint(arr[i]);
-	// block_refs[addr] += 1;
 	int index = addr / 8;
 	int bit = addr % 8;
 	char c = bitmap[index] >> bit;
@@ -115,7 +116,6 @@ void check_bitmap(struct dinode * cur_inode) {
 	if(fbn >= NDIRECT) {
 		int base = xint(cur_inode -> addrs[NDIRECT]);
 		rsect(base, (char*)indirect);
-		block_refs[base] += 1;
 		for(int i = 0; i < NINDIRECT; i++) {
 			c = uget_c(indirect, i, bitmap);
 			if(!(c & mask)) {
@@ -127,7 +127,11 @@ void check_bitmap(struct dinode * cur_inode) {
 }
 
 void check_reference_count() {
-
+	for(int i = 0; i < inused_inode_bound; i++) {
+		if(inode_refs[i] == 0) {
+			fprintf(stderr, "ERROR: inode marked use but not found in a directory.\n");
+		}
+	}
 }
 
 void check_bitmap_marks_free_inused() {
@@ -188,7 +192,6 @@ void check_type(struct dinode * cur_inode, int block_index, int inode_index) {
 			fprintf(stderr, "ERROR: root directory does not exist.\n");
 			exit(1);
 		}
-
 	}
 	else{
 		if(cur_type != T_DIR && cur_type != T_FILE && cur_type != T_DEV) {
@@ -203,6 +206,7 @@ void check_addr(struct dinode * cur_inode) {
 	int fbn = off / 512 + 1;
 	int bound = fbn < NDIRECT ? fbn : NDIRECT;
 	uint indirect[NINDIRECT];
+	int finished = 0;
 
 	for(int i = 0; i < bound; i++) {
 		printf("direct : addr is %u\n", cur_inode -> addrs[i]);
@@ -210,30 +214,111 @@ void check_addr(struct dinode * cur_inode) {
 			fprintf(stderr, "ERROR: bad direct address in inode.\n");
 			exit(1);
 		}
+		int cur = xint(cur_inode -> addrs[i]);
+		if(used[cur] && cur != 0) {
+			fprintf(stderr, "ERROR: direct address used more than once.\n");
+			exit(1);
+		}
+		used[cur] += 1;
+		finished += 512;
 	}
 	//indirect
 	if(fbn >= NDIRECT) {
 		rsect(xint(cur_inode -> addrs[NDIRECT]), (char*)indirect);
+		int cur = xint(cur_inode -> addrs[NDIRECT]);
 		printf("indirect : INTER is %u\n", cur_inode -> addrs[NDIRECT]);
+		if(used[cur] && cur != 0) {
+			fprintf(stderr, "ERROR: indirect address used more than once.\n");
+			exit(1);
+		}
+		used[cur] += 1;
 		for(int i = 0; i < NINDIRECT; i++) {
-			int cur = indirect[i];
+			cur = indirect[i];
 			printf("indirect : addr is %u\n", cur);
 			if(cur >= nblocks) {
 				fprintf(stderr, "ERROR: bad indirect address in inode.\n");
 				exit(1);
 			}
+			if(used[cur] && cur != 0) {
+				fprintf(stderr, "ERROR: indirect address used more than once.\n");
+				exit(1);
+			}
+			used[cur] += 1;
+			finished += 512;
+			if(finished >= cur_inode -> size) {
+				break;
+			}
 		}
 	}
 }
+
+void check_not_referenced() {
+
+}
+
+// void check_addr(struct dinode * cur_inode) {
+// 	int off = xint(cur_inode -> size);
+// 	// if(off == 0) return;
+// 	int fbn = (off - 1) / 512 + 1;
+// 	int bound = fbn < NDIRECT ? fbn : NDIRECT;
+// 	uint indirect[NINDIRECT];
+// 	int finished = 0;
+
+// 	for(int i = 0; i < bound; i++) {
+// 		printf("direct : addr is %u\n", cur_inode -> addrs[i]);
+// 		int cur = xint(cur_inode -> addrs[i]);
+// 		if(cur >= nblocks) {
+// 			fprintf(stderr, "ERROR: bad direct address in inode.\n");
+// 			exit(1);
+// 		}
+// 		if(used[cur] && cur != 0) {
+// 			fprintf(stderr, "ERROR: direct address used more than once.\n");
+// 			exit(1);
+// 		}
+// 		used[cur] += 1;
+// 		finished += 512;
+// 	}
+// 	//indirect
+// 	if(fbn >= NDIRECT) {
+// 		rsect(xint(cur_inode -> addrs[NDIRECT]), (char*)indirect);
+// 		int cur = xint(cur_inode -> addrs[NDIRECT]);
+// 		printf("indirect : INTER is %u\n", cur_inode -> addrs[NDIRECT]);
+// 		if(used[cur] && cur != 0) {
+// 			fprintf(stderr, "ERROR: indirect address used more than once.\n");
+// 			exit(1);
+// 		}
+// 		used[cur] += 1;
+// 		for(int i = 0; i < NINDIRECT; i++) {
+// 			cur = indirect[i];
+// 			printf("indirect : addr is %u\n", cur);
+// 			if(cur >= nblocks) {
+// 				fprintf(stderr, "ERROR: bad indirect address in inode.\n");
+// 				exit(1);
+// 			}
+// 			if(used[cur] && cur != 0) {
+// 				fprintf(stderr, "ERROR: indirect address used more than once.\n");
+// 				exit(1);
+// 			}
+// 			used[cur] += 1;
+// 			finished += 512;
+// 			if(finished >= cur_inode -> size) {
+// 				break;
+// 			}
+// 		}
+// 	}
+// }
 
 void add_ref_file_inode(struct dinode * cur_inode) {
 	int off = xint(cur_inode -> size);
 	int fbn = off / 512 + 1;
 	int bound = fbn < NDIRECT ? fbn : NDIRECT;
 	uint indirect[NINDIRECT];
+	int finished = 0;
 	for(int i = 0; i < bound; i++) {
 		int target = cur_inode -> addrs[i];
+		printf("add_ref_file_inode : FILE, direct, %d\n", target);
 		block_refs[target] += 1;
+		finished += 512;
 	}
 
 		//indirect
@@ -241,14 +326,21 @@ void add_ref_file_inode(struct dinode * cur_inode) {
 		int base = xint(cur_inode -> addrs[NDIRECT]);
 		rsect(base, (char*)indirect);
 		block_refs[base] += 1;
+		printf("add_ref : FILE, base, %d\n", base);
 		for(int i = 0; i < NINDIRECT; i++) {
+			printf("add_ref_file_inode : FILE, indirect, %d\n", indirect[i]);
 			block_refs[indirect[i]] += 1;
+			finished += 512;
+			if(finished >= cur_inode -> size) {
+				break;
+			}
 		}
 	}
 }
 
 void read_dir_buf(char * buf) {
 	// int size_dinode = sizeof(struct dinode);
+	printf("--------reading a dir buf\n");
 	int finished = 0;
 	int size_dirent = sizeof(struct dirent);
 	struct dirent * pdirent = (struct dirent *)buf;
@@ -256,7 +348,11 @@ void read_dir_buf(char * buf) {
 	char inode_buf[512];
 	while(1) {
 		if(pdirent -> inum == 0) {
+			printf("read_dir_buf: no more inum, name %s\n", pdirent -> name);
 			break;
+		}
+		else{
+			printf("reading inode %hu\n", pdirent -> inum);
 		}
 		if(strcmp(pdirent -> name, ".") == 0) {
 			pdirent += 1;
@@ -268,25 +364,29 @@ void read_dir_buf(char * buf) {
 			finished += size_dirent;
 			continue;
 		}
+		printf("reading file : %s\n", pdirent -> name);
 		int b = i2b(pdirent -> inum);
 		rsect(b, inode_buf);
 		int off = pdirent -> inum % IPB;
 		pdinode = ((struct dinode *)inode_buf) + off;
-		add_ref(pdinode);
+		add_ref(pdinode, pdirent -> inum);
 		pdirent += 1;
 		finished += size_dirent;
 		if(finished == 512) {
 			break;
 		}
 	}
+	printf("------quit read dir buf\n");
 	return;
 }
 
-void add_ref(struct dinode * cur_inode) {
+void add_ref(struct dinode * cur_inode, int inum) {
+	inode_refs[inum] += 1;
 	if(cur_inode -> type == T_FILE) {
 		add_ref_file_inode(cur_inode);
 	}
 	else if(cur_inode -> type == T_DIR) {
+		printf("-----------add_ref: adding a dir\n");
 		int off = xint(cur_inode -> size);
 		int fbn = off / 512 + 1;
 		int bound = fbn < NDIRECT ? fbn : NDIRECT;
@@ -295,8 +395,9 @@ void add_ref(struct dinode * cur_inode) {
 		int finished = 0;
 
 		char buf[512];
-		for(int i = 0; i < bound; i++) {
+		for(int i = 0; i < bound && finished < cur_inode -> size; i++) {
 			int target = cur_inode -> addrs[i];
+			printf("add_ref : dir, direct, %d, size : %u\n", target, cur_inode -> size);
 			block_refs[target] += 1;
 			rsect(target, buf);
 			read_dir_buf(buf);
@@ -308,6 +409,7 @@ void add_ref(struct dinode * cur_inode) {
 			rsect(base, (char*)indirect);
 			for(int i = 0; i < NINDIRECT && finished < cur_inode -> size; i++) {
 				rsect(indirect[i], indirect_buf);
+				printf("add_ref : dir, indirect, %d\n", indirect[i]);
 				block_refs[indirect[i]] += 1;
 				read_dir_buf(indirect_buf);
 				finished += 512;
@@ -340,6 +442,10 @@ void print_bitmap() {
 	}
 }
 
+void get_parent(struct dinode * cur_inode) {
+
+}
+
 
 int main(int argc, char * argv[]){
 	if(argc < 2) {
@@ -364,6 +470,8 @@ int main(int argc, char * argv[]){
 	ninodes = sb -> ninodes;
 
 	block_refs = malloc(sizeof(int) * nblocks);
+	used = malloc(sizeof(int) * nblocks);
+	inode_refs = malloc(sizeof(int) * ninodes);
 
 	int inode_read = 0;
 	int quit = 0;
@@ -377,6 +485,7 @@ int main(int argc, char * argv[]){
 			if(i == 0 && j == 0) continue;
 			cur_inode = ((struct dinode *)buf) + j;
 			if(cur_inode -> nlink < 1){
+				inused_inode_bound = i;
 				quit = 1;
 				break;
 			}
@@ -386,19 +495,21 @@ int main(int argc, char * argv[]){
 			check_addr(cur_inode);
 			check_self_parent(cur_inode, inode_read + 1);
 			check_bitmap(cur_inode);
-			add_ref(cur_inode);
+			if(inode_read == 0)
+				add_ref(cur_inode, inode_read + 1);
 			inode_read += 1;
 		}
 		if(quit) {
 			break;
 		}
 	}
-	check_bitmap_marks_free_inused();
 	print_bitmap();
-
+	// check_bitmap_marks_free_inused();
+	// check_reference_count();
 
 	free(block_refs);
-
+	free(used);
+	free(inode_refs);
 	close(fsfd);
     return 0;
 }
