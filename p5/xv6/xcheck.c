@@ -64,12 +64,10 @@ rsect(uint sec, void *buf)
 {
   if(lseek(fsfd, sec * 512L, 0) != sec * 512L){
     perror("lseek");
-    clean_up();
     exit(1);
   }
   if(read(fsfd, buf, 512) != 512){
     perror("read");
-    clean_up();
     exit(1);
   }
 }
@@ -148,7 +146,7 @@ void check_reference_inode() {
 			exit(1);
 		}
 
-		if(inode_refs[i] != inode_internal_refs[i]) {
+		if(i != 1 && inode_refs[i] != inode_internal_refs[i]) {
 			fprintf(stderr, "ERROR: bad reference count for file.\n");
 			clean_up();
 			exit(1);
@@ -241,7 +239,7 @@ void check_addr(struct dinode * cur_inode) {
 		printf("direct : addr is %u\n", cur_inode -> addrs[i]);
 		if(xint(cur_inode -> addrs[i]) >= nblocks) {
 			fprintf(stderr, "ERROR: bad direct address in inode.\n");
-			clean_up();
+			// clean_up(); -------------------really weird here----------
 			exit(1);
 		}
 		int cur = xint(cur_inode -> addrs[i]);
@@ -432,11 +430,16 @@ void get_parent(struct dinode * cur_inode) {
 }
 
 void clean_up(){
-	free(block_refs);
-	free(used);
-	free(inode_refs);
-	free(inode_used);
-	free(inode_internal_refs);
+	if(block_refs != NULL)
+		free(block_refs);
+	if(used != NULL)
+		free(used);
+	if(inode_refs != NULL)
+		free(inode_refs);
+	if(inode_used != NULL)
+		free(inode_used);
+	if(inode_internal_refs != NULL)
+		free(inode_internal_refs);
 }
 
 
@@ -469,9 +472,12 @@ int main(int argc, char * argv[]){
 	inode_refs = malloc(sizeof(int) * ninodes);
 	inode_used = malloc(sizeof(int) * ninodes);
 	inode_internal_refs = malloc(sizeof(int) * ninodes);
+
 	memset(inode_refs, 0, sizeof(int) * ninodes);
 	memset(inode_used, 0, sizeof(int) * ninodes);
 	memset(inode_internal_refs, 0, sizeof(int) * ninodes);
+	memset(used, 0, sizeof(int) * nblocks);
+	memset(block_refs, 0, sizeof(int) * nblocks);
 
 	int inode_read = 0;
 	int quit = 0;
