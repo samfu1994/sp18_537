@@ -29,6 +29,7 @@ int inused_inode_bound;
 
 void rsect(uint, void *);
 void add_ref(struct dinode * cur_inode, int );
+void clean_up();
 
 uint
 i2b(uint inum)
@@ -63,10 +64,12 @@ rsect(uint sec, void *buf)
 {
   if(lseek(fsfd, sec * 512L, 0) != sec * 512L){
     perror("lseek");
+    clean_up();
     exit(1);
   }
   if(read(fsfd, buf, 512) != 512){
     perror("read");
+    clean_up();
     exit(1);
   }
 }
@@ -112,6 +115,7 @@ void check_bitmap(struct dinode * cur_inode) {
 		c = uget_c(cur_inode -> addrs, i, bitmap);
 		if(!(c & mask)) {
 			fprintf(stderr, "ERROR: address used by inode but marked free in bitmap.\n");
+			clean_up();
 			exit(1);
 		}
 	}
@@ -123,6 +127,7 @@ void check_bitmap(struct dinode * cur_inode) {
 			c = uget_c(indirect, i, bitmap);
 			if(!(c & mask)) {
 				fprintf(stderr, "ERROR: address used by inode but marked free in bitmap.\n");
+				clean_up();
 				exit(1);
 			}
 		}
@@ -131,18 +136,21 @@ void check_bitmap(struct dinode * cur_inode) {
 
 void check_reference_inode() {
 	for(int i = 0; i < sb -> ninodes; i++) {
-		printf("%d, refs : %d, used : %d\n", i, inode_refs[i], inode_used[i]);
+		printf("%d, refs : %d, used : %d, internal : %d\n", i, inode_refs[i], inode_used[i], inode_internal_refs[i]);
 		if(inode_refs[i] == 0 && inode_used[i] > 0) {
 			fprintf(stderr, "ERROR: inode marked use but not found in a directory.\n");
+			clean_up();
 			exit(1);
 		}
 		if(inode_refs[i] > 0 && inode_used[i] == 0) {
 			fprintf(stderr, "ERROR: inode referred to in directory but marked free.\n");
+			clean_up();
 			exit(1);
 		}
 
 		if(inode_refs[i] != inode_internal_refs[i]) {
 			fprintf(stderr, "ERROR: bad reference count for file.\n");
+			clean_up();
 			exit(1);
 		}
 	}
@@ -160,6 +168,7 @@ void check_bitmap_marks_free_inused() {
 		if(c & mask) {
 			printf("i is %d\n", i);
 			fprintf(stderr, "ERROR: bitmap marks block in use but it is not in use.\n");
+			clean_up();
 			exit(1);
 		}
 	}
@@ -177,20 +186,24 @@ void check_self_parent(struct dinode * cur_inode, int inum) {
 	de = (struct xv6_dirent*)buf;
 	if(strcmp(de -> name, ".") != 0) {
 		fprintf(stderr, "ERROR: directory not properly formatted.\n");
+		clean_up();
 		exit(1);
 	}
 	if(de -> inum != inum) {
 		fprintf(stderr, "ERROR: directory not properly formatted.\n");
+		clean_up();
 		exit(1);
 	}
 	de += 1;
 	if(strcmp(de -> name, "..") != 0) {
 		fprintf(stderr, "ERROR: directory not properly formatted.\n");
+		clean_up();
 		exit(1);
 	}
 	if(inum == 1) {
 		if(de -> inum != 1) {
 			fprintf(stderr, "ERROR: root directory does not exist.\n");
+			clean_up();
 			exit(1);
 		}
 	}
@@ -203,12 +216,14 @@ void check_type(struct dinode * cur_inode, int block_index, int inode_index) {
 		//root inode
 		if(cur_type != T_DIR) {
 			fprintf(stderr, "ERROR: root directory does not exist.\n");
+			clean_up();
 			exit(1);
 		}
 	}
 	else{
 		if(cur_type != T_DIR && cur_type != T_FILE && cur_type != T_DEV) {
 			fprintf(stderr, "ERROR: bad inode.\n");
+			clean_up();
 			exit(1);
 		}
 	}
@@ -226,11 +241,13 @@ void check_addr(struct dinode * cur_inode) {
 		printf("direct : addr is %u\n", cur_inode -> addrs[i]);
 		if(xint(cur_inode -> addrs[i]) >= nblocks) {
 			fprintf(stderr, "ERROR: bad direct address in inode.\n");
+			clean_up();
 			exit(1);
 		}
 		int cur = xint(cur_inode -> addrs[i]);
 		if(used[cur] && cur != 0) {
 			fprintf(stderr, "ERROR: direct address used more than once.\n");
+			clean_up();
 			exit(1);
 		}
 		used[cur] += 1;
@@ -243,6 +260,7 @@ void check_addr(struct dinode * cur_inode) {
 		printf("indirect : INTER is %u\n", cur_inode -> addrs[NDIRECT]);
 		if(used[cur] && cur != 0) {
 			fprintf(stderr, "ERROR: indirect address used more than once.\n");
+			clean_up();
 			exit(1);
 		}
 		used[cur] += 1;
@@ -251,10 +269,12 @@ void check_addr(struct dinode * cur_inode) {
 			printf("indirect : addr is %u\n", cur);
 			if(cur >= nblocks) {
 				fprintf(stderr, "ERROR: bad indirect address in inode.\n");
+				clean_up();
 				exit(1);
 			}
 			if(used[cur] && cur != 0) {
 				fprintf(stderr, "ERROR: indirect address used more than once.\n");
+				clean_up();
 				exit(1);
 			}
 			used[cur] += 1;
@@ -315,17 +335,19 @@ void read_dir_buf(char * buf) {
 			continue;
 		}
 		printf("reading inode %hu\n", pdirent -> inum);
+		printf("before : reading filename : %s\n", pdirent -> name);
 		if(strcmp(pdirent -> name, ".") == 0) {
 			pdirent += 1;
 			finished += size_dirent;
 			continue;
 		}
 		if(strcmp(pdirent -> name, "..") == 0) {
+			// inode_refs[pdirent -> inum] += 1;
 			pdirent += 1;
 			finished += size_dirent;
 			continue;
 		}
-		printf("reading filename : %s\n", pdirent -> name);
+		printf("after :eading filename : %s\n", pdirent -> name);
 		int b = i2b(pdirent -> inum);
 		rsect(b, inode_buf);
 		int off = pdirent -> inum % IPB;
@@ -340,6 +362,7 @@ void read_dir_buf(char * buf) {
 }
 
 void add_ref(struct dinode * cur_inode, int inum) {
+	printf("inode %d is type %hd\n", inum, cur_inode -> type);
 	inode_refs[inum] += 1;
 	inode_internal_refs[inum] = cur_inode -> nlink;
 	if(cur_inode -> type == T_FILE) {
@@ -408,10 +431,19 @@ void get_parent(struct dinode * cur_inode) {
 
 }
 
+void clean_up(){
+	free(block_refs);
+	free(used);
+	free(inode_refs);
+	free(inode_used);
+	free(inode_internal_refs);
+}
+
 
 int main(int argc, char * argv[]){
 	if(argc < 2) {
 		fprintf(stderr, "Usage: xcheck <file_system_image>\n");
+		clean_up();
 		exit(1);
 	}
 	mask = 0x01;
@@ -420,6 +452,7 @@ int main(int argc, char * argv[]){
 	fsfd = open(img_name, O_RDONLY);
 	if(fsfd == -1) {
 		fprintf(stderr, "image not found.\n");
+		clean_up();
 		exit(1);
 	}
 
@@ -474,9 +507,7 @@ int main(int argc, char * argv[]){
 	check_bitmap_marks_free_inused();
 	check_reference_inode();
 
-	free(block_refs);
-	free(used);
-	free(inode_refs);
+	clean_up();
 	close(fsfd);
     return 0;
 }
