@@ -139,7 +139,6 @@ void check_bitmap_marks_free_inused() {
 	char bitmap[512];
 	rsect(start, bitmap);
 	char c;
-	//reverse
 
 	for(int i = start + 1; i < sb -> nblocks; i++) {
 		if(block_refs[i] >= 1) continue;
@@ -208,6 +207,7 @@ void check_addr(struct dinode * cur_inode) {
 	uint indirect[NINDIRECT];
 	int finished = 0;
 
+	// if(cur_inode -> nlink == 2) 
 	for(int i = 0; i < bound; i++) {
 		printf("direct : addr is %u\n", cur_inode -> addrs[i]);
 		if(xint(cur_inode -> addrs[i]) >= nblocks) {
@@ -347,13 +347,16 @@ void read_dir_buf(char * buf) {
 	struct dinode * pdinode;
 	char inode_buf[512];
 	while(1) {
-		if(pdirent -> inum == 0) {
-			printf("read_dir_buf: no more inum, name %s\n", pdirent -> name);
+		if(finished == 512) {
+			printf("finished reading a dir and break\n");
 			break;
 		}
-		else{
-			printf("reading inode %hu\n", pdirent -> inum);
+		if(pdirent -> inum == 0) {
+			pdirent += 1;
+			finished += size_dirent;
+			continue;
 		}
+		printf("reading inode %hu\n", pdirent -> inum);
 		if(strcmp(pdirent -> name, ".") == 0) {
 			pdirent += 1;
 			finished += size_dirent;
@@ -364,7 +367,7 @@ void read_dir_buf(char * buf) {
 			finished += size_dirent;
 			continue;
 		}
-		printf("reading file : %s\n", pdirent -> name);
+		printf("reading filename : %s\n", pdirent -> name);
 		int b = i2b(pdirent -> inum);
 		rsect(b, inode_buf);
 		int off = pdirent -> inum % IPB;
@@ -372,9 +375,7 @@ void read_dir_buf(char * buf) {
 		add_ref(pdinode, pdirent -> inum);
 		pdirent += 1;
 		finished += size_dirent;
-		if(finished == 512) {
-			break;
-		}
+
 	}
 	printf("------quit read dir buf\n");
 	return;
@@ -397,7 +398,7 @@ void add_ref(struct dinode * cur_inode, int inum) {
 		char buf[512];
 		for(int i = 0; i < bound && finished < cur_inode -> size; i++) {
 			int target = cur_inode -> addrs[i];
-			printf("add_ref : dir, direct, %d, size : %u\n", target, cur_inode -> size);
+			printf("add_ref : dir, direct, %d, current : %d, size : %u\n", target, finished, cur_inode -> size);
 			block_refs[target] += 1;
 			rsect(target, buf);
 			read_dir_buf(buf);
@@ -406,7 +407,9 @@ void add_ref(struct dinode * cur_inode, int inum) {
 
 		if(fbn >= NDIRECT) {
 			int base = xint(cur_inode -> addrs[NDIRECT]);
+			printf("add_ref : dir, base, %d\n", base);
 			rsect(base, (char*)indirect);
+			block_refs[base] += 1;
 			for(int i = 0; i < NINDIRECT && finished < cur_inode -> size; i++) {
 				rsect(indirect[i], indirect_buf);
 				printf("add_ref : dir, indirect, %d\n", indirect[i]);
@@ -484,7 +487,7 @@ int main(int argc, char * argv[]){
 			}
 			if(i == 0 && j == 0) continue;
 			cur_inode = ((struct dinode *)buf) + j;
-			if(cur_inode -> nlink < 1){
+			if(cur_inode -> type == 0){
 				inused_inode_bound = i;
 				quit = 1;
 				break;
@@ -504,7 +507,7 @@ int main(int argc, char * argv[]){
 		}
 	}
 	print_bitmap();
-	// check_bitmap_marks_free_inused();
+	check_bitmap_marks_free_inused();
 	// check_reference_count();
 
 	free(block_refs);
