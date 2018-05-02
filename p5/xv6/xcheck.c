@@ -21,6 +21,9 @@ int nblocks, ninodes;
 int * block_refs;
 int * used;
 int * inode_refs;
+int * inode_used;
+int * inode_internal_refs;
+
 char mask;
 int inused_inode_bound;
 
@@ -126,10 +129,21 @@ void check_bitmap(struct dinode * cur_inode) {
 	}
 }
 
-void check_reference_count() {
-	for(int i = 0; i < inused_inode_bound; i++) {
-		if(inode_refs[i] == 0) {
+void check_reference_inode() {
+	for(int i = 0; i < sb -> ninodes; i++) {
+		printf("%d, refs : %d, used : %d\n", i, inode_refs[i], inode_used[i]);
+		if(inode_refs[i] == 0 && inode_used[i] > 0) {
 			fprintf(stderr, "ERROR: inode marked use but not found in a directory.\n");
+			exit(1);
+		}
+		if(inode_refs[i] > 0 && inode_used[i] == 0) {
+			fprintf(stderr, "ERROR: inode referred to in directory but marked free.\n");
+			exit(1);
+		}
+
+		if(inode_refs[i] != inode_internal_refs[i]) {
+			fprintf(stderr, "ERROR: bad reference count for file.\n");
+			exit(1);
 		}
 	}
 }
@@ -252,62 +266,6 @@ void check_addr(struct dinode * cur_inode) {
 	}
 }
 
-void check_not_referenced() {
-
-}
-
-// void check_addr(struct dinode * cur_inode) {
-// 	int off = xint(cur_inode -> size);
-// 	// if(off == 0) return;
-// 	int fbn = (off - 1) / 512 + 1;
-// 	int bound = fbn < NDIRECT ? fbn : NDIRECT;
-// 	uint indirect[NINDIRECT];
-// 	int finished = 0;
-
-// 	for(int i = 0; i < bound; i++) {
-// 		printf("direct : addr is %u\n", cur_inode -> addrs[i]);
-// 		int cur = xint(cur_inode -> addrs[i]);
-// 		if(cur >= nblocks) {
-// 			fprintf(stderr, "ERROR: bad direct address in inode.\n");
-// 			exit(1);
-// 		}
-// 		if(used[cur] && cur != 0) {
-// 			fprintf(stderr, "ERROR: direct address used more than once.\n");
-// 			exit(1);
-// 		}
-// 		used[cur] += 1;
-// 		finished += 512;
-// 	}
-// 	//indirect
-// 	if(fbn >= NDIRECT) {
-// 		rsect(xint(cur_inode -> addrs[NDIRECT]), (char*)indirect);
-// 		int cur = xint(cur_inode -> addrs[NDIRECT]);
-// 		printf("indirect : INTER is %u\n", cur_inode -> addrs[NDIRECT]);
-// 		if(used[cur] && cur != 0) {
-// 			fprintf(stderr, "ERROR: indirect address used more than once.\n");
-// 			exit(1);
-// 		}
-// 		used[cur] += 1;
-// 		for(int i = 0; i < NINDIRECT; i++) {
-// 			cur = indirect[i];
-// 			printf("indirect : addr is %u\n", cur);
-// 			if(cur >= nblocks) {
-// 				fprintf(stderr, "ERROR: bad indirect address in inode.\n");
-// 				exit(1);
-// 			}
-// 			if(used[cur] && cur != 0) {
-// 				fprintf(stderr, "ERROR: indirect address used more than once.\n");
-// 				exit(1);
-// 			}
-// 			used[cur] += 1;
-// 			finished += 512;
-// 			if(finished >= cur_inode -> size) {
-// 				break;
-// 			}
-// 		}
-// 	}
-// }
-
 void add_ref_file_inode(struct dinode * cur_inode) {
 	int off = xint(cur_inode -> size);
 	int fbn = off / 512 + 1;
@@ -383,6 +341,7 @@ void read_dir_buf(char * buf) {
 
 void add_ref(struct dinode * cur_inode, int inum) {
 	inode_refs[inum] += 1;
+	inode_internal_refs[inum] = cur_inode -> nlink;
 	if(cur_inode -> type == T_FILE) {
 		add_ref_file_inode(cur_inode);
 	}
@@ -475,6 +434,11 @@ int main(int argc, char * argv[]){
 	block_refs = malloc(sizeof(int) * nblocks);
 	used = malloc(sizeof(int) * nblocks);
 	inode_refs = malloc(sizeof(int) * ninodes);
+	inode_used = malloc(sizeof(int) * ninodes);
+	inode_internal_refs = malloc(sizeof(int) * ninodes);
+	memset(inode_refs, 0, sizeof(int) * ninodes);
+	memset(inode_used, 0, sizeof(int) * ninodes);
+	memset(inode_internal_refs, 0, sizeof(int) * ninodes);
 
 	int inode_read = 0;
 	int quit = 0;
@@ -488,10 +452,10 @@ int main(int argc, char * argv[]){
 			if(i == 0 && j == 0) continue;
 			cur_inode = ((struct dinode *)buf) + j;
 			if(cur_inode -> type == 0){
-				inused_inode_bound = i;
-				quit = 1;
-				break;
+				inode_read += 1;
+				continue;
 			}
+			inode_used[inode_read + 1] = 1;
 			printf("inode : %d, link :%hd, size %u, type: %hd\n", 
 				inode_read + 1, cur_inode -> nlink,  cur_inode -> size, cur_inode -> type);
 			check_type(cur_inode, i + 2, j);
@@ -506,9 +470,9 @@ int main(int argc, char * argv[]){
 			break;
 		}
 	}
-	print_bitmap();
+	// print_bitmap();
 	check_bitmap_marks_free_inused();
-	// check_reference_count();
+	check_reference_inode();
 
 	free(block_refs);
 	free(used);
