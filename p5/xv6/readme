@@ -1,0 +1,4 @@
+indirect used more than once, usertests, the last block, 366 -> 387 not only 387 used once, but 366 does not use at all. Two erros. What is the order.
+
+1 bad direct address cannot clean up, double free problem.
+2 remaning 3 test cases.

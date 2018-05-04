@@ -305,6 +305,12 @@ void add_ref_file_inode(struct dinode * cur_inode) {
 		printf("add_ref : FILE, base, %d\n", base);
 		for(int i = 0; i < NINDIRECT; i++) {
 			printf("add_ref_file_inode : FILE, indirect, %d\n", indirect[i]);
+			if(indirect[i] < 0 || indirect[i] >= sb -> nblocks) {
+				fprintf(stderr, "ERROR: bad indirect address in inode.\n");
+				clean_up();
+				exit(1);
+			}
+
 			block_refs[indirect[i]] += 1;
 			finished += 512;
 			if(finished >= cur_inode -> size) {
@@ -362,6 +368,11 @@ void read_dir_buf(char * buf) {
 void add_ref(struct dinode * cur_inode, int inum) {
 	printf("inode %d is type %hd\n", inum, cur_inode -> type);
 	inode_refs[inum] += 1;
+	if(cur_inode -> type == T_DIR && inode_refs[inum] > 1) {
+		fprintf(stderr, "ERROR: directory appears more than once in file system.\n");
+		clean_up();
+		exit(1);
+	}
 	inode_internal_refs[inum] = cur_inode -> nlink;
 	if(cur_inode -> type == T_FILE) {
 		add_ref_file_inode(cur_inode);
