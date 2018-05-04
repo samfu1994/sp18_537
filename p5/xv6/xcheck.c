@@ -134,7 +134,7 @@ void check_bitmap(struct dinode * cur_inode) {
 
 void check_reference_inode() {
 	for(int i = 0; i < sb -> ninodes; i++) {
-		printf("%d, refs : %d, used : %d, internal : %d\n", i, inode_refs[i], inode_used[i], inode_internal_refs[i]);
+		// printf("%d, refs : %d, used : %d, internal : %d\n", i, inode_refs[i], inode_used[i], inode_internal_refs[i]);
 		if(inode_refs[i] == 0 && inode_used[i] > 0) {
 			fprintf(stderr, "ERROR: inode marked use but not found in a directory.\n");
 			clean_up();
@@ -164,7 +164,7 @@ void check_bitmap_marks_free_inused() {
 		if(block_refs[i] >= 1) continue;
 		c = get_c_with_index(i, bitmap);
 		if(c & mask) {
-			printf("i is %d\n", i);
+			// printf("i is %d\n", i);
 			fprintf(stderr, "ERROR: bitmap marks block in use but it is not in use.\n");
 			clean_up();
 			exit(1);
@@ -236,7 +236,7 @@ void check_addr(struct dinode * cur_inode) {
 
 	// if(cur_inode -> nlink == 2) 
 	for(int i = 0; i < bound; i++) {
-		printf("direct : addr is %u\n", cur_inode -> addrs[i]);
+		// printf("direct : addr is %u\n", cur_inode -> addrs[i]);
 		if(xint(cur_inode -> addrs[i]) >= nblocks) {
 			fprintf(stderr, "ERROR: bad direct address in inode.\n");
 			// clean_up(); -------------------really weird here----------
@@ -255,7 +255,7 @@ void check_addr(struct dinode * cur_inode) {
 	if(fbn >= NDIRECT) {
 		rsect(xint(cur_inode -> addrs[NDIRECT]), (char*)indirect);
 		int cur = xint(cur_inode -> addrs[NDIRECT]);
-		printf("indirect : INTER is %u\n", cur_inode -> addrs[NDIRECT]);
+		// printf("indirect : INTER is %u\n", cur_inode -> addrs[NDIRECT]);
 		if(used[cur] && cur != 0) {
 			fprintf(stderr, "ERROR: indirect address used more than once.\n");
 			clean_up();
@@ -264,7 +264,7 @@ void check_addr(struct dinode * cur_inode) {
 		used[cur] += 1;
 		for(int i = 0; i < NINDIRECT; i++) {
 			cur = indirect[i];
-			printf("indirect : addr is %u\n", cur);
+			// printf("indirect : addr is %u\n", cur);
 			if(cur >= nblocks) {
 				fprintf(stderr, "ERROR: bad indirect address in inode.\n");
 				clean_up();
@@ -292,7 +292,7 @@ void add_ref_file_inode(struct dinode * cur_inode) {
 	int finished = 0;
 	for(int i = 0; i < bound; i++) {
 		int target = cur_inode -> addrs[i];
-		printf("add_ref_file_inode : FILE, direct, %d\n", target);
+		// printf("add_ref_file_inode : FILE, direct, %d\n", target);
 		block_refs[target] += 1;
 		finished += 512;
 	}
@@ -302,9 +302,9 @@ void add_ref_file_inode(struct dinode * cur_inode) {
 		int base = xint(cur_inode -> addrs[NDIRECT]);
 		rsect(base, (char*)indirect);
 		block_refs[base] += 1;
-		printf("add_ref : FILE, base, %d\n", base);
+		// printf("add_ref : FILE, base, %d\n", base);
 		for(int i = 0; i < NINDIRECT; i++) {
-			printf("add_ref_file_inode : FILE, indirect, %d\n", indirect[i]);
+			// printf("add_ref_file_inode : FILE, indirect, %d\n", indirect[i]);
 			if(indirect[i] < 0 || indirect[i] >= sb -> nblocks) {
 				fprintf(stderr, "ERROR: bad indirect address in inode.\n");
 				clean_up();
@@ -322,7 +322,7 @@ void add_ref_file_inode(struct dinode * cur_inode) {
 
 void read_dir_buf(char * buf) {
 	// int size_dinode = sizeof(struct dinode);
-	printf("--------reading a dir buf\n");
+	// printf("--------reading a dir buf\n");
 	int finished = 0;
 	int size_dirent = sizeof(struct dirent);
 	struct dirent * pdirent = (struct dirent *)buf;
@@ -330,7 +330,7 @@ void read_dir_buf(char * buf) {
 	char inode_buf[512];
 	while(1) {
 		if(finished == 512) {
-			printf("finished reading a dir and break\n");
+			// printf("finished reading a dir and break\n");
 			break;
 		}
 		if(pdirent -> inum == 0) {
@@ -338,8 +338,8 @@ void read_dir_buf(char * buf) {
 			finished += size_dirent;
 			continue;
 		}
-		printf("reading inode %hu\n", pdirent -> inum);
-		printf("before : reading filename : %s\n", pdirent -> name);
+		// printf("reading inode %hu\n", pdirent -> inum);
+		// printf("before : reading filename : %s\n", pdirent -> name);
 		if(strcmp(pdirent -> name, ".") == 0) {
 			pdirent += 1;
 			finished += size_dirent;
@@ -351,7 +351,7 @@ void read_dir_buf(char * buf) {
 			finished += size_dirent;
 			continue;
 		}
-		printf("after :eading filename : %s\n", pdirent -> name);
+		// printf("after :eading filename : %s\n", pdirent -> name);
 		int b = i2b(pdirent -> inum);
 		rsect(b, inode_buf);
 		int off = pdirent -> inum % IPB;
@@ -361,12 +361,12 @@ void read_dir_buf(char * buf) {
 		finished += size_dirent;
 
 	}
-	printf("------quit read dir buf\n");
+	// printf("------quit read dir buf\n");
 	return;
 }
 
 void add_ref(struct dinode * cur_inode, int inum) {
-	printf("inode %d is type %hd\n", inum, cur_inode -> type);
+	// printf("inode %d is type %hd\n", inum, cur_inode -> type);
 	inode_refs[inum] += 1;
 	if(cur_inode -> type == T_DIR && inode_refs[inum] > 1) {
 		fprintf(stderr, "ERROR: directory appears more than once in file system.\n");
@@ -378,7 +378,7 @@ void add_ref(struct dinode * cur_inode, int inum) {
 		add_ref_file_inode(cur_inode);
 	}
 	else if(cur_inode -> type == T_DIR) {
-		printf("-----------add_ref: adding a dir\n");
+		// printf("-----------add_ref: adding a dir\n");
 		int off = xint(cur_inode -> size);
 		int fbn = off / 512 + 1;
 		int bound = fbn < NDIRECT ? fbn : NDIRECT;
@@ -389,7 +389,7 @@ void add_ref(struct dinode * cur_inode, int inum) {
 		char buf[512];
 		for(int i = 0; i < bound && finished < cur_inode -> size; i++) {
 			int target = cur_inode -> addrs[i];
-			printf("add_ref : dir, direct, %d, current : %d, size : %u\n", target, finished, cur_inode -> size);
+			// printf("add_ref : dir, direct, %d, current : %d, size : %u\n", target, finished, cur_inode -> size);
 			block_refs[target] += 1;
 			rsect(target, buf);
 			read_dir_buf(buf);
@@ -398,12 +398,12 @@ void add_ref(struct dinode * cur_inode, int inum) {
 
 		if(fbn >= NDIRECT) {
 			int base = xint(cur_inode -> addrs[NDIRECT]);
-			printf("add_ref : dir, base, %d\n", base);
+			// printf("add_ref : dir, base, %d\n", base);
 			rsect(base, (char*)indirect);
 			block_refs[base] += 1;
 			for(int i = 0; i < NINDIRECT && finished < cur_inode -> size; i++) {
 				rsect(indirect[i], indirect_buf);
-				printf("add_ref : dir, indirect, %d\n", indirect[i]);
+				// printf("add_ref : dir, indirect, %d\n", indirect[i]);
 				block_refs[indirect[i]] += 1;
 				read_dir_buf(indirect_buf);
 				finished += 512;
@@ -474,7 +474,7 @@ int main(int argc, char * argv[]){
 
 	rsect(1, sb_buf);
 	sb = (struct superblock *) sb_buf;
-	printf("size : %d, nblocks : %d, ninodes : %d\n", sb -> size, sb -> nblocks, sb -> ninodes);
+	// printf("size : %d, nblocks : %d, ninodes : %d\n", sb -> size, sb -> nblocks, sb -> ninodes);
 	nblocks = sb -> nblocks;
 	ninodes = sb -> ninodes;
 
@@ -506,8 +506,8 @@ int main(int argc, char * argv[]){
 				continue;
 			}
 			inode_used[inode_read + 1] = 1;
-			printf("inode : %d, link :%hd, size %u, type: %hd\n", 
-				inode_read + 1, cur_inode -> nlink,  cur_inode -> size, cur_inode -> type);
+			// printf("inode : %d, link :%hd, size %u, type: %hd\n", 
+				// inode_read + 1, cur_inode -> nlink,  cur_inode -> size, cur_inode -> type);
 			check_type(cur_inode, i + 2, j);
 			check_addr(cur_inode);
 			check_self_parent(cur_inode, inode_read + 1);
